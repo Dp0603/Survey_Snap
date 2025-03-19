@@ -1,0 +1,30 @@
+.admin-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    color: black;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.survey-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.survey-item {
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.survey-item:hover {
+    background: #e0e0e0;
+}

@@ -1,0 +1,125 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 5%;
+  background: white; /* Opaque white */
+  color: black; /* Dark black text */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+/* Navigation Styling */
+.nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav ul li button:hover {
+  color: #007bff;
+}
+
+/* Authentication Buttons */
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-btn {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.login-btn:hover {
+  background: black;
+  color: white;
+}
+
+.signup-btn {
+  background: #007bff;
+  color: white;
+}
+
+.signup-btn:hover {
+  background: #0056b3;
+}
+
+/* Header styling for Login/Signup pages */
+.auth-header {
+  background: white; /* Opaque white */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.auth-header .logo {
+  color: black;
+}
+
+.auth-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.auth-nav button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.auth-nav .back-home {
+  color: black;
+}
+
+.auth-nav .back-home:hover {
+  color: #007bff;
+}
+
+.auth-nav .switch-auth {
+  color: #007bff;
+}
+
+.auth-nav .switch-auth:hover {
+  color: #0056b3;
+}
