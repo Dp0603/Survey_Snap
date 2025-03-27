@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer-section">
       {/* Site Index Section */}
-      <div className="site-index">
-        <h2 className="site-index-title">
+      <div className="footer-site-index">
+        <h2 className="footer-site-index-title">
           <Link to="/sitemap">Site Index</Link>
         </h2>
-        <div className="site-index-table">
-          <div className="site-index-column">
+        <div className="footer-site-index-table">
+          <div className="footer-site-index-column">
             <h3>About</h3>
             <ul>
               <li><a href="#company-overview">Company Overview</a></li>
@@ -23,7 +23,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="site-index-column">
+          <div className="footer-site-index-column">
             <h3>Survey Software</h3>
             <ul>
               <li><a href="#survey-software">SurveySnap Survey Software</a></li>
@@ -35,7 +35,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="site-index-column">
+          <div className="footer-site-index-column">
             <h3>Additional Products</h3>
             <ul>
               <li><a href="#offline-interviewer">SurveySnap Offline Interviewer</a></li>
@@ -45,7 +45,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="site-index-column">
+          <div className="footer-site-index-column">
             <h3>Comparisons</h3>
             <ul>
               <li><a href="#smartsurvey">SmartSurvey</a></li>
@@ -54,7 +54,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="site-index-column">
+          <div className="footer-site-index-column">
             <h3>Contact Us</h3>
             <ul>
               <li>Sales: <a href="tel:999999999">+91 9999999999</a></li>
@@ -67,16 +67,16 @@ const Footer = () => {
       </div>
 
       {/* Connect with Us Section */}
-      <div className="connect-with-us">
+      <div className="footer-connect">
         <h3>Connect with Us</h3>
-        <div className="social-icons">
+        <div className="footer-social-icons">
           <a href="#facebook"><img src="/icons/facebook.png" alt="Facebook" /></a>
           <a href="#linkedin"><img src="/icons/linkedin.png" alt="LinkedIn" /></a>
           <a href="#twitter"><img src="/icons/twitter.png" alt="Twitter" /></a>
           <a href="#youtube"><img src="/icons/youtube.png" alt="YouTube" /></a>
           <a href="#instagram"><img src="/icons/instagram.png" alt="Instagram" /></a>
         </div>
-        <div className="updates">
+        <div className="footer-updates">
           <input type="checkbox" id="updates" />
           <label htmlFor="updates">Get regular updates</label>
         </div>

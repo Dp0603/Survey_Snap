@@ -8,7 +8,7 @@ const Header = ({ scrollToSection }) => {
   const location = useLocation();
 
   // Get user data from localStorage (or use Context API if needed)
-  const user = JSON.parse(localStorage.getItem("user")); 
+  const user = JSON.parse(localStorage.getItem("user"));
 
   // Define the pages where the navbar should be visible
   const showNavbar =
@@ -19,22 +19,22 @@ const Header = ({ scrollToSection }) => {
 
   return (
     <motion.header 
-      className="header"
+      className="header-ss"
       initial={{ opacity: 0, y: -20 }} 
       animate={{ opacity: 1, y: 0 }} 
       transition={{ duration: 0.6 }}
     >
       {/* Logo */}
       <Link to="/">
-        <h2 className="logo">SurveySnap</h2>
+        <h2 className="header-ss-logo">SurveySnap</h2>
       </Link>
 
       {/* If on Login/Signup page, show only Home & Switch Auth */}
       {location.pathname === "/login" || location.pathname === "/signup" ? (
-        <div className="auth-nav">
-          <button className="back-home" onClick={() => navigate("/")}>🏠 Back to Home</button>
+        <div className="header-ss-auth-nav">
+          <button className="header-ss-back-home" onClick={() => navigate("/")}>🏠 Back to Home</button>
           <button 
-            className="switch-auth" 
+            className="header-ss-switch-auth" 
             onClick={() => navigate(location.pathname === "/login" ? "/signup" : "/login")}
           >
             {location.pathname === "/login" ? "Sign Up" : "Login"}
@@ -43,7 +43,7 @@ const Header = ({ scrollToSection }) => {
       ) : (
         <>
           {/* Navigation Links */}
-          <nav className="nav">
+          <nav className="header-ss-nav">
             <ul>
               <motion.li whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <button onClick={() => scrollToSection("features")}>Features</button>
@@ -68,10 +68,10 @@ const Header = ({ scrollToSection }) => {
           </nav>
 
           {/* Authentication Buttons */}
-          <div className="auth-buttons">
+          <div className="header-ss-auth-buttons">
             <motion.button 
               onClick={() => navigate("/login")} 
-              className="login-btn"
+              className="header-ss-login-btn"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -79,7 +79,7 @@ const Header = ({ scrollToSection }) => {
             </motion.button>
             <motion.button 
               onClick={() => navigate("/signup")} 
-              className="signup-btn"
+              className="header-ss-signup-btn"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

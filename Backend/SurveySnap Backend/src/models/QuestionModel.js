@@ -33,7 +33,6 @@
 
 // module.exports = mongoose.model("Question", questionSchema);
 
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -50,7 +49,13 @@ const questionSchema = new Schema(
     },
     question_type: {
       type: String,
-      enum: ["Multiple Choice", "Short Text", "Long Text", "Rating Scale", "Dropdown"],
+      enum: [
+        "Multiple Choice",
+        "Short Text",
+        "Long Text",
+        "Rating Scale",
+        "Dropdown",
+      ],
       required: true,
     },
     is_required: {
@@ -59,7 +64,7 @@ const questionSchema = new Schema(
     },
     questionimageURL: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {

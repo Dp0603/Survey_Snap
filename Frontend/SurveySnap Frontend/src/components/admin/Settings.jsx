@@ -1,11 +1,20 @@
 import React from "react";
+import { FaLock, FaUserShield } from "react-icons/fa";
 import "./Settings.css";
 
 const Settings = () => {
   return (
-    <div className="admin-content">
-      <h2>Admin Settings</h2>
-      <p>Manage system settings here...</p>
+    <div className="settings">
+      <h2>⚙️ Settings</h2>
+      <div className="settings-option">
+        <FaLock />
+        <span>Change Password</span>
+      </div>
+
+      <div className="settings-option">
+        <FaUserShield />
+        <span>Manage Permissions</span>
+      </div>
     </div>
   );
 };

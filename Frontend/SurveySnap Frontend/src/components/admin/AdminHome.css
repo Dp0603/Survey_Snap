@@ -1,0 +1,124 @@
+/* General Styles */
+.admin-home-container {
+  text-align: center;
+  padding: 40px;
+  background: #f4f4f4; /* Light background for better contrast */
+  min-height: 100vh;
+}
+
+/* Title and Subtitle */
+.admin-home-title {
+  font-size: 32px;
+  color: #222;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.admin-home-subtitle {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Dashboard Statistics */
+.admin-home-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Stat Cards */
+.admin-home-stat-card {
+  background: white;
+  padding: 25px;
+  width: 240px;
+  height: 140px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  cursor: pointer;
+  border-left: 6px solid transparent;
+}
+
+.admin-home-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Icons */
+.admin-home-stat-icon {
+  font-size: 40px;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Stat Info */
+.admin-home-stat-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+  margin: 0;
+}
+
+.admin-home-stat-info p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+/* Color Variations */
+.admin-home-users {
+  border-left-color: #007bff; /* Blue */
+  background: #e3f2fd;
+}
+
+.admin-home-users .admin-home-stat-icon {
+  background: #007bff;
+}
+
+.admin-home-surveys {
+  border-left-color: #28a745; /* Green */
+  background: #e9f7ef;
+}
+
+.admin-home-surveys .admin-home-stat-icon {
+  background: #28a745;
+}
+
+.admin-home-reports {
+  border-left-color: #ff851b; /* Orange */
+  background: #fff3e0;
+}
+
+.admin-home-reports .admin-home-stat-icon {
+  background: #ff851b;
+}
+
+/* Sidebar Adjustments */
+.content.with-sidebar .admin-home-stats {
+  margin-left: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-home-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .admin-home-stat-card {
+    width: 90%;
+    max-width: 300px;
+  }
+}

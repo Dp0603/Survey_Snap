@@ -1,134 +1,19 @@
-// import axios from "axios";
-// import React, { useState } from "react";
-// import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import "./Signup.css";
-
-// export const Signup = () => {
-//   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-//   const navigate = useNavigate();
-//   const password = watch("password");
-//   const [role, setRole] = useState("");
-
-//   // Function to get Role ID based on selection
-//   const getRoleId = (selectedRole) => {
-//     const roleIds = {
-//       Admin: "67cef4be0b2513383e7d41fc",
-//       Survey_Creator: "67cef4f30b2513383e7d41fe",
-//       Respondent: "67cef5070b2513383e7d4200",
-//     };
-//     return roleIds[selectedRole] || "";
-//   };
-
-
-//   if(role === "Admin"){
-//     setRole("67cef4be0b2513383e7d41fc")
-//   }
-//   if(role === "Survey Creator"){
-//     setRole("67cef4f30b2513383e7d41fe")
-//   }
-//   if(role === "Respondent"){
-//     setRole("67cef5070b2513383e7d4200")
-//   }
-
-
-//   const submitHandler = async (data) => {
-//     data.roleId = role 
-
-//     try {
-//       const res = await axios.post("/signup", data);
-//       toast.success("User created successfully!", { autoClose: 2000 });
-
-//       setTimeout(() => navigate("/login"), 2500);
-//     } catch (error) {
-//       console.error("Signup Error:", error.response?.data || error.message);
-//       toast.error(error.response?.data?.message || "Signup failed!");
-//     }
-//   };
-
-//   return (
-//     <div className="signup-container">
-//       <h1 className="signup-title">Create Your Account</h1>
-//       <form className="signup-form" onSubmit={handleSubmit(submitHandler)}>
-
-//         {/* First Name */}
-//         <div className="form-group">
-//           <label>First Name</label>
-//           <input type="text" {...register("firstName", { required: "First name is required" })} />
-//           {errors.firstName && <p className="error-text">{errors.firstName.message}</p>}
-//         </div>
-
-//         {/* Last Name */}
-//         <div className="form-group">
-//           <label>Last Name</label>
-//           <input type="text" {...register("lastName", { required: "Last name is required" })} />
-//           {errors.lastName && <p className="error-text">{errors.lastName.message}</p>}
-//         </div>
-
-//         {/* Email */}
-//         <div className="form-group">
-//           <label>Email</label>
-//           <input type="email" {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/, message: "Invalid email format" } })} />
-//           {errors.email && <p className="error-text">{errors.email.message}</p>}
-//         </div>
-
-//         {/* Password */}
-//         <div className="form-group">
-//           <label>Password</label>
-//           <input type="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: "Minimum 6 characters required" } })} />
-//           {errors.password && <p className="error-text">{errors.password.message}</p>}
-//         </div>
-
-//         {/* Confirm Password */}
-//         <div className="form-group">
-//           <label>Confirm Password</label>
-//           <input type="password" {...register("confirmPassword", { required: "Confirm your password", validate: (value) => value === password || "Passwords do not match" })} />
-//           {errors.confirmPassword && <p className="error-text">{errors.confirmPassword.message}</p>}
-//         </div>
-
-//         {/* Age */}
-//         <div className="form-group">
-//           <label>Age</label>
-//           <input type="number" {...register("age", { required: "Age is required", min: { value: 18, message: "Must be at least 18 years old" } })} />
-//           {errors.age && <p className="error-text">{errors.age.message}</p>}
-//         </div>
-
-//         {/* Role Selection */}
-//         <div className="form-group">
-//           <label>Role</label>
-//           <select {...register("role", { required: "Role is required" })} onChange={(e) => setRole(e.target.value)}>
-//             <option value="">Select Role</option>
-//             <option value="Admin">Admin</option>
-//             <option value="Survey Creator">Survey Creator</option>
-//             <option value="Respondent">Respondent</option>
-//           </select>
-//           {errors.role && <p className="error-text">{errors.role.message}</p>}
-//         </div>
-
-//         {/* Submit Button */}
-//         <button className="submit-btn" type="submit">Sign Up</button>
-//       </form>
-//       <ToastContainer />
-//     </div>
-//   );
-// };
-
-
-import axios from "axios"; 
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Signup.css"; // External CSS for styling
+import { FaEye, FaEyeSlash, FaUser, FaLock, FaEnvelope, FaUserShield } from "react-icons/fa";
+import "./Signup.css"; 
+import Header from "../layout/Header";
 
 export const Signup = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const password = watch("password");
   const [role, setRole] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // 🔹 Loader state
 
   // Role-based roleId assignment
   const getRoleId = (selectedRole) => {
@@ -143,70 +28,108 @@ export const Signup = () => {
   const submitHandler = async (data) => {
     console.log("Form Data Submitted:", data);
     data.roleId = getRoleId(role);
+    setIsLoading(true); // 🔹 Show loader popup
 
     try {
       const res = await axios.post("/signup", data);
       console.log("Server Response:", res.data);
 
       if (res.status === 201) {
-        toast.success("User created successfully!", { autoClose: 2000 });
-        setTimeout(() => navigate("/login"), 2500);
+        setTimeout(() => {
+          setIsLoading(false); // 🔹 Hide loader
+          toast.success("🎉 User created successfully!");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000); // Redirect after toast
+        }, 1500); // Loader visible for 1.5s
       }
     } catch (error) {
-      console.error("Signup Error:", error.response?.data || error.message);
-      toast.error(error.response?.data?.message || "Signup failed!");
+      console.error("Signup Error:", error);
+      setIsLoading(false); // 🔹 Hide loader on error
+      toast.error(error.response?.data?.message || "❌ Signup failed!");
     }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit(submitHandler)}>
-          {/* Two-column layout */}
-          <div className="form-row">
-            <div className="input-group">
-              <label>First Name</label>
-              <input type="text" {...register("firstName", { required: "First name is required" })} />
-              {errors.firstName && <p className="error">{errors.firstName.message}</p>}
-            </div>
-
-            <div className="input-group">
-              <label>Last Name</label>
-              <input type="text" {...register("lastName", { required: "Last name is required" })} />
-              {errors.lastName && <p className="error">{errors.lastName.message}</p>}
-            </div>
+    <>
+      <Header />
+      <div className="signup-container">
+        {/* 🔹 Loader Popup (Only shows when isLoading is true) */}
+        {isLoading && (
+          <div className="loader-overlay">
+            <div className="survey-loader"></div>
+            <p>Creating your profile...</p>
           </div>
+        )}
 
-          <div className="form-row">
-            <div className="input-group">
-              <label>Email</label>
-              <input type="email" {...register("email", { required: "Email is required" })} />
-              {errors.email && <p className="error">{errors.email.message}</p>}
+        {/* 🔹 Signup Form */}
+        <div className="signup-box">
+          <h1>🚀 Join SurveySnap</h1>
+          <p className="signup-subtitle">Create surveys, collect insights, and grow smarter.</p>
+
+          <form onSubmit={handleSubmit(submitHandler)}>
+            {/* 🔹 Name Fields */}
+            <div className="signup-form-row">
+              <div className="signup-input-group">
+                <label><FaUser /> First Name</label>
+                <input type="text" {...register("firstName", { required: "First name is required" })} placeholder="John" />
+                {errors.firstName && <p className="signup-error">{errors.firstName.message}</p>}
+              </div>
+
+              <div className="signup-input-group">
+                <label><FaUser /> Last Name</label>
+                <input type="text" {...register("lastName", { required: "Last name is required" })} placeholder="Doe" />
+                {errors.lastName && <p className="signup-error">{errors.lastName.message}</p>}
+              </div>
             </div>
 
-            <div className="input-group">
-              <label>Password</label>
-              <input type="password" {...register("password", { required: "Password is required" })} />
-              {errors.password && <p className="error">{errors.password.message}</p>}
+            {/* 🔹 Email & Password Fields */}
+            <div className="signup-form-row">
+              <div className="signup-input-group">
+                <label><FaEnvelope /> Email</label>
+                <input type="email" {...register("email", { required: "Email is required" })} placeholder="you@example.com" />
+                {errors.email && <p className="signup-error">{errors.email.message}</p>}
+              </div>
+
+              <div className="signup-input-group signup-password-group">
+                <label><FaLock /> Password</label>
+                <div className="signup-password-wrapper">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    {...register("password", { required: "Password is required" })}
+                    placeholder="Create a strong password"
+                  />
+                  <span className="signup-toggle-password" onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
+                {errors.password && <p className="signup-error">{errors.password.message}</p>}
+              </div>
             </div>
-          </div>
 
-          <div className="input-group">
-            <label>Role</label>
-            <select {...register("role", { required: "Role is required" })} onChange={(e) => setRole(e.target.value)}>
-              <option value="">Select Role</option>
-              <option value="Admin">Admin</option>
-              <option value="Survey Creator">Survey Creator</option>
-              <option value="Respondent">Respondent</option>
-            </select>
-            {errors.role && <p className="error">{errors.role.message}</p>}
-          </div>
+            {/* 🔹 Role Selection */}
+            <div className="signup-input-group">
+              <label><FaUserShield /> Select Role</label>
+              <select {...register("role", { required: "Role is required" })} onChange={(e) => setRole(e.target.value)}>
+                <option value="">Choose a role</option>
+                <option value="Admin">👑 Admin</option>
+                <option value="Survey Creator">📋 Survey Creator</option>
+                <option value="Respondent">📢 Respondent</option>
+              </select>
+              {errors.role && <p className="signup-error">{errors.role.message}</p>}
+            </div>
 
-          <button type="submit" className="auth-btn">Sign Up</button>
-        </form>
-        <ToastContainer />
+            {/* 🔹 Submit Button */}
+            <button type="submit" className="signup-btn">🚀 Sign Up</button>
+
+            {/* 🔹 Already have an account? */}
+            <p className="signup-footer">
+              Already have an account? <Link to="/login" className="signup-login-link">Login</Link>
+            </p>
+          </form>
+          <ToastContainer />
+        </div>
       </div>
-    </div>
+    </>
   );
 };

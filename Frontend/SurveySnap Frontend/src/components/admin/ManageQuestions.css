@@ -1,0 +1,307 @@
+/* General Styling */
+.questions-container {
+  position: relative;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.questions-container h3 {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Close Button */
+.questions-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #777;
+  transition: color 0.3s ease;
+}
+
+.questions-close-btn:hover {
+  color: #e74c3c;
+}
+
+/* Add Question Button */
+.questions-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.questions-add-btn:hover {
+  background: #2980b9;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background: #3498db;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Action Buttons */
+.questions-edit-btn,
+.questions-delete-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 5px;
+  transition: transform 0.2s ease;
+}
+
+.questions-edit-btn {
+  color: #f1c40f;
+}
+
+.questions-delete-btn {
+  color: #e74c3c;
+}
+
+.questions-edit-btn:hover,
+.questions-delete-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Modal Overlay */
+.questions-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+.questions-modal-container {
+  background: white;
+  padding: 25px;
+  width: 400px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Form Styling */
+.questions-form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.questions-form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.questions-form-group input,
+.questions-form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.questions-form-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+/* Modal Buttons */
+.questions-form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.questions-add-btn,
+.questions-update-btn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.questions-add-btn:hover,
+.questions-update-btn:hover {
+  background: #219150;
+}
+
+.questions-cancel-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.questions-cancel-btn:hover {
+  background: #c0392b;
+}
+
+/* Modal Fade In Animation */
+@keyframes fadeIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .questions-modal-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  table th,
+  table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .questions-add-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .questions-form-group input,
+  .questions-form-group select {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+/* Ensure uniform modal design */
+.questions-modal-container {
+  background: white;
+  padding: 20px;
+  width: 420px; /* Adjust width to match other modals */
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Consistent table header style */
+table th {
+  background: #007bff; /* Bootstrap primary color */
+  color: white;
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* Table row styling */
+table tr {
+  background: white;
+}
+
+table tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+/* Add spacing & align checkboxes */
+td {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+/* Fix checkbox alignment */
+td input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0 auto;
+}
+
+/* Action buttons (Edit & Delete) */
+.questions-edit-btn,
+.questions-delete-btn {
+  font-size: 16px;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.questions-edit-btn {
+  color: #f39c12; /* Yellow */
+}
+
+.questions-delete-btn {
+  color: #e74c3c; /* Red */
+}
+
+.questions-edit-btn:hover,
+.questions-delete-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Ensure Add Question button matches */
+.questions-add-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.3s;
+}
+
+.questions-add-btn:hover {
+  background: #0056b3;
+}

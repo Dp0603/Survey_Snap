@@ -1,0 +1,86 @@
+/* ManageResponses.css */
+
+/* Container Styling */
+.response-management {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Heading */
+.response-management h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Survey Dropdown Container */
+.survey-dropdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.survey-dropdown-container label {
+  font-weight: bold;
+}
+
+.survey-dropdown-container select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.survey-dropdown-container button {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.survey-dropdown-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responses Table */
+.responses-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.responses-table th,
+.responses-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.responses-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.responses-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.responses-table tr:hover {
+  background-color: #ddd;
+}
+
+/* Loading & No Responses Message */
+.response-management p {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}

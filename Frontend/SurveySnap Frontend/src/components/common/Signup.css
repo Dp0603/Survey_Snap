@@ -1,141 +1,210 @@
-/* General Styles */
-.auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #007bff, #00bfff);
-    color: white;
-    overflow: hidden;
-    margin-top: 50px;
+/* 🔹 Signup Page - Professional & Modern Styling */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #2c3e50, #4ca1af);
+  /* background: linear-gradient(135deg, #007bff, #6c63ff); option1 */
+  /* background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url("/assets/background.jpg");
+  background-size: cover;
+  background-position: center; option2*/
+  /* background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+animation: waveMove 10s infinite alternate;
+@keyframes waveMove {
+   0% { background-position: 0% 50%; }
+   100% { background-position: 100% 50%; }
+} option3*/
+  padding: 20px;
 }
 
-.auth-box {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 450px;
-    animation: fadeIn 1.5s ease-in-out;
+/* 🔹 Signup Box */
+.signup-box {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-/* Heading */
-.auth-box h1 {
-    font-size: 28px;
-    color: #007bff;
-    margin-bottom: 20px;
-    animation: fadeInDown 1.5s ease-in-out;
+.signup-box:hover {
+  transform: scale(1.02);
 }
 
-/* Two-column Layout */
-.form-row {
-    display: flex;
-    gap: 15px;
-
+/* 🔹 Title & Subtitle */
+.signup-box h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 10px;
 }
 
-.form-row .input-group {
-    flex: 1;
+.signup-subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
 }
 
-/* Input Groups */
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
+/* 🔹 Form Layout */
+.signup-form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
-.input-group label {
-    font-weight: bold;
-    display: block;
-    color: #007bff;
-    animation: fadeIn 1.5s ease-in-out;
+.signup-input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.input-group input,
-.input-group select {
-    width: 90%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: all 0.3s;
+.signup-input-group label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.input-group select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: all 0.3s;
+.signup-input-group input,
+.signup-input-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-.input-group input:focus,
-.input-group select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+.signup-input-group input:focus,
+.signup-input-group select:focus {
+  border-color: #4ca1af;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 161, 175, 0.5);
 }
 
-/* Role Dropdown */
-.input-group select {
-    cursor: pointer;
+/* 🔹 Password Field with Toggle Icon */
+.signup-password-group {
+  position: relative;
 }
 
-/* Button */
-.auth-btn {
-    width: 100%;
-    padding: 12px;
-    background: white;
-    color: #007bff;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInUp 1.5s ease-in-out;
+.signup-password-wrapper {
+  position: relative;
+  width: 100%;
 }
 
-.auth-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-   
+.signup-password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
 }
 
-/* Error Messages */
-.error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
+.signup-toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  transition: color 0.3s ease;
 }
 
-/* Responsive */
-@media (max-width: 450px) {
-    .auth-box {
-        width: 90%;
-    }
-
-    .form-row {
-        flex-direction: column;
-    }
+.signup-toggle-password:hover {
+  color: #4ca1af;
 }
 
-/* Animations */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 🔹 Signup Button */
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #4ca1af;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
+.signup-btn:hover {
+  background: #357e85;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* 🔹 Error Messages */
+.signup-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* 🔹 Footer */
+.signup-footer {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.signup-login-link {
+  color: #4ca1af;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-login-link:hover {
+  text-decoration: underline;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 480px) {
+  .signup-form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .signup-box {
+    padding: 20px;
+  }
+}
+/* 🔹 Loader Popup Overlay */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dark transparent */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-size: 18px;
+  z-index: 1000;
+}
+
+/* 🔹 Survey Themed Loader */
+.survey-loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #4ca1af;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+/* 🔹 Loader Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

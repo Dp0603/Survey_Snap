@@ -2,108 +2,137 @@
 .admin-dashboard {
   display: flex;
   height: 100vh;
-  background-color: #f8f9fa;
+  background-color: #f4f4f4;
 }
 
 /* Sidebar */
-.sidebar {
+.admin-sidebar {
   width: 250px;
   height: 100vh;
-  background: #222;
+  background: #000;
   color: white;
   position: fixed;
   left: 0;
   top: 0;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s ease-in-out;
+  box-shadow: 3px 0 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
 }
 
-.sidebar.closed {
+/* Collapsed Sidebar */
+.admin-sidebar.closed {
   width: 70px;
 }
 
 /* Sidebar Header */
-.sidebar-header {
+.admin-sidebar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px;
-  font-size: 20px;
+  font-size: 18px;
+  background: #000;
+  color: white;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.logo {
-  font-size: 18px;
+/* Sidebar Logo */
+.admin-logo {
   font-weight: bold;
-  color: #ffffff;
   transition: opacity 0.3s ease-in-out;
+  color: white;
 }
 
-.sidebar.closed .logo {
+/* Hide Logo When Collapsed */
+.admin-sidebar.closed .admin-logo {
   opacity: 0;
 }
 
-.toggle-btn {
+/* Sidebar Toggle Button */
+.admin-toggle-btn {
   background: none;
   border: none;
   color: white;
   font-size: 22px;
   cursor: pointer;
+  padding: 0px;
 }
 
 /* Sidebar Menu */
-.sidebar-menu {
+.admin-sidebar-menu {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-grow: 1;
+  background: #000000;
+  color: white;
 }
 
-.menu-item {
+/* Sidebar Items */
+.admin-sidebar-menu li {
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 12px 15px;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  background: black;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 5px;
+  border-radius: 5px;
 }
 
-.menu-item:hover {
+/* Hover Effect */
+.admin-sidebar-menu li:hover {
   background: rgba(255, 255, 255, 0.1);
-  transform: translateX(5px);
+  border-color: white;
 }
 
-.menu-item .icon {
+/* Icons */
+.admin-sidebar-menu .admin-icon {
   font-size: 20px;
   margin-right: 15px;
+  transition: margin-right 0.3s ease;
+  background: #000000;
+  color: white;
 }
 
-.menu-text {
-  transition: opacity 0.3s ease-in-out;
+/* Hide Text When Sidebar is Collapsed */
+.admin-sidebar.closed .admin-sidebar-menu .admin-show-text {
+  display: none;
 }
 
-.sidebar.closed .menu-text {
-  opacity: 0;
+/* Adjust Icon Alignment */
+.admin-sidebar.closed .admin-sidebar-menu .admin-icon {
+  margin-right: 0;
 }
 
-/* Content */
-.content {
+/* Center Items When Collapsed */
+.admin-sidebar.closed .admin-sidebar-menu li {
+  justify-content: center;
+}
+
+/* Main Content */
+.admin-content {
   margin-left: 250px;
   flex: 1;
   padding: 20px;
   transition: margin-left 0.3s ease-in-out;
 }
 
-.content.full-width {
+/* When Sidebar is Closed */
+.admin-content.full-width {
   margin-left: 70px;
 }
 
 /* Logout Button */
-.logout {
+.admin-logout {
   margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
   color: red;
 }
 
-.logout:hover {
-  background: rgba(255, 0, 0, 0.2);
+.admin-logout:hover {
+  background: rgba(255, 0, 0, 0.3);
 }

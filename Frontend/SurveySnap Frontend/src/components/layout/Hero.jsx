@@ -1,22 +1,22 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import "../styles/Hero.css";
 
 const Hero = () => {
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate("/signup"); // Navigate to the signup page
+    navigate("/signup");
   };
 
   return (
-    <section className="hero">
-      <div className="hero-content">
-        <h1 className="animated-text">The Complete Survey Solution</h1>
-        <p className="animated-subtext">
+    <section className="hero-section">
+      <div className="hero-content-box">
+        <h1 className="hero-heading">The Complete Survey Solution</h1>
+        <p className="hero-subtext">
           Create engaging surveys, analyze data, and produce visual reports with SurveySnap.
         </p>
-        <button className="cta animated-button" onClick={handleGetStarted}>
+        <button className="hero-button" onClick={handleGetStarted}>
           Get Started
         </button>
       </div>

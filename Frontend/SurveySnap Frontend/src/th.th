@@ -1,0 +1,98 @@
+import React, { useState, useEffect } from "react";
+import { FaTrash, FaEdit, FaPlus, FaEye } from "react-icons/fa";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./ManageSurveys.css"; 
+import ManageQuestions from "./ManageQuestions"; // Import ManageQuestions modal
+
+const ManageSurveys = () => {
+  const [surveys, setSurveys] = useState([]);
+  const [selectedSurvey, setSelectedSurvey] = useState(null);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [showQuestionsModal, setShowQuestionsModal] = useState(false);
+
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    creator_id: "",
+    status: "Draft",
+  });
+
+  useEffect(() => {
+    fetchSurveys();
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setFormData((prev) => ({ ...prev, creator_id: user._id }));
+    }
+  }, []);
+
+  const fetchSurveys = async () => {
+    try {
+      const response = await axios.get("/survey/all");
+      setSurveys(response.data.data);
+    } catch (error) {
+      toast.error("Failed to fetch surveys! 🚨");
+    }
+  };
+
+  const handleViewQuestions = (survey) => {
+    setSelectedSurvey(survey);
+    setShowQuestionsModal(true);
+  };
+
+  return (
+    <div className="manage-surveys">
+      <h2>📊 Manage Surveys</h2>
+
+      <button className="add-survey-btn" onClick={() => setShowAddForm(true)}>
+        <FaPlus /> Create Survey
+      </button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Creator</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {surveys.map((survey, index) => (
+            <tr key={survey._id}>
+              <td>{index + 1}</td>
+              <td>{survey.title}</td>
+              <td>{survey.description}</td>
+              <td>
+                {survey.creator_id?.firstName + " " + survey.creator_id?.lastName}
+              </td>
+              <td>{survey.status}</td>
+              <td className="action-buttons">
+                <button className="edit-btn" onClick={() => handleEditClick(survey)}>
+                  <FaEdit /> Update
+                </button>
+                <button className="delete-btn" onClick={() => handleDeleteSurvey(survey._id)}>
+                  <FaTrash /> Delete
+                </button>
+                <button className="view-btn" onClick={() => handleViewQuestions(survey)}>
+                  <FaEye /> Manage Questions
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {showQuestionsModal && (
+        <ManageQuestions survey={selectedSurvey} onClose={() => setShowQuestionsModal(false)} />
+      )}
+
+      <ToastContainer position="top-right" autoClose={2000} />
+    </div>
+  );
+};
+
+export default ManageSurveys;

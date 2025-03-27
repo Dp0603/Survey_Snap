@@ -1,24 +1,24 @@
-/* Testimonials.css */
-.testimonials {
+/* ======== Testimonials Section (Unique Class Names) ======== */
+.testimonials-section {
   padding: 80px 20px;
   background-color: #fff;
   text-align: center;
 }
 
-.section-title {
+.testimonials-title {
   font-size: 36px;
   margin-bottom: 40px;
   color: #007bff;
   animation: fadeInDown 1.5s ease-in-out;
 }
 
-.testimonial-cards {
+.testimonials-cards {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
-.testimonial-cards .card {
+.testimonials-card {
   width: 45%;
   padding: 20px;
   background-color: #f9f9f9;
@@ -28,28 +28,28 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.testimonial-cards .card p {
+.testimonials-card p {
   font-size: 16px;
   color: #333;
   margin-bottom: 10px;
 }
 
-.testimonial-cards .card strong {
+.testimonials-card strong {
   color: #007bff;
 }
 
-.animated-card {
+.animated-testimonials-card {
   animation: fadeInUp 1.5s ease-in-out;
 }
 
-.testimonial-cards .card:hover {
+.testimonials-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Design */
+/* ======== Responsive Design ======== */
 @media (max-width: 768px) {
-  .testimonial-cards .card {
+  .testimonials-card {
     width: 100%;
     margin-bottom: 20px;
   }

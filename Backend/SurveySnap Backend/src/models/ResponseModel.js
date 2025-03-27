@@ -5,17 +5,17 @@ const responseSchema = new Schema(
   {
     survey_id: {
       type: Schema.Types.ObjectId,
-      ref: "Survey",
+      ref: "Survey", // ✅ Ensure "Survey" model exists
       required: true,
     },
     question_id: {
       type: Schema.Types.ObjectId,
-      ref: "Question",
+      ref: "Question", // ✅ Ensure "Question" model exists
       required: true,
     },
     respondent_id: {
       type: Schema.Types.ObjectId,
-      ref: "Response",
+      ref: "users", // ✅ Ensure "users" model exists (matches `UserModel.js`)
       required: true,
     },
     response: {

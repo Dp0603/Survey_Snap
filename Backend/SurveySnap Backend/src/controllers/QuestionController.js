@@ -67,13 +67,11 @@
 
 // module.exports = { addQuestion, getQuestionsBySurvey, addQuestionWithFile};
 
-
-
 const QuestionModel = require("../models/QuestionModel");
 const multer = require("multer");
 const cloudinaryUtil = require("../utils/CloudinaryUtil");
 
-
+// Multer Storage Configuration
 const storage = multer.diskStorage({
   destination: "./uploads",
   filename: function (req, file, cb) {
@@ -83,11 +81,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single("image");
 
-
+// ✅ Add Question WITHOUT Image
 const addQuestion = async (req, res) => {
   try {
-    if (!req.body.questionimageURL) {
-      return res.status(400).json({ message: "questionimageURL is required" });
+    if (!req.body.survey_id) {
+      return res.status(400).json({ message: "Survey ID is required!" });
     }
 
     const savedQuestion = await QuestionModel.create(req.body);
@@ -100,22 +98,34 @@ const addQuestion = async (req, res) => {
   }
 };
 
-
+// ✅ Add Question WITH Image (Cloudinary)
 const addQuestionWithFile = async (req, res) => {
   upload(req, res, async (err) => {
-    if (err) {
-      return res.status(500).json({ message: err.message });
-    }
+    if (err) return res.status(500).json({ message: err.message });
 
     try {
-      if (!req.file) {
-        return res.status(400).json({ message: "Image file is required" });
+      if (!req.body.survey_id) {
+        return res.status(400).json({ message: "Survey ID is required!" });
       }
 
-      const cloudinaryResponse = await cloudinaryUtil.uploadFileToCloudinary(req.file);
-      req.body.questionimageURL = cloudinaryResponse.secure_url; // Save URL to DB
+      let imageUrl = "";
+      if (req.file) {
+        const cloudinaryResponse = await cloudinaryUtil.uploadFileToCloudinary(
+          req.file
+        );
+        if (!cloudinaryResponse.secure_url) {
+          return res
+            .status(500)
+            .json({ message: "Failed to upload image to Cloudinary" });
+        }
+        imageUrl = cloudinaryResponse.secure_url;
+      }
 
-      const savedQuestion = await QuestionModel.create(req.body);
+      const savedQuestion = await QuestionModel.create({
+        ...req.body,
+        questionimageURL: imageUrl || null,
+      });
+
       res.status(201).json({
         message: "Question added successfully",
         data: savedQuestion,
@@ -126,11 +136,22 @@ const addQuestionWithFile = async (req, res) => {
   });
 };
 
-
+// ✅ Get Questions by Survey ID
 const getQuestionsBySurvey = async (req, res) => {
   try {
     const { surveyId } = req.params;
+    if (!surveyId) {
+      return res.status(400).json({ message: "Survey ID is required!" });
+    }
+
     const questions = await QuestionModel.find({ survey_id: surveyId });
+
+    if (!questions.length) {
+      return res
+        .status(404)
+        .json({ message: "No questions found for this survey." });
+    }
+
     res.status(200).json({
       message: "Questions retrieved successfully",
       data: questions,
@@ -140,4 +161,49 @@ const getQuestionsBySurvey = async (req, res) => {
   }
 };
 
-module.exports = { addQuestion, getQuestionsBySurvey, addQuestionWithFile };
+// ✅ Update Question
+const updateQuestion = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedQuestion = await QuestionModel.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true }
+    );
+
+    if (!updatedQuestion) {
+      return res.status(404).json({ message: "Question not found" });
+    }
+
+    res.status(200).json({
+      message: "Question updated successfully",
+      data: updatedQuestion,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// ✅ Delete Question
+const deleteQuestion = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedQuestion = await QuestionModel.findByIdAndDelete(id);
+
+    if (!deletedQuestion) {
+      return res.status(404).json({ message: "Question not found" });
+    }
+
+    res.status(200).json({ message: "Question deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = {
+  addQuestion,
+  getQuestionsBySurvey,
+  addQuestionWithFile,
+  updateQuestion,
+  deleteQuestion,
+};

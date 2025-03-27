@@ -1,27 +1,22 @@
-.admin-content {
-    background: white;
+.settings {
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-}
-
-h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
-}
-
-.setting-option {
+    background: #f8f9fa;
+    border-radius: 10px;
+  }
+  
+  .settings-option {
+    background: white;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: #f8f9fa;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    transition: background 0.3s ease-in-out;
-}
-
-.setting-option:hover {
-    background: #e0e0e0;
-}
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .settings-option:hover {
+    background: #e3f2fd;
+  }
+  

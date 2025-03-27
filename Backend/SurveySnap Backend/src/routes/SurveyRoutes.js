@@ -1,7 +1,23 @@
-const routes = require("express").Router();
-const surveyController = require("../controllers/SurveyController");
+// const routes = require("express").Router();
+// const surveyController = require("../controllers/SurveyController");
 
-routes.post("/add", surveyController.createSurvey);
-routes.get("/all", surveyController.getAllSurveys);
+// routes.post("/add", surveyController.createSurvey);
+// routes.get("/all", surveyController.getAllSurveys);
 
-module.exports = routes;
+// module.exports = routes;
+
+
+
+const express = require("express");
+const router = express.Router();
+const surveyController = require("../controllers/SurveyController"); // ✅ Ensure this path is correct
+
+// ✅ Make sure all these functions exist in SurveyController.js
+router.post("/add", surveyController.createSurvey);
+router.get("/all", surveyController.getAllSurveys);
+router.get("/:id", surveyController.getSurveyById);
+router.put("/:id", surveyController.updateSurvey);
+router.delete("/:id", surveyController.deleteSurvey);
+
+module.exports = router;
+
