@@ -140,7 +140,7 @@ export const Login = () => {
         </div>
       )}
 
-      <ToastContainer />
+      <ToastContainer position="top-right" autoClose={2000} />
     </>
   );
 };

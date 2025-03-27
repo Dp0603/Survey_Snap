@@ -1,86 +1,112 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './ForgotPassword.css';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./ForgotPassword.css"; // ✅ Custom CSS
+import { Link, useNavigate } from "react-router-dom";
 
 export const ForgotPassword = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const submitHandler = async (data) => {
+    setLoading(true); // Show loader
+
     try {
       const res = await axios.post("/user/forgotpassword", data);
+
+      setLoading(false); // Hide loader before showing toast
+
       if (res.data.message === "reset password link sent to mail.") {
-        toast.success('Reset password link sent to your email.', {
+        toast.success("✅ Reset Link Sent! Check your email.", {
           position: "top-center",
-          autoClose: 2000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined,
           theme: "light",
-          transition: Bounce,
+          className: "forgot-toast-success",
+          onClose: () => navigate("/login"), // ✅ Redirect after toast closes
         });
       } else {
         toast.error(res.data.message, {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
-          closeOnClick: false,
+          closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined,
           theme: "light",
-          transition: Bounce,
+          className: "forgot-toast-error",
         });
       }
     } catch (error) {
-      console.error("Error during forgot password request:", error);
-      toast.error('Internal Server Error', {
+      setLoading(false); // Hide loader before showing toast
+      console.error("Forgot Password Error:", error);
+
+      toast.error("❌ Something went wrong. Please try again!", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
-        closeOnClick: false,
+        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
         theme: "light",
-        transition: Bounce,
+        className: "forgot-toast-error",
       });
     }
   };
 
   return (
-    <div className="forgot-password-container">
-      <ToastContainer />
-      <div className="forgot-password-wrapper">
-        <div className="forgot-password-card">
-          <div className="forgot-password-card-header">
-            <h3 className="forgot-password-title">Forgot Password</h3>
-          </div>
-          <div className="forgot-password-card-body">
-            <form onSubmit={handleSubmit(submitHandler)}>
-              <div className="forgot-password-input-group">
-                <input
-                  type="email"
-                  className="forgot-password-input"
-                  placeholder="Email"
-                  {...register("email", { required: "Email is required" })}
-                />
-                {errors.email && (
-                  <span className="forgot-password-error">{errors.email.message}</span>
-                )}
-              </div>
-              <div className="forgot-password-button-container">
-                <button type="submit" className="forgot-password-button">
-                  Send Reset Link
-                </button>
-              </div>
-            </form>
-          </div>
+    <div className="forgot-container">
+      <ToastContainer position="top-center" autoClose={2000} />
+
+      {/* 🔹 Loader Overlay */}
+      {loading && (
+        <div className="loader-overlay">
+          <div className="survey-loader"></div>
+          <p>Sending Reset Link...</p>
         </div>
+      )}
+
+      <div className="forgot-box">
+        <h1>🔑 Forgot Password</h1>
+        <p className="forgot-subtitle">
+          Enter your email to receive a reset link.
+        </p>
+
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <div className="forgot-input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              className="forgot-input"
+              placeholder="Enter your email"
+              {...register("email", { required: "Email is required" })}
+            />
+            {errors.email && (
+              <p className="forgot-error">{errors.email.message}</p>
+            )}
+          </div>
+
+          <button type="submit" className="forgot-btn" disabled={loading}>
+            {loading ? "Processing..." : "Send Reset Link"}
+          </button>
+        </form>
+
+        <p className="forgot-footer">
+          Remember your password?{" "}
+          <Link to="/login" className="forgot-login-link">
+            Login here
+          </Link>
+        </p>
       </div>
     </div>
   );

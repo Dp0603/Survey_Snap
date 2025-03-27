@@ -57,7 +57,7 @@
 
 // export default ManageUsers;
 
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import { FaTrash, FaEdit, FaUserPlus } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -126,7 +126,13 @@ const ManageUsers = () => {
 
   const handleAddUserClick = () => {
     setShowAddForm(true);
-    setFormData({ firstName: "", lastName: "", email: "", password: "", roleId: "" });
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      roleId: "",
+    });
   };
 
   const handleInputChange = (e) => {
@@ -155,6 +161,24 @@ const ManageUsers = () => {
     } catch (error) {
       toast.error("Error adding user! 🚨");
     }
+  };
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteUserId, setDeleteUserId] = useState(null);
+  const confirmDelete = (id) => {
+    setDeleteUserId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteConfirmed = async () => {
+    try {
+      await axios.delete(`/user/${deleteUserId}`);
+      toast.success("User deleted successfully! 🗑️");
+      fetchUsers();
+    } catch (error) {
+      toast.error("Error deleting user! 🚨");
+    }
+    setShowDeleteModal(false);
   };
 
   return (
@@ -186,10 +210,16 @@ const ManageUsers = () => {
               <td>{user.email}</td>
               <td>{user.roleId?.name || "Unknown"}</td>
               <td className="manage-users-action-buttons">
-                <button className="manage-users-edit-btn" onClick={() => handleEditClick(user)}>
+                <button
+                  className="manage-users-edit-btn"
+                  onClick={() => handleEditClick(user)}
+                >
                   <FaEdit /> Update
                 </button>
-                <button className="manage-users-delete-btn" onClick={() => handleDelete(user._id)}>
+                <button
+                  className="manage-users-delete-btn"
+                  onClick={() => confirmDelete(user._id)}
+                >
                   <FaTrash /> Delete
                 </button>
               </td>
@@ -206,32 +236,66 @@ const ManageUsers = () => {
             <form onSubmit={handleUpdateUser} className="manage-users-form">
               <div className="manage-users-form-group">
                 <label>First Name:</label>
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="manage-users-form-group">
                 <label>Last Name:</label>
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="manage-users-form-group">
                 <label>Email:</label>
-                <input type="email" name="email" value={formData.email} onChange={handleInputChange} required disabled />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  disabled
+                />
               </div>
 
               <div className="manage-users-form-group">
                 <label>Role:</label>
-                <select name="roleId" value={formData.roleId} onChange={handleInputChange} required>
+                <select
+                  name="roleId"
+                  value={formData.roleId}
+                  onChange={handleInputChange}
+                  required
+                >
                   <option value="">Select Role</option>
                   {roles.map((role) => (
-                    <option key={role._id} value={role._id}>{role.name}</option>
+                    <option key={role._id} value={role._id}>
+                      {role.name}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div className="manage-users-form-actions">
-                <button type="submit" className="manage-users-update-btn">Update</button>
-                <button type="button" className="manage-users-cancel-btn" onClick={() => setSelectedUser(null)}>Cancel</button>
+                <button type="submit" className="manage-users-update-btn">
+                  Update
+                </button>
+                <button
+                  type="button"
+                  className="manage-users-cancel-btn"
+                  onClick={() => setSelectedUser(null)}
+                >
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
@@ -246,39 +310,100 @@ const ManageUsers = () => {
             <form onSubmit={handleAddUser} className="manage-users-form">
               <div className="manage-users-form-group">
                 <label>First Name:</label>
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="manage-users-form-group">
                 <label>Last Name:</label>
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="manage-users-form-group">
                 <label>Email:</label>
-                <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="manage-users-form-group">
                 <label>Password:</label>
-                <input type="password" name="password" value={formData.password} onChange={handleInputChange} required />
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="manage-users-form-group">
                 <label>Role:</label>
-                <select name="roleId" value={formData.roleId} onChange={handleInputChange} required>
+                <select
+                  name="roleId"
+                  value={formData.roleId}
+                  onChange={handleInputChange}
+                  required
+                >
                   <option value="">Select Role</option>
                   {roles.map((role) => (
-                    <option key={role._id} value={role._id}>{role.name}</option>
+                    <option key={role._id} value={role._id}>
+                      {role.name}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div className="manage-users-form-actions">
-                <button type="submit" className="manage-users-add-btn">Add User</button>
-                <button type="button" className="manage-users-cancel-btn" onClick={() => setShowAddForm(false)}>Cancel</button>
+                <button type="submit" className="manage-users-add-btn">
+                  Add User
+                </button>
+                <button
+                  type="button"
+                  className="manage-users-cancel-btn"
+                  onClick={() => setShowAddForm(false)}
+                >
+                  Cancel
+                </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {showDeleteModal && (
+        <div className="manage-users-modal-overlay">
+          <div className="manage-users-modal-container">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this user?</p>
+            <div className="manage-users-form-actions">
+              <button
+                className="manage-users-delete-btn"
+                onClick={handleDeleteConfirmed}
+              >
+                Yes, Delete
+              </button>
+              <button
+                className="manage-users-cancel-btn"
+                onClick={() => setShowDeleteModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -289,4 +414,3 @@ const ManageUsers = () => {
 };
 
 export default ManageUsers;
-

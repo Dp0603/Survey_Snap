@@ -18,6 +18,28 @@ const ManageSurveys = () => {
     creator_id: "", // Corrected ID Handling
     status: "Draft",
   });
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteSurveyId, setDeleteSurveyId] = useState(null);
+
+  const confirmDeleteSurvey = (id) => {
+    setDeleteSurveyId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      await axios.delete(`/survey/${deleteSurveyId}`);
+      toast.success("Survey deleted successfully! 🗑️");
+      fetchSurveys();
+    } catch (error) {
+      toast.error("Error deleting survey! 🚨");
+    }
+    setShowDeleteModal(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteModal(false);
+  };
 
   // Fetch Surveys & Set Creator ID (Assuming user is logged in)
   useEffect(() => {
@@ -151,7 +173,7 @@ const ManageSurveys = () => {
                 </button>
                 <button
                   className="delete-btn"
-                  onClick={() => handleDeleteSurvey(survey._id)}
+                  onClick={() => confirmDeleteSurvey(survey._id)}
                 >
                   <FaTrash /> Delete
                 </button>
@@ -277,6 +299,22 @@ const ManageSurveys = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {showDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this survey?</p>
+            <div className="form-actions">
+              <button className="delete-btn" onClick={handleDeleteConfirm}>
+                Yes, Delete
+              </button>
+              <button className="cancel-btn" onClick={handleDeleteCancel}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}
