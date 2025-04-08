@@ -1,0 +1,74 @@
+.survey-creator-my-surveys {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.survey-creator-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.survey-creator-create-btn,
+.survey-creator-refresh-btn {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.survey-creator-create-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.survey-creator-refresh-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.survey-creator-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.survey-creator-table th,
+.survey-creator-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.survey-creator-action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.survey-creator-view-btn,
+.survey-creator-edit-btn,
+.survey-creator-delete-btn {
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.survey-creator-view-btn {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.survey-creator-edit-btn {
+  background-color: #ffc107;
+  color: white;
+}
+
+.survey-creator-delete-btn {
+  background-color: #dc3545;
+  color: white;
+}

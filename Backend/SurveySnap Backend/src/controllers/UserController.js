@@ -211,19 +211,102 @@ const deleteUserById = async (req, res) => {
 
 // ✅ Forgot Password
 const forgotPassword = async (req, res) => {
-  const email = req.body.email;
-  const foundUser = await userModel.findOne({ email: email });
+  try {
+    const email = req.body.email;
+    const foundUser = await userModel.findOne({ email: email });
 
-  if (foundUser) {
-    const token = jwt.sign(foundUser.toObject(), secret);
-    console.log(token);
+    if (!foundUser) {
+      return res
+        .status(404)
+        .json({ message: "User not found. Please register first." });
+    }
+
+    const token = jwt.sign({ _id: foundUser._id }, secret, {
+      expiresIn: "10m",
+    });
     const url = `http://localhost:5173/resetpassword/${token}`;
-    const mailContent = `<html><a href="${url}">Reset Password</a></html>`;
 
-    await mailUtil.sendingMail(foundUser.email, "Reset Password", mailContent);
-    res.json({ message: "Reset password link sent to mail." });
-  } else {
-    res.json({ message: "User not found. Register first." });
+    const emailSubject = "🔐 Reset Your Password - SurveySnap";
+
+    const emailBody = `
+      <html>
+      <head>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+          }
+          .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+          .header {
+            background: #dc3545;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            border-radius: 8px 8px 0 0;
+          }
+          .content {
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+          }
+          .button {
+            display: inline-block;
+            background: #dc3545;
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+          }
+          .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">Reset Your Password</div>
+          <div class="content">
+            <p>Hello ${foundUser.firstName || "User"},</p>
+            <p>We received a request to reset your <strong>SurveySnap</strong> account password.</p>
+            <p>If you didn’t make this request, you can safely ignore this email.</p>
+            <p>Otherwise, click the button below to reset your password. This link will expire in <strong>10 minutes</strong>:</p>
+            <p style="text-align: center;">
+              <a href="${url}" class="button">Reset Password</a>
+            </p>
+            <p>If the button doesn't work, copy and paste this link into your browser:</p>
+            <p><a href="${url}">${url}</a></p>
+            <p>If you have any questions, contact us at <a href="mailto:support@surveysnap.com">support@surveysnap.com</a>.</p>
+          </div>
+          <div class="footer">
+            Stay Secure,<br>
+            <strong>SurveySnap Team</strong>
+          </div>
+        </div>
+      </body>
+      </html>`;
+
+    await mailUtil.sendingMail(email, emailSubject, emailBody);
+
+    res.json({ message: "Reset password link sent to your email." });
+  } catch (error) {
+    console.log("error", error);
+    res
+      .status(500)
+      .json({ message: "Something went wrong. Please try again." });
   }
 };
 

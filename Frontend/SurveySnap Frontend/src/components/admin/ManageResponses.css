@@ -1,86 +1,119 @@
-/* ManageResponses.css */
-
-/* Container Styling */
-.response-management {
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+.responses-container {
+  padding: 30px;
+  background-color: #f9fafb;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Heading */
-.response-management h2 {
-  text-align: center;
-  color: #333;
+.responses-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #1f2937;
 }
 
-/* Survey Dropdown Container */
-.survey-dropdown-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+.responses-survey-selector {
   margin-bottom: 20px;
 }
 
-.survey-dropdown-container label {
-  font-weight: bold;
+.responses-dropdown-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
 
-.survey-dropdown-container select {
-  padding: 8px;
+.responses-dropdown {
+  padding: 8px 12px;
   font-size: 14px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
-.survey-dropdown-container button {
-  padding: 8px 15px;
-  font-size: 14px;
-  border: none;
-  background-color: #007bff;
+.responses-fetch-btn {
+  background-color: #2563eb;
   color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
   cursor: pointer;
-  border-radius: 4px;
 }
 
-.survey-dropdown-container button:disabled {
-  background-color: #ccc;
+.responses-fetch-btn:disabled {
+  background-color: #93c5fd;
   cursor: not-allowed;
 }
 
-/* Responses Table */
+.responses-tools-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.responses-filter-input {
+  padding: 8px 12px;
+  width: 260px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.responses-csv-btn {
+  padding: 8px 16px;
+  background-color: #10b981;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.responses-csv-btn:hover {
+  background-color: #059669;
+}
+
+.responses-table-wrapper {
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 .responses-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
 }
 
 .responses-table th,
 .responses-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  padding: 12px 15px;
+  border: 1px solid #e5e7eb;
   text-align: left;
 }
 
 .responses-table th {
-  background-color: #007bff;
-  color: white;
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
 }
 
-.responses-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.responses-table tr:hover {
-  background-color: #ddd;
-}
-
-/* Loading & No Responses Message */
-.response-management p {
+.responses-no-data {
   text-align: center;
-  font-size: 16px;
-  color: #555;
+  color: #6b7280;
+  padding: 20px;
+}
+
+.responses-error-message {
+  color: red;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.responses-loading {
+  font-style: italic;
+  color: #6b7280;
 }

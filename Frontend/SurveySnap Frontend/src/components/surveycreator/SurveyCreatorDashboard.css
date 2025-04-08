@@ -1,0 +1,136 @@
+/* General Styles */
+.survey-creator-dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Sidebar */
+.survey-sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #000;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease-in-out;
+  box-shadow: 3px 0 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Collapsed Sidebar */
+.survey-sidebar.closed {
+  width: 70px;
+}
+
+/* Sidebar Header */
+.survey-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  font-size: 18px;
+  background: #000;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Sidebar Logo */
+.survey-logo {
+  font-weight: bold;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Hide Logo When Collapsed */
+.survey-sidebar.closed .survey-logo {
+  opacity: 0;
+}
+
+/* Sidebar Toggle Button */
+.survey-toggle-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Sidebar Menu */
+.survey-sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Sidebar Items */
+.survey-sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  background: black;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.survey-sidebar-menu li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Icons */
+.survey-sidebar-menu .survey-icon {
+  font-size: 20px;
+  margin-right: 15px;
+  transition: margin-right 0.3s ease;
+}
+
+/* Hide Text When Sidebar is Collapsed */
+.survey-sidebar.closed .survey-sidebar-menu .survey-show-text {
+  display: none;
+}
+
+.survey-sidebar.closed .survey-sidebar-menu .survey-icon {
+  margin-right: 0;
+}
+
+.survey-sidebar.closed .survey-sidebar-menu li {
+  justify-content: center;
+}
+
+/* Main Content */
+.survey-content {
+  margin-left: 250px;
+  flex: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.survey-content.full-width {
+  margin-left: 70px;
+}
+
+/* Logout Popup */
+.survey-logout-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.survey-logout-popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}

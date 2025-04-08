@@ -1,0 +1,74 @@
+.viewSurvey-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  color: #007bff;
+}
+
+.viewSurvey-loading-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.viewSurvey-backButton {
+  margin-bottom: 15px;
+}
+
+.viewSurvey-tableContainer {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.viewSurvey-tableTitle {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.viewSurvey-headerRow {
+  background-color: #007bff;
+}
+
+.viewSurvey-headerCell {
+  color: white;
+  font-weight: bold;
+}
+
+.viewSurvey-questionText {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.viewSurvey-textField {
+  width: 100%;
+  min-width: 200px;
+}
+
+.viewSurvey-saveButton,
+.viewSurvey-editButton,
+.viewSurvey-deleteButton {
+  margin-right: 5px;
+}
+/* 🟢 Prevent column from resizing on edit */
+.viewSurvey-questionCell {
+  width: 50%; /* Set fixed width for question column */
+  min-width: 250px;
+  max-width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 🟢 Ensure text and input field align properly */
+.viewSurvey-questionText {
+  display: flex;
+  align-items: center;
+  min-height: 40px; /* Keep row height consistent */
+  padding: 5px;
+}
+
+/* 🟢 Prevent TextField from resizing row */
+.viewSurvey-textField {
+  width: 100%; /* Ensure TextField fills cell */
+  min-height: 40px; /* Keep height same as text */
+}

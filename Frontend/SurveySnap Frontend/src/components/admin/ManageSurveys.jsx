@@ -1,26 +1,65 @@
-import React, { useState, useEffect } from "react";
-import { FaTrash, FaEdit, FaPlus, FaEye } from "react-icons/fa";
+import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaTrash, FaEye, FaSync } from "react-icons/fa";
+import { useTable, useSortBy } from "react-table";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./ManageSurveys.css"; // Ensure styles are correct
-import ManageQuestions from "./ManageQuestions";
+import "./ManageSurveys.css";
 
 const ManageSurveys = () => {
   const [surveys, setSurveys] = useState([]);
-  const [selectedSurvey, setSelectedSurvey] = useState(null);
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [showQuestionsModal, setShowQuestionsModal] = useState(false);
-
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    creator_id: "", // Corrected ID Handling
-    status: "Draft",
-  });
+  const [users, setUsers] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteSurveyId, setDeleteSurveyId] = useState(null);
+  const navigate = useNavigate();
 
+  // Fetch Surveys & Users
+  useEffect(() => {
+    fetchSurveys();
+    fetchUsers();
+  }, []);
+
+  const fetchSurveys = async () => {
+    try {
+      const response = await axios.get("/survey/all");
+      setSurveys(response.data.data);
+    } catch (error) {
+      toast.error("Failed to fetch surveys! 🚨");
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get("/users");
+      setUsers(response.data.data);
+    } catch (error) {
+      toast.error("Failed to fetch users! 🚨");
+    }
+  };
+
+  // Group surveys by user
+  const surveysByUser = useMemo(() => {
+    const grouped = {};
+    surveys.forEach((survey) => {
+      const userId = survey.creator_id?._id || "unknown";
+      if (!grouped[userId]) {
+        grouped[userId] = {
+          user: survey.creator_id,
+          surveys: [],
+        };
+      }
+      grouped[userId].surveys.push(survey);
+    });
+    return grouped;
+  }, [surveys]);
+
+  // Navigate to View Survey Page
+  const handleViewSurvey = (surveyId) => {
+    navigate(`${surveyId}`);
+  };
+
+  // Delete confirmation
   const confirmDeleteSurvey = (id) => {
     setDeleteSurveyId(id);
     setShowDeleteModal(true);
@@ -41,267 +80,126 @@ const ManageSurveys = () => {
     setShowDeleteModal(false);
   };
 
-  // Fetch Surveys & Set Creator ID (Assuming user is logged in)
-  useEffect(() => {
-    fetchSurveys();
-    setFormData((prev) => ({
-      ...prev,
-      creator_id: "67e052121ddec96dad5326ff",
-    })); // Use real user ID dynamically
-  }, []);
+  // React Table Component
+  const SurveyTable = ({ data }) => {
+    const columns = useMemo(
+      () => [
+        {
+          Header: "#",
+          accessor: (row, i) => i + 1,
+          id: "index",
+        },
+        {
+          Header: "Title",
+          accessor: "title",
+        },
+        {
+          Header: "Description",
+          accessor: "description",
+        },
+        {
+          Header: "Status",
+          accessor: "status",
+          Cell: ({ value }) => (
+            <span
+              className={`status-badge ${
+                value === "Active"
+                  ? "active"
+                  : value === "Closed"
+                  ? "closed"
+                  : "draft"
+              }`}
+            >
+              {value}
+            </span>
+          ),
+        },
+        {
+          Header: "Actions",
+          accessor: "_id",
+          Cell: ({ row }) => (
+            <div className="action-buttons">
+              <button
+                className="view-btn"
+                onClick={() => handleViewSurvey(row.original._id)}
+              >
+                <FaEye />
+              </button>
+              <button
+                className="delete-btn"
+                onClick={() => confirmDeleteSurvey(row.original._id)}
+              >
+                <FaTrash />
+              </button>
+            </div>
+          ),
+          disableSortBy: true,
+        },
+      ],
+      []
+    );
 
-  const fetchSurveys = async () => {
-    try {
-      const response = await axios.get("/survey/all");
-      setSurveys(response.data.data);
-    } catch (error) {
-      toast.error("Failed to fetch surveys! 🚨");
-    }
-  };
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+      useTable(
+        {
+          columns,
+          data,
+        },
+        useSortBy
+      );
 
-  // Handle Input Changes
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // Handle Add Survey
-  const handleAddSurvey = async (e) => {
-    e.preventDefault();
-    if (!formData.creator_id) {
-      toast.error("Error: Creator ID is missing! 🚨");
-      return;
-    }
-    try {
-      await axios.post("/survey/add", formData);
-      toast.success("Survey added successfully! 🎉");
-      setShowAddForm(false);
-      setFormData({
-        title: "",
-        description: "",
-        creator_id: "67e052121ddec96dad5326ff",
-        status: "Draft",
-      });
-      fetchSurveys();
-    } catch (error) {
-      toast.error("Error adding survey! 🚨");
-    }
-  };
-
-  // Handle Edit Click
-  const handleEditClick = (survey) => {
-    setSelectedSurvey(survey);
-    setFormData({
-      title: survey.title,
-      description: survey.description,
-      creator_id: survey.creator_id?._id || "",
-      status: survey.status,
-    });
-  };
-
-  // Handle Update Survey
-  const handleUpdateSurvey = async (e) => {
-    e.preventDefault();
-    if (!selectedSurvey) return;
-
-    try {
-      await axios.put(`/survey/${selectedSurvey._id}`, formData);
-      toast.success("Survey updated successfully! ✅");
-      setSelectedSurvey(null);
-      fetchSurveys();
-    } catch (error) {
-      toast.error("Error updating survey! 🚨");
-    }
-  };
-
-  // Handle Delete Survey
-  const handleDeleteSurvey = async (id) => {
-    if (window.confirm("Are you sure you want to delete this survey?")) {
-      try {
-        await axios.delete(`/survey/${id}`);
-        toast.success("Survey deleted successfully! 🗑️");
-        fetchSurveys();
-      } catch (error) {
-        toast.error("Error deleting survey! 🚨");
-      }
-    }
-  };
-
-  const handleViewQuestions = (survey) => {
-    setSelectedSurvey(survey);
-    setShowQuestionsModal(true);
+    return (
+      <table {...getTableProps()} className="survey-table">
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
   };
 
   return (
     <div className="manage-surveys">
-      <h2>📊 Manage Surveys</h2>
+      <h2>📊 Manage Surveys by User</h2>
 
-      {/* Add Survey Button */}
-      <button className="add-survey-btn" onClick={() => setShowAddForm(true)}>
-        <FaPlus /> Create Survey
+      {/* Refresh Button */}
+      <button className="add-survey-btn" onClick={fetchSurveys}>
+        <FaSync /> Refresh Surveys
       </button>
 
-      {/* Surveys Table */}
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Creator</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {surveys.map((survey, index) => (
-            <tr key={survey._id}>
-              <td>{index + 1}</td>
-              <td>{survey.title}</td>
-              <td>{survey.description}</td>
-              <td>
-                {survey.creator_id?.firstName +
-                  " " +
-                  survey.creator_id?.lastName}
-              </td>
-              <td>{survey.status}</td>
-              <td className="action-buttons">
-                <button
-                  className="edit-btn"
-                  onClick={() => handleEditClick(survey)}
-                >
-                  <FaEdit /> Update
-                </button>
-                <button
-                  className="delete-btn"
-                  onClick={() => confirmDeleteSurvey(survey._id)}
-                >
-                  <FaTrash /> Delete
-                </button>
-                <button
-                  className="view-btn"
-                  onClick={() => handleViewQuestions(survey)}
-                >
-                  <FaEye /> Manage Questions
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {showQuestionsModal && (
-        <ManageQuestions
-          survey={selectedSurvey}
-          onClose={() => setShowQuestionsModal(false)}
-        />
-      )}
-
-      {/* Add Survey Modal */}
-      {showAddForm && (
-        <div className="modal-overlay">
-          <div className="modal-container">
-            <h3>Create Survey</h3>
-            <form onSubmit={handleAddSurvey} className="update-form">
-              <div className="form-group">
-                <label>Title:</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Description:</label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Status:</label>
-                <select
-                  name="status"
-                  value={formData.status}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="Draft">Draft</option>
-                  <option value="Active">Active</option>
-                  <option value="Closed">Closed</option>
-                </select>
-              </div>
-              <div className="form-actions">
-                <button type="submit" className="add-btn">
-                  Add Survey
-                </button>
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() => setShowAddForm(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
+      {/* User-wise Survey Tables */}
+      {Object.entries(surveysByUser).map(([userId, userData]) => (
+        <div key={userId} className="user-survey-section">
+          <h3>
+            Surveys by:{" "}
+            {userData.user
+              ? `${userData.user.firstName} ${userData.user.lastName}`
+              : "Unknown User"}
+          </h3>
+          <SurveyTable data={userData.surveys} />
         </div>
-      )}
+      ))}
 
-      {/* Edit Survey Modal */}
-      {selectedSurvey && (
-        <div className="modal-overlay">
-          <div className="modal-container">
-            <h3>Edit Survey</h3>
-            <form onSubmit={handleUpdateSurvey} className="update-form">
-              <div className="form-group">
-                <label>Title:</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Description:</label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Status:</label>
-                <select
-                  name="status"
-                  value={formData.status}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="Draft">Draft</option>
-                  <option value="Active">Active</option>
-                  <option value="Closed">Closed</option>
-                </select>
-              </div>
-              <div className="form-actions">
-                <button type="submit" className="update-btn">
-                  Update
-                </button>
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() => setSelectedSurvey(null)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal-container">

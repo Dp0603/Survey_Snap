@@ -15,7 +15,7 @@
   margin-bottom: 20px;
 }
 
-/* Add Survey Button */
+/* ========== Add Survey Button ========== */
 .add-survey-btn {
   display: flex;
   align-items: center;
@@ -38,41 +38,111 @@
   margin-right: 8px;
 }
 
-/* Table Styles */
-table {
+/* ========== User Survey Sections ========== */
+.user-survey-section {
+  margin-bottom: 2rem;
+  border: 1px solid #eee;
+  padding: 1rem;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.user-survey-section h3 {
+  margin-bottom: 1rem;
+  color: #333;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* ========== Table Styles ========== */
+.survey-table {
   width: 100%;
   border-collapse: collapse;
   background: white;
   border-radius: 8px;
   overflow: hidden;
+  margin-bottom: 1rem;
 }
 
-thead {
+.survey-table thead {
   background: #007bff;
   color: white;
 }
 
-th, td {
-  padding: 12px;
+.survey-table th,
+.survey-table td {
+  padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
-th {
+.survey-table th {
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.survey-table th:hover {
+  background-color: #0069d9;
+}
+
+.survey-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+/* Table Sorting Indicators */
+.sort-asc::after {
+  content: " ↑";
+}
+
+.sort-desc::after {
+  content: " ↓";
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-badge.active {
+  background-color: #28a745; /* Green */
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 5px 10px;
   font-weight: bold;
 }
 
-tbody tr:hover {
-  background: #f1f1f1;
+.status-badge.draft {
+  background-color: #ffc107; /* Gold */
+  color: #212529;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: bold;
 }
 
-/* Action Buttons */
+.status-badge.closed {
+  background-color: #dc3545; /* Red */
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+
+/* ========== Action Buttons ========== */
 .action-buttons {
   display: flex;
   gap: 10px;
 }
 
-.edit-btn, .delete-btn, .view-btn {
+.edit-btn,
+.delete-btn,
+.view-btn {
   display: flex;
   align-items: center;
   border: none;
@@ -80,7 +150,7 @@ tbody tr:hover {
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .edit-btn {
@@ -100,7 +170,7 @@ tbody tr:hover {
 }
 
 .delete-btn:hover {
-  background: #f8d7da; 
+  background: #f8d7da;
   color: #dc3545;
   border: 1px solid #dc3545;
 }
@@ -116,11 +186,13 @@ tbody tr:hover {
   border: 1px solid #28a745;
 }
 
-.edit-btn svg, .delete-btn svg, .view-btn svg {
+.edit-btn svg,
+.delete-btn svg,
+.view-btn svg {
   margin-right: 5px;
 }
 
-/* Modal Overlay */
+/* ========== Modal Styles ========== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -136,20 +208,22 @@ tbody tr:hover {
 
 .modal-container {
   background: white;
-  padding: 20px;
-  width: 400px;
+  padding: 25px;
+  width: 450px;
+  max-width: 95%;
   border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
 .modal-container h3 {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   color: #333;
   text-align: center;
+  font-size: 1.3rem;
 }
 
-/* Form Styles */
+/* ========== Form Styles ========== */
 .update-form .form-group {
   margin-bottom: 15px;
 }
@@ -157,51 +231,64 @@ tbody tr:hover {
 .update-form label {
   font-weight: bold;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  color: #555;
 }
 
-.update-form input, 
-.update-form textarea, 
+.update-form input,
+.update-form textarea,
 .update-form select {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
+  transition: border 0.3s ease;
+}
+
+.update-form input:focus,
+.update-form textarea:focus,
+.update-form select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
 .update-form textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 100px;
 }
 
 .form-actions {
   display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-/* Buttons */
-.add-btn, .update-btn {
+/* ========== Form Buttons ========== */
+.add-btn,
+.update-btn {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px;
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.add-btn:hover, .update-btn:hover {
-  background-color: #0056b3;
+.add-btn:hover,
+.update-btn:hover {
+  background-color: #0069d9;
 }
 
 .cancel-btn {
   background-color: #6c757d;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px;
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
@@ -212,18 +299,133 @@ tbody tr:hover {
   background-color: #5a6268;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .modal-container {
-    width: 90%;
-  }
+/* Delete Confirmation Buttons */
+.delete-confirm-btn {
+  background-color: #dc3545;
+  color: white;
+}
 
-  table {
+.delete-confirm-btn:hover {
+  background-color: #c82333;
+}
+
+/* ========== Responsive Styles ========== */
+@media (max-width: 768px) {
+  .survey-table {
     font-size: 14px;
   }
 
-  .edit-btn, .delete-btn, .view-btn {
-    font-size: 12px;
-    padding: 5px 10px;
+  .survey-table th,
+  .survey-table td {
+    padding: 8px 10px;
   }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .edit-btn,
+  .delete-btn,
+  .view-btn {
+    padding: 5px 8px;
+    font-size: 12px;
+    justify-content: center;
+  }
+
+  .modal-container {
+    padding: 15px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .add-btn,
+  .update-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .manage-surveys {
+    padding: 10px;
+  }
+
+  .user-survey-section {
+    padding: 0.5rem;
+  }
+
+  .survey-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* Add these styles to your existing ManageSurveys.css */
+
+/* ========== Fixed Table Layout ========== */
+.survey-table {
+  table-layout: fixed; /* This enforces equal column distribution */
+  width: 100%;
+}
+
+/* Set fixed widths for each column */
+.survey-table th:nth-child(1),
+.survey-table td:nth-child(1) {
+  width: 5%; /* # column */
+}
+
+.survey-table th:nth-child(2),
+.survey-table td:nth-child(2) {
+  width: 20%; /* Title column */
+}
+
+.survey-table th:nth-child(3),
+.survey-table td:nth-child(3) {
+  width: 35%; /* Description column */
+}
+
+.survey-table th:nth-child(4),
+.survey-table td:nth-child(4) {
+  width: 15%; /* Status column */
+}
+
+.survey-table th:nth-child(5),
+.survey-table td:nth-child(5) {
+  width: 25%; /* Actions column */
+}
+
+/* Handle text overflow */
+.survey-table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Make description column wrap but maintain width */
+.survey-table td:nth-child(3) {
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Ensure action buttons stay in one line */
+.action-buttons {
+  white-space: nowrap;
+  overflow: visible;
+}
+
+/* ========== User Section Consistency ========== */
+.user-survey-section {
+  margin-bottom: 2rem;
+}
+
+.user-survey-section h3 {
+  margin: 0 0 1rem 0;
+  padding: 0;
+  font-size: 1.1rem;
+  color: #444;
 }

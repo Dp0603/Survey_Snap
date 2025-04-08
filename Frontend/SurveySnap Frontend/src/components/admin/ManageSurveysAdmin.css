@@ -1,0 +1,66 @@
+.admin-manage-surveys {
+    padding: 20px;
+    background: #f8f9fa;
+  }
+  
+  .admin-surveys-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .admin-user-survey {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-survey-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .admin-survey-table th, .admin-survey-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .admin-survey-table th {
+    background: #007bff;
+    color: white;
+  }
+  
+  .admin-survey-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .admin-edit-btn, .admin-delete-btn {
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .admin-edit-btn {
+    background: #ffc107;
+    color: black;
+  }
+  
+  .admin-delete-btn {
+    background: #dc3545;
+    color: white;
+  }
+  
+  @media (max-width: 900px) {
+    .admin-surveys-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  

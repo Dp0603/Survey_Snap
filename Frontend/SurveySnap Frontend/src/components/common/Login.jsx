@@ -51,7 +51,7 @@ export const Login = () => {
             if (role === "Admin") {
               navigate("/admin-dashboard");
             } else if (role === "Survey Creator") {
-              navigate("/user-dashboard");
+              navigate("/survey-creator-dashboard");
             } else if (role === "Respondent") {
               navigate("/respondent-dashboard");
             }
@@ -116,7 +116,7 @@ export const Login = () => {
             </div>
 
             <div className="login-forgot-password">
-              <Link to="/user/forgotpassword">Forgot Password?</Link>
+              <Link to="/forgotpassword">Forgot Password?</Link>
             </div>
 
             <button type="submit" className="login-btn">

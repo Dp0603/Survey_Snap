@@ -1,0 +1,45 @@
+.survey-creator-settings {
+  padding: 20px;
+  background-color: #f7f9fc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.survey-creator-settings h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+  color: #333;
+}
+
+.setting-item {
+  margin-bottom: 16px;
+}
+
+.setting-item label {
+  font-size: 16px;
+  color: #444;
+}
+
+.setting-item input[type="number"],
+.setting-item select {
+  margin-left: 10px;
+  padding: 6px 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.save-settings-btn {
+  background-color: #0052cc;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.save-settings-btn:hover {
+  background-color: #003d99;
+}

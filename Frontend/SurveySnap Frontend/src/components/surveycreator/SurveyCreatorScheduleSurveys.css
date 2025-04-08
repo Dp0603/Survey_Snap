@@ -1,0 +1,49 @@
+.survey-creator-schedule {
+  padding: 20px;
+  background-color: #f0f5ff;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.survey-creator-schedule h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.schedule-field {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-field label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+}
+
+.schedule-field input[type="date"] {
+  padding: 8px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.schedule-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.schedule-btn:hover {
+  background-color: #0056b3;
+}

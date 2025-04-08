@@ -1,0 +1,211 @@
+/* General Styles */
+.survey-respondent-dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+/* Sidebar */
+.survey-respondent-sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #000;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.3s ease-in-out;
+    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Collapsed Sidebar */
+.survey-respondent-sidebar.closed {
+  width: 70px;
+}
+
+/* Sidebar Header */
+.survey-respondent-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    font-size: 18px;
+    background: #000;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Sidebar Logo */
+.survey-respondent-logo {
+  font-weight: bold;
+  transition: opacity 0.3s ease-in-out;
+  color: white;
+}
+
+/* Hide Logo When Collapsed */
+.survey-respondent-sidebar.closed .survey-respondent-logo {
+  opacity: 0;
+}
+
+/* Sidebar Toggle Button */
+.survey-respondent-toggle-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0px;
+}
+
+/* Sidebar Menu */
+.survey-respondent-sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  background: #000000;
+  color: white;
+}
+
+/* Sidebar Items */
+.survey-respondent-sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  background: black;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 5px;
+  border-radius: 5px;
+}
+
+/* Hover Effect */
+.survey-respondent-sidebar-menu li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+/* Icons */
+.survey-respondent-sidebar-menu .survey-respondent-icon {
+  font-size: 20px;
+  margin-right: 15px;
+  transition: margin-right 0.3s ease;
+  color: white;
+}
+
+/* Hide Text When Sidebar is Collapsed */
+.survey-respondent-sidebar.closed
+  .survey-respondent-sidebar-menu
+  .survey-respondent-show-text {
+  display: none;
+}
+
+/* Adjust Icon Alignment */
+.survey-respondent-sidebar.closed
+  .survey-respondent-sidebar-menu
+  .survey-respondent-icon {
+  margin-right: 0;
+}
+
+/* Center Items When Collapsed */
+.survey-respondent-sidebar.closed .survey-respondent-sidebar-menu li {
+  justify-content: center;
+}
+
+/* Main Content */
+.survey-respondent-content {
+  margin-left: 250px;
+  flex: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+  background-color: #ecf0f1;
+}
+
+/* When Sidebar is Closed */
+.survey-respondent-content.full-width {
+  margin-left: 70px;
+}
+
+/* Logout Button */
+.survey-respondent-logout {
+  margin-top: auto;
+  color: #e74c3c;
+}
+
+.survey-respondent-logout:hover {
+  background: rgba(231, 76, 60, 0.3);
+}
+
+/* Logout Popup Styles */
+.survey-respondent-logout-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.survey-respondent-logout-popup-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  width: 350px;
+}
+
+.survey-respondent-logout-popup h3 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.survey-respondent-logout-popup p {
+  margin-bottom: 20px;
+  color: #7f8c8d;
+}
+
+.survey-respondent-logout-popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.survey-respondent-confirm-btn {
+  background: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.survey-respondent-cancel-btn {
+  background: #95a5a6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.survey-respondent-confirm-btn:hover {
+  background: #c0392b;
+}
+
+.survey-respondent-cancel-btn:hover {
+  background: #7f8c8d;
+}

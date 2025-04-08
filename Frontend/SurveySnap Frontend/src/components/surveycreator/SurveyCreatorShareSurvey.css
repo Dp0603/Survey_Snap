@@ -1,0 +1,15 @@
+.survey-creator-share {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .copy-link-btn, .generate-qr-btn {
+    padding: 10px;
+    margin: 10px;
+    background: #17a2b8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  

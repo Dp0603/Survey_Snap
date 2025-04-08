@@ -1,0 +1,64 @@
+.survey-dist-container {
+    padding: 30px;
+    background-color: #fdfdfd;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+  
+  .survey-dist-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .survey-dist-email,
+  .survey-dist-link-section,
+  .survey-dist-qr-section,
+  .survey-dist-social {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .survey-dist-email-input,
+  .survey-dist-link-input {
+    padding: 10px;
+    width: 60%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .survey-dist-email-btn,
+  .survey-dist-copy-btn,
+  .survey-dist-qr-btn,
+  .survey-dist-twitter-btn,
+  .survey-dist-fb-btn {
+    padding: 10px 16px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .survey-dist-email-btn:hover,
+  .survey-dist-copy-btn:hover,
+  .survey-dist-qr-btn:hover,
+  .survey-dist-twitter-btn:hover,
+  .survey-dist-fb-btn:hover {
+    background-color: #357ab8;
+  }
+  
+  .survey-dist-copy-msg {
+    display: block;
+    margin-top: 5px;
+    color: green;
+    font-size: 14px;
+  }
+  
+  .survey-dist-qr-display {
+    margin-top: 10px;
+  }
+  

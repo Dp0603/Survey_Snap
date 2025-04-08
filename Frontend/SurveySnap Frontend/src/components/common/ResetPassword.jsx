@@ -25,8 +25,8 @@ export const ResetPassword = () => {
 
       setLoading(false); // ✅ Hide loader before toast
 
-      if (res.data.message === "password updated successfully..") {
-        toast.success("✅ Password Reset Successful! Redirecting to Login...", {
+      if (res.data.message) {
+        toast.success(" Password Reset Successfull! Redirecting to Login...", {
           position: "top-center",
           autoClose: 3000, // ✅ Closes automatically in 3s
           hideProgressBar: false,
@@ -35,8 +35,10 @@ export const ResetPassword = () => {
           draggable: true,
           theme: "light",
           className: "reset-toast-success",
-          onClose: () => navigate("/login"), // ✅ Redirects after toast closes
         });
+         setTimeout(() => {
+          navigate("/login")
+         }, 3000); 
       } else {
         toast.error(res.data.message, {
           position: "top-center",
@@ -53,7 +55,7 @@ export const ResetPassword = () => {
       setLoading(false); // ✅ Hide loader before showing error toast
       console.error("Reset Password Error:", error);
 
-      toast.error("❌ Something went wrong. Please try again!", {
+      toast.error(" Something went wrong. Please try again!", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,

@@ -32,6 +32,9 @@ app.use("/notification", notificationRoutes);
 const analyticsreportsRoutes = require("./src/routes/AnalyticsReportsRoutes");
 app.use("/analytics", analyticsreportsRoutes);
 
+const reportRoutes = require("./src/routes/ReportRoutes");
+app.use("/report", reportRoutes);
+
 mongoose.connect("mongodb://127.0.0.1:27017/Survey_Snap").then(() => {
   console.log("database connected....");
 });

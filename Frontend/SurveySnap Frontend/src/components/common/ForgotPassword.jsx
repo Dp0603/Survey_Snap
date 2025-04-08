@@ -22,19 +22,21 @@ export const ForgotPassword = () => {
       const res = await axios.post("/user/forgotpassword", data);
 
       setLoading(false); // Hide loader before showing toast
-
-      if (res.data.message === "reset password link sent to mail.") {
-        toast.success("✅ Reset Link Sent! Check your email.", {
+      if (res.data.message) {
+        toast.success("Reset Link Sent! Check your email.", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
+          progress: undefined,
           theme: "light",
           className: "forgot-toast-success",
-          onClose: () => navigate("/login"), // ✅ Redirect after toast closes
         });
+        setTimeout(() => {
+          navigate("/login")
+        }, 3000);  
       } else {
         toast.error(res.data.message, {
           position: "top-center",
@@ -51,7 +53,7 @@ export const ForgotPassword = () => {
       setLoading(false); // Hide loader before showing toast
       console.error("Forgot Password Error:", error);
 
-      toast.error("❌ Something went wrong. Please try again!", {
+      toast.error("Email not found. Please check your Email!", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,

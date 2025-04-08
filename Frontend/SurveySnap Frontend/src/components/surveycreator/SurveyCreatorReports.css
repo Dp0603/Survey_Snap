@@ -1,0 +1,64 @@
+.survey-reports-wrapper {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f9f9f9;
+}
+
+.survey-reports-sub {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.survey-reports-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.report-card {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.report-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.chart-box {
+  margin: 20px 0;
+}
+
+.question-analytics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.question-chart {
+  flex: 1;
+  min-width: 250px;
+}
+
+.export-btn {
+  margin-top: 40px;
+  padding: 10px 20px;
+  font-size: 15px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+}
+
+.export-btn:hover {
+  background-color: #218838;
+}

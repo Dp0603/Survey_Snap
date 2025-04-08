@@ -1,224 +1,97 @@
-/* Manage Users Container */
 .manage-users-container {
-  max-width: 1200px;
-  margin: auto;
   padding: 20px;
-  font-family: "Arial", sans-serif;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.manage-users-container h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Add User Button */
-.manage-users-add-btn {
-  display: flex;
-  align-items: center;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: background 0.3s ease;
-}
-
-.manage-users-add-btn:hover {
-  background-color: #0056b3;
-}
-
-.manage-users-add-btn svg {
-  margin-right: 8px;
-}
-
-/* Table Styles */
-.manage-users-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.manage-users-table thead {
-  background: #007bff;
-  color: white;
-}
-
-.manage-users-table th, 
-.manage-users-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.manage-users-table th {
-  font-weight: bold;
-}
-
-.manage-users-table tbody tr:hover {
-  background: #f1f1f1;
-}
-
-/* Action Buttons */
-.manage-users-action-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.manage-users-edit-btn, 
-.manage-users-delete-btn {
-  display: flex;
-  align-items: center;
-  border: none;
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.manage-users-edit-btn {
-  background-color: #007bff;
-  color: white;
-}
-
-.manage-users-edit-btn:hover {
-  background: #cce5ff;
-  color: #007bff;
-  border: 1px solid #007bff;
-}
-
-.manage-users-delete-btn {
-  background-color: #dc3545;
-  color: white;
-}
-
-.manage-users-delete-btn:hover {
-  background: #f8d7da;
-  color: #dc3545;
-  border: 1px solid #dc3545;
-}
-
-.manage-users-edit-btn svg, 
-.manage-users-delete-btn svg {
-  margin-right: 5px;
-}
-
-/* Modal Overlay */
-.manage-users-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.manage-users-modal-container {
-  background: white;
-  padding: 20px;
-  width: 400px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  position: relative;
-}
-
-.manage-users-modal-container h3 {
-  margin-bottom: 15px;
-  color: #333;
-  text-align: center;
-}
-
-/* Form Styles */
-.manage-users-form .manage-users-form-group {
-  margin-bottom: 15px;
-}
-
-.manage-users-form label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.manage-users-form input, 
-.manage-users-form textarea, 
-.manage-users-form select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.manage-users-form textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-.manage-users-form-actions {
+.manage-users-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
 }
 
-/* Buttons */
-.manage-users-add-btn, 
-.manage-users-update-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
+.manage-users-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Unified button style */
+.manage-users-btn {
+  font-weight: 600;
+  text-transform: none;
+  border-radius: 8px;
+  padding: 8px 16px;
   font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  min-width: 140px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
-.manage-users-add-btn:hover, 
-.manage-users-update-btn:hover {
-  background-color: #0056b3;
+.manage-users-btn.MuiButton-outlined {
+  color: #0cbf5b;
+  border-color: #0cbf5b;
+  background-color: white;
 }
 
-.manage-users-cancel-btn {
-  background-color: #6c757d;
+.manage-users-btn.MuiButton-outlined:hover {
+  background-color: #e6f9f0;
+  border-color: #0aa14c;
+}
+
+.manage-users-btn.MuiButton-contained {
+  background-color: #1976d2;
   color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-.manage-users-cancel-btn:hover {
-  background-color: #5a6268;
+.manage-users-btn.MuiButton-contained:hover {
+  background-color: #1258a8;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .manage-users-modal-container {
-    width: 90%;
+.manage-users-buttons svg {
+  font-size: 16px;
+}
+
+.user-table-container {
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+.role-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+}
+
+.badge-admin {
+  background-color: #d32f2f;
+}
+.badge-creator {
+  background-color: #1976d2;
+}
+.badge-respondent {
+  background-color: #388e3c;
+}
+.badge-default {
+  background-color: #757575;
+}
+
+@media (max-width: 600px) {
+  .manage-users-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .manage-users-table {
-    font-size: 14px;
+  .manage-users-buttons {
+    justify-content: space-between;
   }
 
-  .manage-users-edit-btn, 
-  .manage-users-delete-btn {
-    font-size: 12px;
-    padding: 5px 10px;
+  .user-table-container {
+    margin-top: 15px;
   }
 }

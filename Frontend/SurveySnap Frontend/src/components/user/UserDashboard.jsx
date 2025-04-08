@@ -15,9 +15,25 @@ import "./UserDashboard.css";
 const UserDashboard = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false); // Logout confirmation state
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  // Function to show logout confirmation popup
+  const confirmLogout = () => {
+    setShowLogoutPopup(true);
+  };
+
+  // Logout Function
+  const handleLogout = () => {
+    // Clear authentication data
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userRole");
+
+    // Redirect to login page
+    navigate("/login");
   };
 
   return (
@@ -33,27 +49,27 @@ const UserDashboard = () => {
 
         <ul className="user-sidebar-menu">
           <li onClick={() => navigate("/user-dashboard")}>
-            <FaHome className="user-icon" />{" "}
+            <FaHome className="user-icon" />
             <span className="user-show-text"> My Dashboard</span>
           </li>
           <li onClick={() => navigate("/user-dashboard/mysurveys")}>
-            <FaPoll className="user-icon" />{" "}
+            <FaPoll className="user-icon" />
             <span className="user-show-text">My Surveys</span>
           </li>
           <li onClick={() => navigate("/user-dashboard/myanalytics")}>
-            <FaChartLine className="user-icon" />{" "}
+            <FaChartLine className="user-icon" />
             <span className="user-show-text">My Analytics</span>
           </li>
           <li onClick={() => navigate("/user-dashboard/myresponses")}>
-            <FaReply className="user-icon" />{" "}
+            <FaReply className="user-icon" />
             <span className="user-show-text">My Responses</span>
           </li>
           <li onClick={() => navigate("/user-dashboard/settings")}>
-            <FaCog className="user-icon" />{" "}
+            <FaCog className="user-icon" />
             <span className="user-show-text">Settings</span>
           </li>
-          <li onClick={() => navigate("/logout")} className="user-logout">
-            <FaSignOutAlt className="user-icon" />{" "}
+          <li onClick={confirmLogout} className="user-logout">
+            <FaSignOutAlt className="user-icon" />
             <span className="user-show-text">Logout</span>
           </li>
         </ul>
@@ -67,8 +83,29 @@ const UserDashboard = () => {
       >
         <h1>Welcome, User 👤</h1>
         <p>Manage your surveys, analytics, and responses here.</p>
-        <Outlet /> {/* Child components will load here */}
+        <Outlet />
       </div>
+
+      {/* Logout Confirmation Popup */}
+      {showLogoutPopup && (
+        <div className="logout-popup">
+          <div className="logout-popup-content">
+            <h3>Confirm Logout</h3>
+            <p>Are you sure you want to log out?</p>
+            <div className="logout-popup-buttons">
+              <button className="confirm-btn" onClick={handleLogout}>
+                Yes, Logout
+              </button>
+              <button
+                className="cancel-btn"
+                onClick={() => setShowLogoutPopup(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -26,7 +26,7 @@ import vi from "../../assets/logos/vi.png";
 import bjp from "../../assets/logos/bjp.png";
 import iqoo from "../../assets/logos/iqoo.png";
 import mcdonalds from "../../assets/logos/mcdonalds.png";
-import pornhub from "../../assets/logos/pornhub.png";
+import s8ul from "../../assets/logos/s8ul.png";
 import realmadrid from "../../assets/logos/realmadrid.png";
 import supercell from "../../assets/logos/supercell.png";
 import youtube from "../../assets/logos/youtube.png";
@@ -36,7 +36,7 @@ import armani from "../../assets/logos/armani.png";
 // 🔹 Split logos into 3 rows (10 per row)
 const topRow = [apple, bmw, kia, microsoft, prime, ronaldo, underarmour, assassinscreed, dell, lamborghini];
 const middleRow = [netflix, pubg, skechers, valorant, audi, emirates, louisphilippe, nike, rcb, spotify];
-const bottomRow = [vi, bjp, iqoo, mcdonalds, pornhub, realmadrid, supercell, youtube, hdfc, armani];
+const bottomRow = [vi, bjp, iqoo, mcdonalds, s8ul, realmadrid, supercell, youtube, hdfc, armani];
 
 // 🔹 Function to Render Infinite Logo Row
 const LogoRow = ({ logos, animationClass }) => {
