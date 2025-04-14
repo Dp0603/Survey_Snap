@@ -1,0 +1,74 @@
+/* ======== Pricing Section (Unique Class Names) ======== */
+.pricing-section {
+  padding: 80px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.pricing-title {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #007bff;
+}
+
+.pricing-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.pricing-card {
+  width: 30%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.pricing-card p {
+  font-size: 16px;
+  color: #666;
+}
+
+.pricing-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 20px 0;
+}
+
+.pricing-cta {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pricing-cta:hover {
+  background-color: #0056b3;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ======== Responsive Design ======== */
+@media (max-width: 768px) {
+  .pricing-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

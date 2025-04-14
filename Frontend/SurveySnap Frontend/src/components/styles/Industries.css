@@ -1,0 +1,52 @@
+/* ======== Industries Section (Unique Class Names) ======== */
+.industries-section {
+  padding: 80px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.industries-title {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #007bff;
+}
+
+.industries-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.industries-card {
+  width: 30%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industries-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.industries-card p {
+  font-size: 16px;
+  color: #666;
+}
+
+.industries-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ======== Responsive Design ======== */
+@media (max-width: 768px) {
+  .industries-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

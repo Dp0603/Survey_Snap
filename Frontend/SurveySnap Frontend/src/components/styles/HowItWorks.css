@@ -1,0 +1,52 @@
+/* ======== How It Works Section (Unique Class Names) ======== */
+.how-it-works-section {
+  padding: 80px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.how-it-works-title {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #007bff;
+}
+
+.how-it-works-steps {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.how-it-works-step {
+  width: 30%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.how-it-works-step h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.how-it-works-step p {
+  font-size: 16px;
+  color: #666;
+}
+
+.how-it-works-step:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ======== Responsive Design ======== */
+@media (max-width: 768px) {
+  .how-it-works-step {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,56 @@
+.respond-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  .respond-form {
+    margin-top: 20px;
+  }
+  
+  .question-block {
+    margin-bottom: 24px;
+  }
+  
+  .question-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .question-image {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .option-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .submit-btn {
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .survey-summary {
+    margin-top: 40px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .survey-summary ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .survey-summary li {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  

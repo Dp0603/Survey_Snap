@@ -1,0 +1,56 @@
+/* ======== Testimonials Section (Unique Class Names) ======== */
+.testimonials-section {
+  padding: 80px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.testimonials-title {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #007bff;
+  animation: fadeInDown 1.5s ease-in-out;
+}
+
+.testimonials-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.testimonials-card {
+  width: 45%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonials-card p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.testimonials-card strong {
+  color: #007bff;
+}
+
+.animated-testimonials-card {
+  animation: fadeInUp 1.5s ease-in-out;
+}
+
+.testimonials-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ======== Responsive Design ======== */
+@media (max-width: 768px) {
+  .testimonials-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

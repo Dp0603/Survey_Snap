@@ -1,0 +1,48 @@
+app.js
+console.log("Hello")
+var user = require("./user")
+console.log(user)
+console.log(user.userName)
+console.log(user.userAge)
+user.printUserData(100)
+
+console.log("user chilling")
+
+var userName = "Hitachi"
+var userAge = 17
+
+user.js
+const  printUserData = (a)=>{
+
+    console.log("print userdata",a)
+}
+
+module.exports={
+    userName,userAge,printUserData
+}
+
+
+
+app.js
+app.get("/test",(req,res)=>{
+
+    console.log("test api calleddddd.......")
+
+    res.send ("hello test api calledd....")
+
+})
+app.get("/users",(req,res)=>{
+
+    res.json({
+        message:"user api called...",
+        data:["abc","xyz","pqr"]
+    })
+})
+
+
+
+model --->  table schema
+
+route ---> api calling
+
+controller ---> function create

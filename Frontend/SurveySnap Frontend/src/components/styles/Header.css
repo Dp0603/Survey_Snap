@@ -1,0 +1,132 @@
+/* ======== Header Styles (Unique) ======== */
+.header-ss {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 5%;
+  background: white;
+  color: black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.header-ss-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+/* ======== Navigation Styling ======== */
+.header-ss-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header-ss-nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-ss-nav ul li button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.header-ss-nav ul li button:hover {
+  color: #007bff;
+}
+
+/* ======== Authentication Buttons ======== */
+.header-ss-auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.header-ss-auth-buttons button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.header-ss-login-btn {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.header-ss-login-btn:hover {
+  background: black;
+  color: white;
+}
+
+.header-ss-signup-btn {
+  background: #007bff;
+  color: white;
+}
+
+.header-ss-signup-btn:hover {
+  background: #0056b3;
+}
+
+/* ======== Header Styling for Login/Signup Pages ======== */
+.header-ss-auth-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.header-ss-back-home {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.header-ss-back-home:hover {
+  color: #007bff;
+}
+
+.header-ss-switch-auth {
+  color: #007bff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.header-ss-switch-auth:hover {
+  color: #0056b3;
+}
+
+/* ======== Responsive Design ======== */
+@media (max-width: 768px) {
+  .header-ss-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-ss-auth-buttons {
+    flex-direction: column;
+  }
+}

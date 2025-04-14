@@ -1,0 +1,61 @@
+/* ======== Sitemap Page (Unique Class Names) ======== */
+.sitemap-section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  min-height: 100vh; /* Ensure it takes up the full page height */
+}
+
+.sitemap-title {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #007bff;
+  text-align: center;
+}
+
+.sitemap-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sitemap-column {
+  flex: 1 1 300px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sitemap-column h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #007bff;
+}
+
+.sitemap-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sitemap-column ul li {
+  margin-bottom: 10px;
+}
+
+.sitemap-column ul li a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sitemap-column ul li a:hover {
+  color: #007bff;
+}
+
+/* ======== Responsive Design ======== */
+@media (max-width: 768px) {
+  .sitemap-container {
+    flex-direction: column;
+  }
+}

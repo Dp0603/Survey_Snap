@@ -1,0 +1,59 @@
+.take-survey-container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  }
+  
+  .take-survey-container h2 {
+    margin-bottom: 0.5rem;
+    color: #007bff;
+  }
+  
+  .desc {
+    margin-bottom: 1.5rem;
+    color: #555;
+  }
+  
+  .question-block {
+    margin-bottom: 1.5rem;
+  }
+  
+  .question-block label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .question-block input[type="text"],
+  .question-block select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .options-group label {
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
+  }
+  
+  .submit-btn {
+    padding: 0.6rem 1.2rem;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  

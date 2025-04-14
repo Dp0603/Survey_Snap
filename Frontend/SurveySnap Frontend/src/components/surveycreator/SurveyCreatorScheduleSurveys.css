@@ -1,0 +1,52 @@
+.survey-creator-schedule {
+  padding: 30px;
+  max-width: 900px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-field {
+  margin: 20px 0;
+}
+
+.schedule-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.schedule-field select,
+.schedule-field input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.schedule-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.schedule-btn:hover {
+  background-color: #115293;
+}
+
+.styled-table {
+  margin-top: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.MuiTableCell-root {
+  font-size: 15px;
+}

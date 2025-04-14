@@ -1,0 +1,59 @@
+.manage-responses-container {
+  padding: 24px;
+}
+
+.manage-title {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.survey-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.survey-select {
+  min-width: 200px;
+}
+
+.filter-export-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.table-container {
+  width: 100%;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.no-responses-text {
+  margin-top: 24px;
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+/* Optional: if you want to style the DataGrid rows a bit */
+.MuiDataGrid-row:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+/* Button spacing inside action column */
+.response-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}

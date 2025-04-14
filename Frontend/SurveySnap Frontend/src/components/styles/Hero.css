@@ -1,0 +1,77 @@
+/* 🔹 Full-width Hero Section */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(to right, #2c3e50, #4ca1af);
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+/* 🔹 Improve Text Styling */
+.hero-heading {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.hero-subtext {
+  font-size: 20px;
+  max-width: 600px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* 🔹 Modernized Button */
+.hero-button {
+  padding: 14px 28px;
+  background: white;
+  color: #2c3e50;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.hero-button:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+/* 🔹 Fade-in Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* 🔹 Responsive Tweaks */
+@media (max-width: 768px) {
+  .hero-heading {
+      font-size: 36px;
+  }
+
+  .hero-subtext {
+      font-size: 18px;
+      max-width: 90%;
+  }
+
+  .hero-button {
+      font-size: 16px;
+  }
+}

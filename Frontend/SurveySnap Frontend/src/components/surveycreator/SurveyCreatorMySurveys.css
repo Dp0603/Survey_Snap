@@ -1,0 +1,126 @@
+.survey-creator-my-surveys {
+  padding: 2rem;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
+
+.survey-creator-my-surveys h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.top-controls {
+  margin-bottom: 1rem;
+}
+
+/* === Action Buttons === */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-buttons button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.action-buttons button:hover {
+  background: #e0e0e0;
+  transform: scale(1.1);
+}
+
+.view-btn {
+  color: #1976d2;
+}
+
+.edit-btn {
+  color: #f9a825;
+}
+
+.delete-btn {
+  color: #d32f2f;
+}
+
+/* === Status Badge Styles === */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.status-badge.active {
+  background-color: #b3ffb7;
+}
+
+.status-badge.inactive {
+  background-color: #757575; 
+}
+
+.status-badge.draft {
+  background-color: #f57c00; 
+}
+
+.status-badge.closed {
+  background-color: #c62828; 
+}
+
+/* Add extra badge styles if needed in future */
+.status-badge.published {
+  background-color: #0288d1;
+}
+
+.status-badge.archived {
+  background-color: #6a1b9a;
+}
+
+/* === DataGrid tweaks === */
+.MuiDataGrid-root {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.MuiDataGrid-footerContainer {
+  justify-content: center;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 600px) {
+  .action-buttons {
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+
+  .top-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .survey-creator-my-surveys {
+    padding: 1rem;
+  }
+
+  .MuiButton-root {
+    width: 100%;
+  }
+}
