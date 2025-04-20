@@ -4,6 +4,7 @@ import {
   FaHome,
   FaClipboardList,
   FaHistory,
+  FaCheckCircle, // New icon for completed surveys
   FaSignOutAlt,
   FaBars,
 } from "react-icons/fa";
@@ -24,6 +25,7 @@ const SurveyRespondentDashboard = () => {
   const getCurrentPageTitle = () => {
     const path = location.pathname;
     if (path.includes("/available-surveys")) return "Available Surveys";
+    if (path.includes("/completed-surveys")) return "Completed Surveys"; // Updated title
     if (path.includes("/response-history")) return "Response History";
     return "Dashboard";
   };
@@ -67,6 +69,19 @@ const SurveyRespondentDashboard = () => {
             <FaClipboardList className="survey-respondent-icon" />
             <span className="survey-respondent-show-text">
               Available Surveys
+            </span>
+          </li>
+          <li
+            className={
+              isActive("/respondent-dashboard/completed-surveys")
+                ? "active"
+                : ""
+            }
+            onClick={() => navigate("/respondent-dashboard/completed-surveys")}
+          >
+            <FaCheckCircle className="survey-respondent-icon" />
+            <span className="survey-respondent-show-text">
+              Completed Surveys
             </span>
           </li>
           <li

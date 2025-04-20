@@ -20,7 +20,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useToast } from "../../ToastContext"; // Adjust path as needed
+import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 import "./SurveyCreatorManageQuestions.css";
 
 const SurveyCreatorManageQuestions = () => {

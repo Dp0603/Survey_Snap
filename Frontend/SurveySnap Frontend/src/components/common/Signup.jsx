@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import "./Signup.css";
 import Header from "../layout/Header";
-import { useToast } from "../../ToastContext"; // ✅ Your custom toast system
+import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 
 export const Signup = () => {
   const {

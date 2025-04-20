@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import {
   Box,
   CircularProgress,
   Alert,
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+  Switch,
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -12,20 +16,26 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Typography,
-  Chip,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import "./SurveyCreatorViewSurvey.css";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import { useToast } from "../../contexts/ToastContext";
 
 const SurveyCreatorViewSurvey = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const [survey, setSurvey] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [editingId, setEditingId] = useState(null);
+  const [editedQuestion, setEditedQuestion] = useState({
+    question_text: "",
+    question_type: "",
+    is_required: false,
+  });
 
   useEffect(() => {
     const fetchSurveyData = async () => {
@@ -36,8 +46,7 @@ const SurveyCreatorViewSurvey = () => {
         setSurvey(surveyRes.data.data);
         setQuestions(questionRes.data.data);
       } catch (err) {
-        setError("Failed to load survey data. Please try again.");
-        console.error("Error fetching survey data:", err);
+        showToast("Failed to load survey data. 😓", "error");
       } finally {
         setLoading(false);
       }
@@ -46,60 +55,156 @@ const SurveyCreatorViewSurvey = () => {
     fetchSurveyData();
   }, [id]);
 
+  const handleEditClick = (q) => {
+    setEditingId(q._id);
+    setEditedQuestion({
+      question_text: q.question_text,
+      question_type: q.question_type,
+      is_required: q.is_required,
+    });
+  };
+
+  const handleSave = async (id) => {
+    try {
+      await axios.put(`/question/${id}`, editedQuestion);
+      const updated = questions.map((q) =>
+        q._id === id ? { ...q, ...editedQuestion } : q
+      );
+      setQuestions(updated);
+      showToast("Question updated successfully! ✅", "success");
+      setEditingId(null);
+    } catch (err) {
+      showToast("Failed to update question. ❌", "error");
+    }
+  };
+
   if (loading) {
     return (
-      <Box className="sc-viewsurvey-loading">
+      <Box textAlign="center" mt={4}>
         <CircularProgress />
       </Box>
     );
   }
 
-  if (error) {
-    return <Alert severity="error">{error}</Alert>;
-  }
-
   return (
-    <Box className="sc-viewsurvey-container">
-      <button
-        className="sc-back-button"
+    <Box p={3}>
+      <Button
+        variant="outlined"
         onClick={() => navigate("/survey-creator-dashboard/my-surveys")}
+        startIcon={<ArrowBackIcon />}
+        sx={{ mb: 2 }}
       >
-        <ArrowBackIcon /> Back to My Surveys
-      </button>
+        Back to My Surveys
+      </Button>
 
-      <Typography variant="h5" className="sc-survey-title">
-        {survey?.title || "Survey Title"}
-      </Typography>
-      <Typography variant="subtitle1" className="sc-survey-description">
+      <Typography variant="h5">{survey?.title}</Typography>
+      <Typography variant="subtitle1" mb={2}>
         {survey?.description}
       </Typography>
 
-      <TableContainer component={Paper} className="sc-table-container">
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow className="sc-table-header">
+            <TableRow>
               <TableCell>#</TableCell>
               <TableCell>Question</TableCell>
               <TableCell>Type</TableCell>
               <TableCell>Required</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {questions.map((q, index) => (
               <TableRow key={q._id}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{q.question_text}</TableCell>
+
                 <TableCell>
-                  <Chip label={q.question_type} color="primary" />
+                  {editingId === q._id ? (
+                    <TextField
+                      value={editedQuestion.question_text}
+                      onChange={(e) =>
+                        setEditedQuestion((prev) => ({
+                          ...prev,
+                          question_text: e.target.value,
+                        }))
+                      }
+                      fullWidth
+                      size="small"
+                    />
+                  ) : (
+                    q.question_text
+                  )}
                 </TableCell>
+
                 <TableCell>
-                  <Chip
-                    label={q.is_required ? "Yes" : "No"}
-                    sx={{
-                      backgroundColor: q.is_required ? "#2E7D32" : "#B71C1C",
-                      color: "#fff",
-                    }}
-                  />
+                  {editingId === q._id ? (
+                    <Select
+                      value={editedQuestion.question_type}
+                      onChange={(e) =>
+                        setEditedQuestion((prev) => ({
+                          ...prev,
+                          question_type: e.target.value,
+                        }))
+                      }
+                      fullWidth
+                      size="small"
+                    >
+                      <MenuItem value="text">Text</MenuItem>
+                      <MenuItem value="mcq">Multiple Choice</MenuItem>
+                      <MenuItem value="checkbox">Checkbox</MenuItem>
+                    </Select>
+                  ) : (
+                    q.question_type
+                  )}
+                </TableCell>
+
+                <TableCell>
+                  {editingId === q._id ? (
+                    <Switch
+                      checked={editedQuestion.is_required}
+                      onChange={(e) =>
+                        setEditedQuestion((prev) => ({
+                          ...prev,
+                          is_required: e.target.checked,
+                        }))
+                      }
+                    />
+                  ) : q.is_required ? (
+                    "Yes"
+                  ) : (
+                    "No"
+                  )}
+                </TableCell>
+
+                <TableCell>
+                  {editingId === q._id ? (
+                    <>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="success"
+                        onClick={() => handleSave(q._id)}
+                      >
+                        Save
+                      </Button>
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={() => setEditingId(null)}
+                        sx={{ ml: 1 }}
+                      >
+                        Cancel
+                      </Button>
+                    </>
+                  ) : (
+                    <Button
+                      size="small"
+                      variant="contained"
+                      onClick={() => handleEditClick(q)}
+                    >
+                      Edit
+                    </Button>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

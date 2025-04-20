@@ -64,7 +64,7 @@ const SurveyCreatorDashboard = () => {
           </li>
           <li
             className={isActive("/survey-creator-dashboard/manage-surveys") ? "active" : ""}
-            onClick={() => navigate("/survey-creator-dashboard/manage-surveys")}
+            onClick={() => navigate("/survey-creator-dashboard/manage-questions")}
           >
             <FaTasks className="creator-icon" />
             <span className="creator-show-text">Manage Questions</span>
@@ -83,20 +83,20 @@ const SurveyCreatorDashboard = () => {
             <FaShareAlt className="creator-icon" />
             <span className="creator-show-text">Share Survey</span>
           </li>
-          <li
+          {/* <li
             className={isActive("/survey-creator-dashboard/reports") ? "active" : ""}
             onClick={() => navigate("/survey-creator-dashboard/reports")}
           >
             <FaChartLine className="creator-icon" />
             <span className="creator-show-text">Reports</span>
-          </li>
-          <li
+          </li> */}
+          {/* <li
             className={isActive("/survey-creator-dashboard/settings") ? "active" : ""}
             onClick={() => navigate("/survey-creator-dashboard/settings")}
           >
             <FaCog className="creator-icon" />
             <span className="creator-show-text">Settings</span>
-          </li>
+          </li> */}
         </ul>
       </div>
 

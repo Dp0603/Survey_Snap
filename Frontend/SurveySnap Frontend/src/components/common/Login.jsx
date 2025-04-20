@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 import "./Login.css";
 import Header from "../layout/Header";
-import { useToast } from "../../ToastContext"; // ✅ Import custom toast
+import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -36,16 +36,17 @@ export const Login = () => {
           return;
         }
 
+        // ✅ Store data in localStorage
         localStorage.setItem("id", userData._id);
         localStorage.setItem("roles", role);
+        localStorage.setItem("email", userData.email); // <-- This line added
+        localStorage.setItem("firstName", userData.firstName || "");
+        localStorage.setItem("lastName", userData.lastName || "");
 
-        // ✅ Show toast
         showToast("Login Successful! Redirecting...", "success");
 
-        // ✅ Delay for loader
         setTimeout(() => {
           setShowLoader(true);
-
           setTimeout(() => {
             if (role === "Admin") {
               navigate("/admin-dashboard");

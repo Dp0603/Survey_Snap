@@ -1,81 +1,216 @@
 .admin-home-container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 30px;
+  background-color: #f9fafb;
+  min-height: 100%;
+}
+
+.admin-home-welcome {
+  margin-bottom: 30px;
+  animation: fadeInUp 0.4s ease-in-out;
 }
 
 .admin-home-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  font-size: 28px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+
+.admin-home-name {
+  color: #2563eb;
+  font-weight: 700;
 }
 
 .admin-home-subtitle {
-  color: #666;
-  margin-bottom: 2rem;
+  font-size: 16px;
+  color: #64748b;
 }
 
 .admin-home-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
 
 .admin-home-stat-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
   display: flex;
   align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
 }
 
 .admin-home-stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .admin-home-stat-icon {
-  font-size: 2.5rem;
-  margin-right: 1rem;
-  color: #1976d2;
+  font-size: 32px;
+  margin-right: 20px;
 }
 
 .admin-home-stat-info h3 {
+  font-size: 24px;
   margin: 0;
-  font-size: 1.8rem;
-  font-weight: 600;
+  color: #1e293b;
+  font-weight: bold;
 }
 
 .admin-home-stat-info p {
   margin: 0;
-  color: #555;
+  color: #64748b;
+  font-size: 14px;
 }
 
-.users .admin-home-stat-icon {
-  color: #1e88e5;
+/* Icon Category Colors */
+.admin-users .admin-home-stat-icon {
+  color: #0ea5e9;
+}
+.admin-surveys .admin-home-stat-icon {
+  color: #10b981;
+}
+.admin-reports .admin-home-stat-icon {
+  color: #f97316;
 }
 
-.surveys .admin-home-stat-icon {
-  color: #43a047;
+/* Quick Actions */
+.admin-home-quick-actions {
+  margin-top: 40px;
+  background: #ffffff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.reports .admin-home-stat-icon {
-  color: #f57c00;
+.admin-home-section-title {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #1e293b;
 }
 
-@media (max-width: 600px) {
+.admin-home-action-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.admin-home-action-buttons button {
+  background-color: #e0edff; /* Light bluewhite background */
+  color: #1d4ed8; /* Blue text */
+  border: 1px solid #3b82f6; /* Blue border */
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.admin-home-action-buttons button:hover {
+  background-color: #3b82f6; /* Deep blue on hover */
+  color: white; /* White text on hover */
+  border-color: #2563eb; /* Slightly deeper border on hover */
+}
+
+/* Activity Section */
+.admin-home-activity {
+  margin-top: 30px;
+  background-color: #ffffff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.admin-home-activity-list {
+  padding-left: 18px;
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.admin-home-activity-list li strong {
+  color: #0f172a;
+}
+
+.admin-home-activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.admin-home-activity-box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.admin-home-activity-box h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.admin-home-activity-list {
+  list-style: none;
+  padding-left: 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.admin-home-activity-list li {
+  margin-bottom: 10px;
+}
+
+.admin-home-activity-list small {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
   .admin-home-title {
-    font-size: 1.5rem;
+    font-size: 24px;
+  }
+
+  .admin-home-subtitle {
+    font-size: 14px;
   }
 
   .admin-home-stat-icon {
-    font-size: 2rem;
+    font-size: 28px;
+    margin-right: 16px;
   }
 
   .admin-home-stat-info h3 {
-    font-size: 1.5rem;
+    font-size: 20px;
+  }
+
+  .admin-home-action-buttons {
+    flex-direction: column;
+  }
+
+  .admin-home-action-buttons button {
+    width: 100%;
   }
 }

@@ -33,7 +33,6 @@ import SurveyCreatorScheduleSurveys from "./components/surveycreator/SurveyCreat
 import SurveyCreatorShareSurvey from "./components/surveycreator/SurveyCreatorShareSurvey";
 import SurveyCreatorReports from "./components/surveycreator/SurveyCreatorReports";
 import SurveyCreatorSettings from "./components/surveycreator/SurveyCreatorSettings";
-import SurveyCreatorLogout from "./components/surveycreator/SurveyCreatorLogout";
 import SurveyRespondentDashboard from "./components/surveyrespondent/SurveyRespondentDashboard";
 import SurveyRespondentHome from "./components/surveyrespondent/SurveyRespondentHome";
 import SurveyRespondentAvailableSurveys from "./components/surveyrespondent/SurveyRespondentAvailableSurveys";
@@ -49,6 +48,8 @@ import ManageReport from "./components/admin/ManageReport";
 import SurveyCreatorViewSurvey from "./components/surveycreator/SurveyCreatorViewSurvey";
 import SurveyCreatorManageSurveyList from "./components/surveycreator/SurveyCreatorManageSurveyList";
 import RespondToSurveyPage from "./components/surveyrespondent/RespondToSurveyPage";
+import SurveyRespondentViewResponse from "./components/surveyrespondent/SurveyRespondentViewResponse";
+import SurveyRespondentCompletedSurveys from "./components/surveyrespondent/SurveyRespondentCompletedSurveys";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -111,21 +112,23 @@ function App() {
           <Route path="my-surveys/create-new-survey/prebuilt-templates" element={<SurveyCreatorPrebuiltTemplates />} />
           <Route path="my-surveys/create-new-survey/prebuilt-templates/create" element={<SurveyCreationPage />} />
           <Route path="my-surveys/create-new-survey/custom-templates" element={<SurveyCreatorCustomTemplate />} />
-          <Route path="manage-surveys" element={<SurveyCreatorManageSurveyList />} />
+          <Route path="manage-questions" element={<SurveyCreatorManageSurveyList />} />
           <Route path="manage-questions/:surveyId" element={<SurveyCreatorManageQuestions />} />
           <Route path="schedule-surveys" element={<SurveyCreatorScheduleSurveys />} />
           {/* <Route path="share-survey" element={<SurveyCreatorShareSurvey />} /> */}
           <Route path="share-survey" element={<SurveyCreatorShareSurvey/>}></Route>
-          <Route path="reports" element={<SurveyCreatorReports />} />
-          <Route path="settings" element={<SurveyCreatorSettings />} />
-          <Route path="logout" element={<SurveyCreatorLogout />} />
+          {/* <Route path="reports" element={<SurveyCreatorReports />} /> */}
+          {/* <Route path="settings" element={<SurveyCreatorSettings />} /> */}
         </Route>        
 
         <Route path="/respondent-dashboard/*" element={<SurveyRespondentDashboard />}>
         <Route index element={<SurveyRespondentHome />} />
         <Route path="available-surveys" element={<SurveyRespondentAvailableSurveys />} />
+        <Route path="available-surveys/respond/:surveyId" element={<RespondToSurveyPage />} />
+        <Route path="completed-surveys" element={<SurveyRespondentCompletedSurveys />} />
         <Route path="response-history" element={<SurveyRespondentResponseHistory />} />
-        {/* <Route path="respond/:surveyId" element={<RespondToSurveyPage />} /> */}
+        <Route path="response-history/view-response/:responseId"  element={<SurveyRespondentViewResponse />}
+/>
 
         </Route>        
       </Routes>

@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const analyticsController = require("../controllers/AnalyticsReportsController");
 
-// Routes for Analytics
 router.get("/survey-analytics", analyticsController.getSurveyAnalytics);
 router.post("/generate-report", analyticsController.generateReport);
+
+// 🆕 Add this route
+router.get("/recent-activity", analyticsController.getRecentActivity);
 
 module.exports = router;

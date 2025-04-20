@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./SurveyCreatorManageSurveyList.css";
+import "./SurveyCreatorManageQuestionsList.css";
 
-const SurveyCreatorManageSurveyList = () => {
+const SurveyCreatorManageQuestionsList = () => {
   const [surveys, setSurveys] = useState([]);
   const navigate = useNavigate();
   const userId = localStorage.getItem("id");
@@ -49,4 +49,4 @@ const SurveyCreatorManageSurveyList = () => {
   );
 };
 
-export default SurveyCreatorManageSurveyList;
+export default SurveyCreatorManageQuestionsList;

@@ -1,0 +1,56 @@
+.response-view-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .response-view-container h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .submitted-on {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  .question-answer-list {
+    margin-top: 20px;
+  }
+  
+  .qa-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+  }
+  
+  .qa-item h4 {
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .answer {
+    margin-top: 8px;
+    color: #444;
+  }
+  
+  .back-btn {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .back-btn:hover {
+    background-color: #115293;
+  }
+  

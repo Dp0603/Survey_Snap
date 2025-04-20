@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./RespondToSurveyPage.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const RespondToSurveyPage = () => {
   const { surveyId } = useParams();
+  const navigate = useNavigate();
+
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
-  const [userId, setUserId] = useState("661696e3786c18ef7e5fe1df"); // ✅ Replace with actual auth logic
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
+    const uid = localStorage.getItem("id");
+    if (uid) setUserId(uid);
+
     const fetchQuestions = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/question/survey/${surveyId}`);
+        const res = await axios.get(
+          `http://localhost:3000/question/survey/${surveyId}`
+        );
         setQuestions(res.data.data);
       } catch (error) {
         console.error("Error fetching questions:", error);
@@ -34,10 +41,12 @@ const RespondToSurveyPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formattedAnswers = Object.entries(answers).map(([questionId, answer]) => ({
-      questionId,
-      answer,
-    }));
+    const formattedAnswers = Object.entries(answers).map(
+      ([questionId, answer]) => ({
+        questionId,
+        answer,
+      })
+    );
 
     const payload = {
       userId,
@@ -46,9 +55,17 @@ const RespondToSurveyPage = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:3000/responses/submit", payload);
+      const res = await axios.post(
+        "http://localhost:3000/responses/submit",
+        payload
+      );
       toast.success("Survey submitted successfully!");
-      setAnswers({}); // Clear form after submit
+      setAnswers({});
+
+      // ✅ Redirect after success
+      setTimeout(() => {
+        navigate("/respondent-dashboard/available-surveys");
+      }, 1000);
     } catch (err) {
       console.error("Error submitting survey:", err);
       toast.error("Failed to submit survey");
@@ -64,7 +81,11 @@ const RespondToSurveyPage = () => {
             <label className="question-label">{q.question_text}</label>
 
             {q.questionimageURL && (
-              <img src={q.questionimageURL} alt="Question" className="question-image" />
+              <img
+                src={q.questionimageURL}
+                alt="Question"
+                className="question-image"
+              />
             )}
 
             {q.question_type === "Short Text" && (
@@ -127,7 +148,10 @@ const RespondToSurveyPage = () => {
             )}
           </div>
         ))}
-        <button type="submit" className="submit-btn">Submit Survey</button>
+
+        <button type="submit" className="submit-btn">
+          Submit Survey
+        </button>
       </form>
     </div>
   );

@@ -19,7 +19,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useToast } from "../../ToastContext";
+import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 import "./ViewSurvey.css";
 
 const ViewSurvey = () => {

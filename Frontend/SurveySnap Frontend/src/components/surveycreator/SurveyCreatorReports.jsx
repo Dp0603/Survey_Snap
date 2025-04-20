@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Bar, Pie, Line } from "react-chartjs-2"; // ✅ FROM react-chartjs-2
-
+import { Bar, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
   ArcElement,
-  PointElement,
-  LineElement,
   Tooltip,
   Legend,
 } from "chart.js";
-
+import { useToast } from "../../contexts/ToastContext"; // ✅ your global toast
 import "./SurveyCreatorReports.css";
 
-// Register ChartJS components
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
   ArcElement,
-  PointElement,
-  LineElement,
   Tooltip,
   Legend
 );
@@ -31,6 +25,8 @@ ChartJS.register(
 const SurveyCreatorReports = () => {
   const [analyticsData, setAnalyticsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
+  const creatorId = localStorage.getItem("id"); // ✅ get current user
 
   useEffect(() => {
     fetchAnalytics();
@@ -38,10 +34,18 @@ const SurveyCreatorReports = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await axios.get("/analytics/getSurveyAnalytics");
-      setAnalyticsData(res.data.data || []);
+      const res = await axios.get("/analytics/survey-analytics");
+      const allData = res.data.data || [];
+
+      // ✅ Filter only current user's survey analytics
+      const filtered = allData.filter(
+        (a) => a.survey_id?.creator_id === creatorId
+      );
+
+      setAnalyticsData(filtered);
     } catch (error) {
       console.error("Error fetching analytics:", error);
+      showToast("Failed to fetch analytics data", "error");
     } finally {
       setLoading(false);
     }
@@ -71,16 +75,16 @@ const SurveyCreatorReports = () => {
 
   return (
     <div className="survey-reports-wrapper">
-      <h2>📊 Survey Reports & Analytics</h2>
+      <h2>📊 My Survey Reports & Analytics</h2>
       <p className="survey-reports-sub">
-        Visualize survey performance & response insights.
+        Visualize your survey performance & insights.
       </p>
 
       <div className="survey-reports-content">
         {loading ? (
           <p>Loading analytics...</p>
         ) : analyticsData.length === 0 ? (
-          <p>No reports available.</p>
+          <p>No reports available for your surveys.</p>
         ) : (
           analyticsData.map((report, index) => (
             <div key={index} className="report-card">
@@ -106,6 +110,7 @@ const SurveyCreatorReports = () => {
                 />
               </div>
 
+              {/* Render Pie charts if response_data exists */}
               {report.response_data &&
                 (() => {
                   try {
@@ -148,9 +153,11 @@ const SurveyCreatorReports = () => {
         )}
       </div>
 
-      <button className="export-btn" onClick={exportToCSV}>
-        📥 Export to CSV
-      </button>
+      {analyticsData.length > 0 && (
+        <button className="export-btn" onClick={exportToCSV}>
+          📥 Export to CSV
+        </button>
+      )}
     </div>
   );
 };

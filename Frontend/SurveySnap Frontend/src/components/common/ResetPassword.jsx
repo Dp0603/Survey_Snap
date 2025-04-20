@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import "./ResetPassword.css"; // ✅ Unique CSS file for styling
-import { useToast } from "../../ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 
 export const ResetPassword = () => {
   const [loading, setLoading] = useState(false); // ✅ Loader state

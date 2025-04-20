@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FaClipboardList, FaCheckCircle, FaHistory } from "react-icons/fa";
+import {
+  FaClipboardList,
+  FaCheckCircle,
+  FaHistory,
+  FaSyncAlt,
+} from "react-icons/fa";
 import axios from "axios";
 import "./SurveyRespondentHome.css";
 
@@ -10,26 +15,50 @@ const SurveyRespondentHome = () => {
 
   const userId = localStorage.getItem("id"); // Assuming you're storing user ID here
 
-  useEffect(() => {
-    const fetchSurveyStats = async () => {
-      try {
-        const response = await axios.get(`/responses/stats/${userId}`);
-        const { available, completed, pending } = response.data;
-        setAvailable(available);
-        setCompleted(completed);
-        setPending(pending);
-      } catch (error) {
-        console.error("Error fetching survey stats:", error);
-      }
-    };
+  const fetchSurveyStats = async () => {
+    try {
+      // Fetch all active surveys
+      const surveyResponse = await axios.get(`/survey/all`);
+      const activeSurveys = surveyResponse.data.data.filter(
+        (survey) => survey.status === "Active"
+      );
 
+      // Fetch filled surveys stats
+      const statsResponse = await axios.get(`/responses/stats/${userId}`);
+      const filledSurveys = statsResponse.data;
+
+      // Filter completed surveys
+      const completedSurveys = filledSurveys.filter(
+        (survey) => survey.status === "completed"
+      );
+
+      // Set available, completed, and pending stats
+      setAvailable(activeSurveys.length);
+      setCompleted(completedSurveys.length);
+      setPending(activeSurveys.length - completedSurveys.length); // Pending = Available - Completed
+    } catch (error) {
+      console.error("Error fetching survey stats:", error);
+    }
+  };
+
+  useEffect(() => {
     if (userId) fetchSurveyStats();
+
+    // Polling every 30 seconds to refresh the data
+    const interval = setInterval(fetchSurveyStats, 30000);
+
+    // Cleanup on component unmount
+    return () => clearInterval(interval);
   }, [userId]);
 
   return (
     <div className="survey-respondent-home-container">
-      <h1 className="survey-respondent-home-title">Welcome to Survey Portal 👋</h1>
-      <p className="survey-respondent-home-subtitle">Complete surveys and track your responses.</p>
+      <h1 className="survey-respondent-home-title">
+        Welcome to Survey Portal 👋
+      </h1>
+      <p className="survey-respondent-home-subtitle">
+        Complete surveys and track your responses.
+      </p>
 
       <div className="survey-respondent-home-stats">
         {/* Available Surveys */}
@@ -58,6 +87,13 @@ const SurveyRespondentHome = () => {
             <p>Pending Surveys</p>
           </div>
         </div>
+      </div>
+
+      {/* Refresh Button */}
+      <div className="refresh-button-container">
+        <button className="refresh-button" onClick={fetchSurveyStats}>
+          <FaSyncAlt /> Refresh Data
+        </button>
       </div>
     </div>
   );

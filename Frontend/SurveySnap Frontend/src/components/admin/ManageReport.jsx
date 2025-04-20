@@ -66,7 +66,7 @@ const ManageReport = () => {
     : "N/A";
 
   const chartData = {
-    labels: reports.map((r) => r.survey_id?.title || "Untitled"),
+    labels: reports.map((r) => r.survey_id?.title || "Response"),
     datasets: [
       {
         label: "Responses",
@@ -179,7 +179,7 @@ const ManageReport = () => {
                 <TableBody>
                   {reports.map((r) => (
                     <TableRow key={r._id}>
-                      <TableCell>{r.survey_id?.title || "Untitled"}</TableCell>
+                      <TableCell>{r.survey_id?.title || "Response"}</TableCell>
                       <TableCell>{r.total_responses}</TableCell>
                       <TableCell>
                         {r.response_data.length > 60

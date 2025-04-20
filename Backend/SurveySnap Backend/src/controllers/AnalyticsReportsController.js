@@ -1,6 +1,9 @@
 const AnalyticsModel = require("../models/AnalyticsReportsModel");
+const UserModel = require("../models/UserModel");
+const SurveyModel = require("../models/SurveyModel");
+const ResponseModel = require("../models/ResponseModel");
 
-// Generate or update report for a specific survey
+// 🎯 Generate or update report
 const generateReport = async (req, res) => {
   try {
     const { survey_id, total_responses, response_data } = req.body;
@@ -9,7 +12,6 @@ const generateReport = async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Check if report already exists for the survey
     const existingReport = await AnalyticsModel.findOne({ survey_id });
 
     let report;
@@ -36,7 +38,7 @@ const generateReport = async (req, res) => {
   }
 };
 
-// Get all analytics reports
+// 📊 Get all analytics reports
 const getSurveyAnalytics = async (req, res) => {
   try {
     const reports = await AnalyticsModel.find().populate(
@@ -53,7 +55,54 @@ const getSurveyAnalytics = async (req, res) => {
   }
 };
 
+// 🔥 NEW: Get Recent Activity (users, surveys, responses)
+const getRecentActivity = async (req, res) => {
+  try {
+    const recentUsers = await UserModel.find().sort({ createdAt: -1 }).limit(5);
+    const recentSurveys = await SurveyModel.find()
+      .sort({ createdAt: -1 })
+      .limit(5);
+    const recentResponses = await ResponseModel.find()
+      .sort({ createdAt: -1 })
+      .limit(5);
+
+    const activities = [];
+
+    recentUsers.forEach((u) =>
+      activities.push({
+        type: "user",
+        message: `👤 New user ${u.firstName} ${u.lastName} registered`,
+        time: u.createdAt,
+      })
+    );
+
+    recentSurveys.forEach((s) =>
+      activities.push({
+        type: "survey",
+        message: `📝 Survey "${s.title}" created`,
+        time: s.createdAt,
+      })
+    );
+
+    recentResponses.forEach((r) =>
+      activities.push({
+        type: "response",
+        message: `✅ A response submitted by user ${r.userId}`,
+        time: r.createdAt,
+      })
+    );
+
+    activities.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+    res.status(200).json({ data: activities.slice(0, 6) });
+  } catch (error) {
+    console.error("Error fetching recent activity:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   generateReport,
   getSurveyAnalytics,
+  getRecentActivity, // 🆕 add this to exports
 };

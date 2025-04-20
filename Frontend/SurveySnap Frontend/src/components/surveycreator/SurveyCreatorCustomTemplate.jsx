@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify"; // Make sure it's installed
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios"; // 🔥 NEW: axios import for API calls
 import "./SurveyCreatorCustomTemplate.css";
 
 const SurveyCreatorCustomTemplate = () => {
@@ -47,22 +48,70 @@ const SurveyCreatorCustomTemplate = () => {
     setQuestions(updated);
   };
 
-  const handleSaveSurvey = () => {
-    const surveyData = {
-      title: surveyTitle,
-      description: surveyDescription,
-      questions,
-    };
+  const mapType = (type) => {
+    switch (type) {
+      case "text":
+        return "Short Text";
+      case "textarea":
+        return "Long Text";
+      case "multipleChoice":
+        return "Multiple Choice";
+      case "dropdown":
+        return "Dropdown";
+      case "rating":
+        return "Rating Scale";
+      default:
+        return "Short Text";
+    }
+  };
 
-    console.log("Saved Survey:", surveyData);
+  const handleSaveSurvey = async () => {
+    if (!surveyTitle.trim() || questions.length === 0) {
+      toast.warning("Please add a title and at least one question.");
+      return;
+    }
 
-    // Show toast
-    toast.success("Survey saved successfully!");
+    try {
+      const creatorId = localStorage.getItem("id");
+      if (!creatorId) {
+        toast.error("User not logged in.");
+        return;
+      }
 
-    // Navigate after short delay (to let user see toast)
-    setTimeout(() => {
-      navigate("/survey-creator-dashboard/my-surveys");
-    }, 1500);
+      // 1. Save survey
+      const surveyRes = await axios.post("/survey/add", {
+        title: surveyTitle,
+        description: surveyDescription,
+        creator_id: creatorId,
+        status: "Active",
+      });
+
+      const surveyId = surveyRes.data.data._id;
+
+      // 2. Save questions
+      await Promise.all(
+        questions.map((q) =>
+          axios.post("/question/add", {
+            survey_id: surveyId,
+            question_text: q.questionText,
+            question_type: mapType(q.type),
+            is_required: false,
+            options:
+              q.type === "multipleChoice" || q.type === "dropdown"
+                ? q.options
+                : [],
+          })
+        )
+      );
+
+      toast.success("Survey and questions saved successfully!");
+      setTimeout(() => {
+        navigate("/survey-creator-dashboard/my-surveys");
+      }, 1500);
+    } catch (error) {
+      console.error("Save error:", error);
+      toast.error("Error saving survey!");
+    }
   };
 
   const handleStarHover = (qIndex, starIndex) => {

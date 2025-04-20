@@ -5,11 +5,11 @@ import {
   FaUsers,
   FaChartBar,
   FaFileAlt,
-  FaCog,
   FaSignOutAlt,
   FaBars,
 } from "react-icons/fa";
 import Logout from "../common/Logout";
+import NotificationBell from "../common/NotificationBell";
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
@@ -27,7 +27,6 @@ const AdminDashboard = () => {
     if (path.includes("/surveys")) return "Manage Surveys";
     if (path.includes("/responses")) return "Manage Responses";
     if (path.includes("/reports")) return "Manage Reports";
-    if (path.includes("/settings")) return "Settings";
     return "Dashboard";
   };
 
@@ -50,42 +49,43 @@ const AdminDashboard = () => {
             onClick={() => navigate("/admin-dashboard")}
           >
             <FaHome className="admin-icon" />
-            <span className="admin-show-text">Dashboard</span>
+            {isSidebarOpen && (
+              <span className="admin-show-text">Dashboard</span>
+            )}
           </li>
           <li
             className={isActive("/admin-dashboard/users") ? "active" : ""}
             onClick={() => navigate("/admin-dashboard/users")}
           >
             <FaUsers className="admin-icon" />
-            <span className="admin-show-text">Manage Users</span>
+            {isSidebarOpen && (
+              <span className="admin-show-text">Manage Users</span>
+            )}
           </li>
           <li
             className={isActive("/admin-dashboard/surveys") ? "active" : ""}
             onClick={() => navigate("/admin-dashboard/surveys")}
           >
             <FaChartBar className="admin-icon" />
-            <span className="admin-show-text">Manage Surveys</span>
+            {isSidebarOpen && (
+              <span className="admin-show-text">Manage Surveys</span>
+            )}
           </li>
           <li
             className={isActive("/admin-dashboard/responses") ? "active" : ""}
             onClick={() => navigate("/admin-dashboard/responses")}
           >
             <FaFileAlt className="admin-icon" />
-            <span className="admin-show-text">Manage Responses</span>
+            {isSidebarOpen && (
+              <span className="admin-show-text">Manage Responses</span>
+            )}
           </li>
           <li
             className={isActive("/admin-dashboard/reports") ? "active" : ""}
             onClick={() => navigate("/admin-dashboard/reports")}
           >
             <FaFileAlt className="admin-icon" />
-            <span className="admin-show-text">Reports</span>
-          </li>
-          <li
-            className={isActive("/admin-dashboard/settings") ? "active" : ""}
-            onClick={() => navigate("/admin-dashboard/settings")}
-          >
-            <FaCog className="admin-icon" />
-            <span className="admin-show-text">Settings</span>
+            {isSidebarOpen && <span className="admin-show-text">Reports</span>}
           </li>
         </ul>
       </div>
@@ -99,11 +99,11 @@ const AdminDashboard = () => {
         <div className="admin-header">
           <h2 className="admin-page-title">{getCurrentPageTitle()}</h2>
           <div className="admin-logout-top">
+            <NotificationBell />
             <Logout
               trigger={
                 <button className="top-logout-btn">
-                  <FaSignOutAlt />
-                  Logout
+                  <FaSignOutAlt /> Logout
                 </button>
               }
             />

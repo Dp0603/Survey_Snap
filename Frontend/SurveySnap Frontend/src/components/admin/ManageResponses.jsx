@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useToast } from "../../ToastContext";
+import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 import "./ManageResponses.css";
 
 const ManageResponses = () => {

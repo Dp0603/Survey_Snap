@@ -1,65 +1,42 @@
 .admin-settings-container {
+  padding: 40px 30px;
   max-width: 800px;
-  margin: auto;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  background: #f9f9f9;
 }
 
 .admin-settings-title {
   font-size: 28px;
-  margin-bottom: 10px;
-  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #333;
 }
 
-.admin-settings-subtitle {
-  font-size: 16px;
-  margin-bottom: 25px;
-  color: #7f8c8d;
+.admin-profile-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 }
 
-.admin-settings-section {
-  margin-bottom: 40px;
-}
-
-.admin-settings-section h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #34495e;
-}
-
-.admin-settings-group {
+.admin-profile-details {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
 }
 
-.admin-settings-group label {
+.admin-detail-row {
+  display: flex;
+  gap: 15px;
+}
+
+.admin-detail-label {
   font-weight: 500;
-  color: #555;
+  color: #777;
+  min-width: 100px;
 }
 
-.admin-settings-group input,
-.admin-settings-group select {
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.admin-settings-btn {
-  width: fit-content;
-  padding: 10px 18px;
-  background-color: #2ecc71;
-  color: white;
-  border: none;
-  border-radius: 6px;
+.admin-detail-value {
   font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.admin-settings-btn:hover {
-  background-color: #27ae60;
+  color: #222;
 }

@@ -16,7 +16,7 @@ import {
   TextField,
 } from "@mui/material";
 import "./SurveyCreatorScheduleSurveys.css";
-import { useToast } from "../../ToastContext"; // adjust path if needed
+import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 
 const SurveyCreatorScheduleSurveys = () => {
   const [surveys, setSurveys] = useState([]);

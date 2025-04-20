@@ -14,7 +14,7 @@ import {
 
 import axios from "axios";
 import "./ManageSurveys.css";
-import { useToast } from "../../ToastContext";
+import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 
 const ManageSurveys = () => {
   const [surveys, setSurveys] = useState([]);
@@ -39,7 +39,7 @@ const ManageSurveys = () => {
   };
 
   const handleViewSurvey = (id) => {
-    navigate(`${id}`);
+    navigate(`/admin-dashboard/surveys/${id}`);
   };
 
   const confirmDeleteSurvey = (id) => {
@@ -166,7 +166,7 @@ const ManageSurveys = () => {
         <DialogTitle id="confirm-delete-title">Delete Survey?</DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-           <h6>Are you sure you want to delete this survey?</h6>
+            <h6>Are you sure you want to delete this survey?</h6>
             <h7>This action is irreversible.</h7>
           </Typography>
         </DialogContent>

@@ -17,6 +17,20 @@ const SurveyCreationPage = () => {
   const [responses, setResponses] = useState({});
   const [saving, setSaving] = useState(false);
   const [hoverStars, setHoverStars] = useState({}); // for hover effect
+  const mapToBackendType = (type) => {
+    switch (type) {
+      case "text":
+        return "Short Text";
+      case "rating":
+        return "Rating Scale";
+      case "multiple-choice":
+        return "Multiple Choice";
+      case "dropdown":
+        return "Dropdown";
+      default:
+        return "Short Text";
+    }
+  };
 
   useEffect(() => {
     if (selectedTemplate) {
@@ -45,6 +59,7 @@ const SurveyCreationPage = () => {
         return;
       }
 
+      // Step 1: Create survey
       const payload = {
         title: surveyData.title,
         description: surveyData.description,
@@ -53,12 +68,28 @@ const SurveyCreationPage = () => {
       };
 
       const response = await axios.post("/survey/add", payload);
+
       if (response.status === 201) {
-        alert("Survey created successfully!");
+        const newSurveyId = response.data.data._id;
+
+        // Step 2: Save questions to backend
+        await Promise.all(
+          surveyData.questions.map((q) =>
+            axios.post("/question/add", {
+              survey_id: newSurveyId,
+              question_text: q.label,
+              question_type: mapToBackendType(q.type),
+              is_required: q.required || false,
+              options: q.options || [], // handle MCQ or dropdown
+            })
+          )
+        );
+
+        alert("Survey and questions saved successfully!");
         navigate("/survey-creator-dashboard/my-surveys");
       }
     } catch (error) {
-      console.error("Error saving survey:", error);
+      console.error("Error saving survey and questions:", error);
       alert("Failed to save survey.");
     } finally {
       setSaving(false);
@@ -84,9 +115,7 @@ const SurveyCreationPage = () => {
                   maxLength={100}
                   className="text-input"
                   value={responses[index] || ""}
-                  onChange={(e) =>
-                    handleResponseChange(index, e.target.value)
-                  }
+                  onChange={(e) => handleResponseChange(index, e.target.value)}
                 />
               )}
 
@@ -134,9 +163,7 @@ const SurveyCreationPage = () => {
               {question.type === "dropdown" && (
                 <select
                   className="dropdown-select"
-                  onChange={(e) =>
-                    handleResponseChange(index, e.target.value)
-                  }
+                  onChange={(e) => handleResponseChange(index, e.target.value)}
                   value={responses[index] || ""}
                 >
                   <option value="">Select an option</option>

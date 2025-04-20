@@ -4,16 +4,14 @@ import axios from "axios";
 import "./SurveyRespondentAvailableSurveys.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DataGrid } from "@mui/x-data-grid";
 
 const SurveyRespondentAvailableSurveys = () => {
   const [surveys, setSurveys] = useState([]);
-  const [filledSurveys, setFilledSurveys] = useState([]);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const id = localStorage.getItem("id"); // ✅ Correct key
+    const id = localStorage.getItem("id");
     if (!id) {
       toast.error("You must be logged in to view surveys!");
       navigate("/login");
@@ -25,7 +23,6 @@ const SurveyRespondentAvailableSurveys = () => {
   useEffect(() => {
     if (userId) {
       fetchAvailableSurveys();
-      fetchFilledSurveys(userId);
     }
   }, [userId]);
 
@@ -41,32 +38,9 @@ const SurveyRespondentAvailableSurveys = () => {
     }
   };
 
-  const fetchFilledSurveys = async (id) => {
-    try {
-      const response = await axios.get(`/responses/stats/${id}`);
-      setFilledSurveys([
-        {
-          id: 1,
-          userId: id,
-          status: "Completed",
-          completed: response.data.completed,
-        },
-      ]);
-    } catch (error) {
-      toast.error("Failed to fetch filled survey stats! ❌");
-    }
-  };
-
   const handleStartSurvey = (surveyId) => {
-    navigate(`/respondent-dashboard/respond/${surveyId}`);
+    navigate(`/respondent-dashboard/available-surveys/respond/${surveyId}`);
   };
-
-  const columns = [
-    { field: "id", headerName: "ID", width: 100 },
-    { field: "userId", headerName: "User ID", width: 300 },
-    { field: "status", headerName: "Status", width: 150 },
-    { field: "completed", headerName: "Surveys Completed", width: 200 },
-  ];
 
   return (
     <div className="respondent-surveys-container">
@@ -88,19 +62,6 @@ const SurveyRespondentAvailableSurveys = () => {
             </div>
           ))
         )}
-      </div>
-
-      {/* 📊 Filled Surveys Table Below */}
-      <div style={{ marginTop: "50px" }}>
-        <h2>Your Filled Surveys</h2>
-        <div style={{ height: 300, width: "100%" }}>
-          <DataGrid
-            rows={filledSurveys}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-        </div>
       </div>
 
       <ToastContainer position="top-center" />

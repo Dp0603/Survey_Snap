@@ -73,41 +73,41 @@ const prebuiltTemplates = [
       { type: "text", label: "Suggestions for future events?" },
     ],
   },
-  {
-    id: 4,
-    title: "Sexual Experience Survey",
-    icon: "🔥",
-    description: "Explore adult preferences. Private & bold.",
-    questions: [
-      {
-        type: "rating",
-        label: "How would you rate your last sexual experience?",
-      },
-      {
-        type: "multiple-choice",
-        label: "Preferred positions?",
-        options: ["Missionary", "Doggy", "Cowgirl", "69", "Others"],
-      },
-      {
-        type: "text",
-        label: "Average session duration (in minutes)?",
-      },
-      {
-        type: "dropdown",
-        label: "Size preference?",
-        options: ['<4"', '4-6"', '6-8"', '>8"'],
-      },
-      {
-        type: "text",
-        label: "Kinks or fantasies you’d like to share?",
-      },
-      {
-        type: "multiple-choice",
-        label: "Do you prefer spontaneous or planned intimacy?",
-        options: ["Spontaneous", "Planned", "Depends"],
-      },
-    ],
-  },
+  // {
+  //   id: 4,
+  //   title: "Sexual Experience Survey",
+  //   icon: "🔥",
+  //   description: "Explore adult preferences. Private & bold.",
+  //   questions: [
+  //     {
+  //       type: "rating",
+  //       label: "How would you rate your last sexual experience?",
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "Preferred positions?",
+  //       options: ["Missionary", "Doggy", "Cowgirl", "69", "Others"],
+  //     },
+  //     {
+  //       type: "text",
+  //       label: "Average session duration (in minutes)?",
+  //     },
+  //     {
+  //       type: "dropdown",
+  //       label: "Size preference?",
+  //       options: ['<4"', '4-6"', '6-8"', '>8"'],
+  //     },
+  //     {
+  //       type: "text",
+  //       label: "Kinks or fantasies you’d like to share?",
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "Do you prefer spontaneous or planned intimacy?",
+  //       options: ["Spontaneous", "Planned", "Depends"],
+  //     },
+  //   ],
+  // },
   {
     id: 5,
     title: "Tech Usage Survey",
@@ -381,150 +381,150 @@ const prebuiltTemplates = [
       { type: "text", label: "Do you follow a diet?" },
     ],
   },
-  {
-    id: 18,
-    title: "Women's Intimacy & Body Preference Survey",
-    icon: "💖",
-    description:
-      "For adult women to explore body awareness and sexual preferences.",
-    questions: [
-      {
-        type: "dropdown",
-        label: "What is your age range?",
-        options: ["18–24", "25–34", "35–44", "45–54", "55+"],
-      },
-      {
-        type: "multiple-choice",
-        label: "How would you describe your breast size?",
-        options: ["A (Small)", "B", "C", "D", "DD+", "Prefer not to say"],
-      },
-      {
-        type: "rating",
-        label: "How confident are you about your breast appearance?",
-      },
-      {
-        type: "multiple-choice",
-        label: "How would you describe your vulva/vaginal appearance comfort?",
-        options: [
-          "Totally comfortable",
-          "Somewhat self-conscious",
-          "Curious to learn more",
-          "Prefer not to say",
-        ],
-      },
-      {
-        type: "multiple-choice",
-        label: "Have you noticed variations in vaginal/labial color?",
-        options: [
-          "Yes – and comfortable with it",
-          "Yes – unsure about it",
-          "Not really",
-          "Prefer not to say",
-        ],
-      },
-      {
-        type: "rating",
-        label:
-          "How satisfied are you with your vaginal sensitivity during intimacy?",
-      },
-      {
-        type: "multiple-choice",
-        label: "How would you describe your vaginal sensitivity or tightness?",
-        options: [
-          "Very sensitive / tight",
-          "Moderate",
-          "Low sensitivity",
-          "Depends on mood",
-          "Prefer not to say",
-        ],
-      },
-      {
-        type: "dropdown",
-        label: "Preferred penis size (if applicable)?",
-        options: [
-          'Small (under 5")',
-          'Average (5–6.5")',
-          'Large (7+")',
-          "Size doesn't matter",
-          "Not applicable",
-        ],
-      },
-      {
-        type: "multiple-choice",
-        label: "Do you have a preference in penis shape or girth?",
-        options: [
-          "Yes – prefer thicker",
-          "Yes – prefer longer",
-          "No preference",
-          "Not applicable",
-        ],
-      },
-      {
-        type: "rating",
-        label: "How important is a partner’s genital appearance to you?",
-      },
-      {
-        type: "multiple-choice",
-        label: "Do you care about a partner’s grooming and hygiene?",
-        options: [
-          "Yes, very important",
-          "Somewhat important",
-          "Not really",
-          "Not applicable",
-        ],
-      },
-      {
-        type: "multiple-choice",
-        label: "Favorite sexual positions?",
-        options: [
-          "Missionary",
-          "Doggy style",
-          "Cowgirl / on top",
-          "Reverse cowgirl",
-          "Oral (receiving)",
-          "Oral (giving)",
-          "Side-lying / spooning",
-          "Standing",
-          "Other",
-        ],
-      },
-      {
-        type: "dropdown",
-        label: "Preferred sexual pace or style?",
-        options: [
-          "Slow and sensual",
-          "Passionate and rough",
-          "Playful / teasing",
-          "Dominant / submissive dynamics",
-          "Depends on mood",
-          "Other",
-        ],
-      },
-      {
-        type: "rating",
-        label: "How adventurous are you in trying new sexual experiences?",
-      },
-      {
-        type: "multiple-choice",
-        label: "How open are you to exploring new sexual activities?",
-        options: [
-          "Very open",
-          "Open with the right person",
-          "Cautious / selective",
-          "Prefer familiar experiences",
-        ],
-      },
-      {
-        type: "rating",
-        label: "How confident are you in communicating desires and limits?",
-      },
-      {
-        type: "text",
-        label:
-          "What’s one thing you’d like to experience or explore sexually (optional)?",
-      },
-    ],
-  },
+  // {
+  //   id: 18,
+  //   title: "Women's Intimacy & Body Preference Survey",
+  //   icon: "💖",
+  //   description:
+  //     "For adult women to explore body awareness and sexual preferences.",
+  //   questions: [
+  //     {
+  //       type: "dropdown",
+  //       label: "What is your age range?",
+  //       options: ["18–24", "25–34", "35–44", "45–54", "55+"],
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "How would you describe your breast size?",
+  //       options: ["A (Small)", "B", "C", "D", "DD+", "Prefer not to say"],
+  //     },
+  //     {
+  //       type: "rating",
+  //       label: "How confident are you about your breast appearance?",
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "How would you describe your vulva/vaginal appearance comfort?",
+  //       options: [
+  //         "Totally comfortable",
+  //         "Somewhat self-conscious",
+  //         "Curious to learn more",
+  //         "Prefer not to say",
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "Have you noticed variations in vaginal/labial color?",
+  //       options: [
+  //         "Yes – and comfortable with it",
+  //         "Yes – unsure about it",
+  //         "Not really",
+  //         "Prefer not to say",
+  //       ],
+  //     },
+  //     {
+  //       type: "rating",
+  //       label:
+  //         "How satisfied are you with your vaginal sensitivity during intimacy?",
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "How would you describe your vaginal sensitivity or tightness?",
+  //       options: [
+  //         "Very sensitive / tight",
+  //         "Moderate",
+  //         "Low sensitivity",
+  //         "Depends on mood",
+  //         "Prefer not to say",
+  //       ],
+  //     },
+  //     {
+  //       type: "dropdown",
+  //       label: "Preferred penis size (if applicable)?",
+  //       options: [
+  //         'Small (under 5")',
+  //         'Average (5–6.5")',
+  //         'Large (7+")',
+  //         "Size doesn't matter",
+  //         "Not applicable",
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "Do you have a preference in penis shape or girth?",
+  //       options: [
+  //         "Yes – prefer thicker",
+  //         "Yes – prefer longer",
+  //         "No preference",
+  //         "Not applicable",
+  //       ],
+  //     },
+  //     {
+  //       type: "rating",
+  //       label: "How important is a partner’s genital appearance to you?",
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "Do you care about a partner’s grooming and hygiene?",
+  //       options: [
+  //         "Yes, very important",
+  //         "Somewhat important",
+  //         "Not really",
+  //         "Not applicable",
+  //       ],
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "Favorite sexual positions?",
+  //       options: [
+  //         "Missionary",
+  //         "Doggy style",
+  //         "Cowgirl / on top",
+  //         "Reverse cowgirl",
+  //         "Oral (receiving)",
+  //         "Oral (giving)",
+  //         "Side-lying / spooning",
+  //         "Standing",
+  //         "Other",
+  //       ],
+  //     },
+  //     {
+  //       type: "dropdown",
+  //       label: "Preferred sexual pace or style?",
+  //       options: [
+  //         "Slow and sensual",
+  //         "Passionate and rough",
+  //         "Playful / teasing",
+  //         "Dominant / submissive dynamics",
+  //         "Depends on mood",
+  //         "Other",
+  //       ],
+  //     },
+  //     {
+  //       type: "rating",
+  //       label: "How adventurous are you in trying new sexual experiences?",
+  //     },
+  //     {
+  //       type: "multiple-choice",
+  //       label: "How open are you to exploring new sexual activities?",
+  //       options: [
+  //         "Very open",
+  //         "Open with the right person",
+  //         "Cautious / selective",
+  //         "Prefer familiar experiences",
+  //       ],
+  //     },
+  //     {
+  //       type: "rating",
+  //       label: "How confident are you in communicating desires and limits?",
+  //     },
+  //     {
+  //       type: "text",
+  //       label:
+  //         "What’s one thing you’d like to experience or explore sexually (optional)?",
+  //     },
+  //   ],
+  // },
 ];
 
 const SurveyCreatorPrebuiltTemplates = () => {

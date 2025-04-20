@@ -1,0 +1,36 @@
+.survey-history-container {
+  padding: 30px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.response-list {
+  list-style: none;
+  padding: 0;
+}
+
+.response-item {
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+  border-left: 5px solid #4caf50;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.response-item h3 {
+  margin: 0 0 10px;
+}
+
+.view-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.view-btn:hover {
+  background-color: #388e3c;
+}

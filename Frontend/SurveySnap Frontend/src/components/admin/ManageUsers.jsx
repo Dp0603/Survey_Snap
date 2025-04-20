@@ -1,5 +1,3 @@
-// ManageUsers.jsx
-
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import {
@@ -17,11 +15,19 @@ import {
   useMediaQuery,
   useTheme,
   Box,
+  InputAdornment,
 } from "@mui/material";
-import { FaTrash, FaEdit, FaUserPlus, FaDownload } from "react-icons/fa";
+import {
+  FaTrash,
+  FaEdit,
+  FaUserPlus,
+  FaDownload,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 import { CSVLink } from "react-csv";
 import { DataGrid } from "@mui/x-data-grid";
-import { useToast } from "../../ToastContext";
+import { useToast } from "../../contexts/ToastContext";
 import "./ManageUsers.css";
 
 const ManageUsers = () => {
@@ -41,6 +47,7 @@ const ManageUsers = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteUserId, setDeleteUserId] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const { showToast } = useToast();
   const theme = useTheme();
@@ -154,7 +161,9 @@ const ManageUsers = () => {
         if (role === "Admin") className = "badge-admin";
         else if (role === "Survey Creator") className = "badge-creator";
         else if (role === "Respondent") className = "badge-respondent";
-        return <span className={`role-badge ${className}`}>{role}</span>;
+        return (
+          <span className={`manageuser-role-badge ${className}`}>{role}</span>
+        );
       },
     },
     {
@@ -184,7 +193,7 @@ const ManageUsers = () => {
   ];
 
   return (
-    <div className="manage-users-container">
+    <div className="manageuser-container">
       <Tabs
         value={tab}
         onChange={(e, newTab) => setTab(newTab)}
@@ -197,7 +206,7 @@ const ManageUsers = () => {
         <Tab label="Respondent" />
       </Tabs>
 
-      <div className="manage-users-actions">
+      <div className="manageuser-actions">
         <TextField
           size="small"
           label="Search users..."
@@ -205,17 +214,12 @@ const ManageUsers = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <div className="manage-users-buttons">
-          <CSVLink
-            data={filteredUsers}
-            filename="users.csv"
-            // className="export-btn"
-          >
+        <div className="manageuser-buttons">
+          <CSVLink data={filteredUsers} filename="users.csv">
             <Button
-              style={{ color: "green" }}
               variant="outlined"
               startIcon={<FaDownload />}
-              className="manage-users-btn MuiButton-outlined"
+              style={{ color: "green" }}
             >
               Export CSV
             </Button>
@@ -224,14 +228,13 @@ const ManageUsers = () => {
             variant="contained"
             startIcon={<FaUserPlus />}
             onClick={() => setShowAddModal(true)}
-            className="manage-users-btn MuiButton-contained"
           >
             Add User
           </Button>
         </div>
       </div>
 
-      <Box className="user-table-container" sx={{ height: 500, width: "100%" }}>
+      <Box className="manageuser-table" sx={{ height: 500, width: "100%" }}>
         <DataGrid
           rows={filteredUsers}
           columns={columns}
@@ -250,8 +253,8 @@ const ManageUsers = () => {
         maxWidth="sm"
       >
         <DialogTitle>Add New User</DialogTitle>
-        <DialogContent className="add-user-form">
-          {["firstName", "lastName", "email", "password"].map((field) => (
+        <DialogContent className="manageuser-form">
+          {["firstName", "lastName", "email"].map((field) => (
             <TextField
               key={field}
               name={field}
@@ -262,9 +265,31 @@ const ManageUsers = () => {
               onChange={(e) =>
                 setFormData({ ...formData, [e.target.name]: e.target.value })
               }
-              type={field === "password" ? "password" : "text"}
             />
           ))}
+          <TextField
+            name="password"
+            label="Password"
+            fullWidth
+            margin="dense"
+            type={showPassword ? "text" : "password"}
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
           <Select
             fullWidth
             name="roleId"
@@ -301,7 +326,7 @@ const ManageUsers = () => {
         maxWidth="sm"
       >
         <DialogTitle>Edit User</DialogTitle>
-        <DialogContent className="add-user-form">
+        <DialogContent className="manageuser-form">
           {["firstName", "lastName", "email"].map((field) => (
             <TextField
               key={field}
@@ -343,7 +368,7 @@ const ManageUsers = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Delete Modal */}
+      {/* Delete Confirmation */}
       <Dialog open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>

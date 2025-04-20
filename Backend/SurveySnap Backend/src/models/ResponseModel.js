@@ -12,7 +12,11 @@ const responseSchema = new Schema(
     },
     answers: [
       {
-        questionId: { type: Schema.Types.ObjectId, ref: "Question", required: true },
+        questionId: {
+          type: Schema.Types.ObjectId,
+          ref: "Question",
+          required: true,
+        },
         answer: { type: Schema.Types.Mixed, required: true },
       },
     ],
