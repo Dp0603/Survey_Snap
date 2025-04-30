@@ -16,13 +16,15 @@ import {
   TextField,
 } from "@mui/material";
 import "./SurveyCreatorScheduleSurveys.css";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext";
 
 const SurveyCreatorScheduleSurveys = () => {
   const [surveys, setSurveys] = useState([]);
   const [selectedSurveyId, setSelectedSurveyId] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [startTime, setStartTime] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [scheduledSurveys, setScheduledSurveys] = useState([]);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -49,20 +51,28 @@ const SurveyCreatorScheduleSurveys = () => {
   };
 
   const handleSchedule = async () => {
-    if (!selectedSurveyId || !startDate || !endDate) {
-      return showToast("Select a survey and dates", "error");
+    if (!selectedSurveyId || !startDate || !endDate || !startTime || !endTime) {
+      return showToast("Select a survey and dates/times", "error");
     }
 
-    if (new Date(startDate) > new Date(endDate)) {
-      return showToast("Start date cannot be after end date", "error");
+    const startDateTime = new Date(`${startDate}T${startTime}`);
+    const endDateTime = new Date(`${endDate}T${endTime}`);
+
+    if (startDateTime > endDateTime) {
+      return showToast("Start time cannot be after end time", "error");
     }
 
     try {
-      await axios.put(`/survey/${selectedSurveyId}`, { startDate, endDate });
+      await axios.put(`/survey/${selectedSurveyId}`, {
+        startDate: startDateTime.toISOString(),
+        endDate: endDateTime.toISOString(),
+      });
       showToast("Survey scheduled!", "success");
       fetchSurveys();
       setStartDate("");
+      setStartTime("");
       setEndDate("");
+      setEndTime("");
       setSelectedSurveyId("");
     } catch (err) {
       showToast("Failed to schedule survey", "error");
@@ -85,14 +95,21 @@ const SurveyCreatorScheduleSurveys = () => {
   };
 
   const handleEditSave = async () => {
-    if (new Date(editingSurvey.startDate) > new Date(editingSurvey.endDate)) {
-      return showToast("Start date cannot be after end date", "error");
+    const startDateTime = new Date(
+      `${editingSurvey.startDate}T${editingSurvey.startTime}`
+    );
+    const endDateTime = new Date(
+      `${editingSurvey.endDate}T${editingSurvey.endTime}`
+    );
+
+    if (startDateTime > endDateTime) {
+      return showToast("Start time cannot be after end time", "error");
     }
 
     try {
       await axios.put(`/survey/${editingSurvey._id}`, {
-        startDate: editingSurvey.startDate,
-        endDate: editingSurvey.endDate,
+        startDate: startDateTime.toISOString(),
+        endDate: endDateTime.toISOString(),
       });
       showToast("Schedule updated", "success");
       setEditDialogOpen(false);
@@ -121,22 +138,42 @@ const SurveyCreatorScheduleSurveys = () => {
         </select>
       </div>
 
-      <div className="schedule-field">
-        <label>Start Date:</label>
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
+      <div className="schedule-row">
+        <div className="schedule-field">
+          <label>Start Date:</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </div>
+        <div className="schedule-field">
+          <label>Start Time:</label>
+          <input
+            type="time"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+          />
+        </div>
       </div>
 
-      <div className="schedule-field">
-        <label>End Date:</label>
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
+      <div className="schedule-row">
+        <div className="schedule-field">
+          <label>End Date:</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
+        <div className="schedule-field">
+          <label>End Time:</label>
+          <input
+            type="time"
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
+          />
+        </div>
       </div>
 
       <button className="schedule-btn" onClick={handleSchedule}>
@@ -148,40 +185,48 @@ const SurveyCreatorScheduleSurveys = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ width: "30%" }}>Title</TableCell>
-              <TableCell style={{ width: "20%" }}>Start Date</TableCell>
-              <TableCell style={{ width: "20%" }}>End Date</TableCell>
-              <TableCell style={{ width: "30%" }}>Actions</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Start Date & Time</TableCell>
+              <TableCell>End Date & Time</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {scheduledSurveys.map((survey) => (
-              <TableRow key={survey._id}>
-                <TableCell>{survey.title}</TableCell>
-                <TableCell>{survey.startDate?.slice(0, 10)}</TableCell>
-                <TableCell>{survey.endDate?.slice(0, 10)}</TableCell>
-                <TableCell>
-                  <Button
-                    color="primary"
-                    onClick={() => {
-                      setEditingSurvey({ ...survey });
-                      setEditDialogOpen(true);
-                    }}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    color="error"
-                    onClick={() => {
-                      setEditingSurvey(survey);
-                      setDeleteDialogOpen(true);
-                    }}
-                  >
-                    Remove Schedule
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+            {scheduledSurveys.map((survey) => {
+              const startDateTime = new Date(survey.startDate);
+              const endDateTime = new Date(survey.endDate);
+
+              const formattedStartDate = startDateTime.toLocaleString(); // Format date and time
+              const formattedEndDate = endDateTime.toLocaleString(); // Format date and time
+
+              return (
+                <TableRow key={survey._id}>
+                  <TableCell>{survey.title}</TableCell>
+                  <TableCell>{formattedStartDate}</TableCell>
+                  <TableCell>{formattedEndDate}</TableCell>
+                  <TableCell>
+                    <Button
+                      color="primary"
+                      onClick={() => {
+                        setEditingSurvey({ ...survey });
+                        setEditDialogOpen(true);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      color="error"
+                      onClick={() => {
+                        setEditingSurvey(survey);
+                        setDeleteDialogOpen(true);
+                      }}
+                    >
+                      Remove
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -190,31 +235,62 @@ const SurveyCreatorScheduleSurveys = () => {
       <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
         <DialogTitle>Edit Schedule</DialogTitle>
         <DialogContent>
-          <TextField
-            label="Start Date"
-            type="date"
-            fullWidth
-            value={editingSurvey?.startDate?.slice(0, 10)}
-            onChange={(e) =>
-              setEditingSurvey((prev) => ({
-                ...prev,
-                startDate: e.target.value,
-              }))
-            }
-            InputLabelProps={{ shrink: true }}
-            margin="normal"
-          />
-          <TextField
-            label="End Date"
-            type="date"
-            fullWidth
-            value={editingSurvey?.endDate?.slice(0, 10)}
-            onChange={(e) =>
-              setEditingSurvey((prev) => ({ ...prev, endDate: e.target.value }))
-            }
-            InputLabelProps={{ shrink: true }}
-            margin="normal"
-          />
+          <div className="dialog-date-row">
+            <TextField
+              label="Start Date"
+              type="date"
+              fullWidth
+              value={editingSurvey?.startDate?.slice(0, 10)}
+              onChange={(e) =>
+                setEditingSurvey((prev) => ({
+                  ...prev,
+                  startDate: e.target.value,
+                }))
+              }
+              InputLabelProps={{ shrink: true }}
+              margin="normal"
+            />
+            <TextField
+              label="Start Time"
+              type="time"
+              fullWidth
+              value={editingSurvey?.startTime}
+              onChange={(e) =>
+                setEditingSurvey((prev) => ({
+                  ...prev,
+                  startTime: e.target.value,
+                }))
+              }
+              margin="normal"
+            />
+            <TextField
+              label="End Date"
+              type="date"
+              fullWidth
+              value={editingSurvey?.endDate?.slice(0, 10)}
+              onChange={(e) =>
+                setEditingSurvey((prev) => ({
+                  ...prev,
+                  endDate: e.target.value,
+                }))
+              }
+              InputLabelProps={{ shrink: true }}
+              margin="normal"
+            />
+            <TextField
+              label="End Time"
+              type="time"
+              fullWidth
+              value={editingSurvey?.endTime}
+              onChange={(e) =>
+                setEditingSurvey((prev) => ({
+                  ...prev,
+                  endTime: e.target.value,
+                }))
+              }
+              margin="normal"
+            />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>

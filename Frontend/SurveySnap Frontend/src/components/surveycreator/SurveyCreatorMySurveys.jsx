@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext";
 import "./SurveyCreatorMySurveys.css";
 
 const SurveyCreatorMySurveys = () => {
@@ -26,11 +26,8 @@ const SurveyCreatorMySurveys = () => {
   const userId = localStorage.getItem("id");
 
   useEffect(() => {
-    if (userId) {
-      fetchUserSurveys();
-    } else {
-      showToast("User ID not found. Please log in again! 🚨", "error");
-    }
+    if (userId) fetchUserSurveys();
+    else showToast("User ID not found. Please log in again! 🚨", "error");
   }, [userId]);
 
   const fetchUserSurveys = async () => {
@@ -55,10 +52,8 @@ const SurveyCreatorMySurveys = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(`/survey/${confirmDeleteId}`);
-      showToast("Survey deleted successfully! 🗑️", "success"); // 👈 Toast pehle
-      setTimeout(() => {
-        fetchUserSurveys(); // 👈 Fir surveys fetch karein
-      }, 2500); // Thoda delay for smoother UI
+      showToast("Survey deleted successfully! 🗑️", "success");
+      setTimeout(() => fetchUserSurveys(), 1500);
     } catch (error) {
       showToast("Error deleting survey! 🚨", "error");
     } finally {
@@ -75,7 +70,7 @@ const SurveyCreatorMySurveys = () => {
       headerName: "Status",
       width: 120,
       renderCell: (params) => (
-        <span className={`status-badge ${params.value.toLowerCase()}`}>
+        <span className={`surveycreator-status ${params.value.toLowerCase()}`}>
           {params.value}
         </span>
       ),
@@ -85,9 +80,10 @@ const SurveyCreatorMySurveys = () => {
       headerName: "Actions",
       width: 160,
       renderCell: (params) => (
-        <div className="action-buttons">
+        <div className="surveycreator-action-btns">
           <button
-            className="view-btn"
+            className="surveycreator-view-btn"
+            title="View"
             onClick={() =>
               navigate(`/survey-creator-dashboard/my-surveys/${params.row._id}`)
             }
@@ -95,7 +91,8 @@ const SurveyCreatorMySurveys = () => {
             <FaEye />
           </button>
           <button
-            className="edit-btn"
+            className="surveycreator-edit-btn"
+            title="Edit"
             onClick={() =>
               navigate(`/survey-creator-dashboard/my-surveys/${params.row._id}`)
             }
@@ -103,7 +100,8 @@ const SurveyCreatorMySurveys = () => {
             <FaEdit />
           </button>
           <button
-            className="delete-btn"
+            className="surveycreator-delete-btn"
+            title="Delete"
             onClick={() => handleDeleteSurvey(params.row._id)}
           >
             <FaTrash />
@@ -119,10 +117,15 @@ const SurveyCreatorMySurveys = () => {
   }));
 
   return (
-    <div className="survey-creator-my-surveys">
+    <div className="surveycreator-wrapper">
       <h2>📋 My Surveys</h2>
 
-      <Grid container spacing={2} alignItems="center" className="top-controls">
+      <Grid
+        container
+        spacing={2}
+        alignItems="center"
+        className="surveycreator-controls"
+      >
         <Grid item xs={12} sm={6}>
           <TextField
             label="Search by title"
@@ -169,7 +172,7 @@ const SurveyCreatorMySurveys = () => {
           😞 No surveys found. Create your first one!
         </Typography>
       ) : (
-        <div style={{ height: 450, width: "100%", marginTop: "2rem" }}>
+        <div style={{ height: 460, width: "100%", marginTop: "2rem" }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -189,8 +192,8 @@ const SurveyCreatorMySurveys = () => {
         <DialogTitle id="confirm-delete-title">Delete Survey?</DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            Are you sure you want to delete this survey? <br />
-            This action is <strong>irreversible</strong>.
+            Are you sure you want to delete this survey? <br/>
+            This action is<strong> irreversible</strong>.
           </Typography>
         </DialogContent>
         <DialogActions>

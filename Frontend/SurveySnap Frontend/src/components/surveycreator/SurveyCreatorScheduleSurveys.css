@@ -1,52 +1,85 @@
 .survey-creator-schedule {
-  padding: 30px;
   max-width: 900px;
-  margin: auto;
-  background-color: #fff;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.survey-creator-schedule h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #222;
 }
 
 .schedule-field {
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
 .schedule-field label {
   display: block;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #333;
 }
 
-.schedule-field select,
-.schedule-field input {
+.schedule-field input,
+.schedule-field select {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
+  padding: 10px 12px;
+  font-size: 14px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  background-color: #fdfdfd;
+}
+
+.schedule-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.schedule-row .schedule-field {
+  flex: 1;
+  min-width: 200px;
 }
 
 .schedule-btn {
-  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
   padding: 10px 20px;
-  font-size: 16px;
-  background-color: #1976d2;
-  color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s ease;
 }
 
 .schedule-btn:hover {
-  background-color: #115293;
+  background-color: #0056b3;
 }
 
 .styled-table {
-  margin-top: 40px;
-  border-radius: 6px;
+  margin-top: 30px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
-.MuiTableCell-root {
-  font-size: 15px;
+.styled-table th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.dialog-date-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }

@@ -9,6 +9,7 @@
   font-size: 28px;
   text-align: center;
   margin-bottom: 10px;
+  color: #222;
 }
 
 .prebuilt-templates-container p {
@@ -30,15 +31,19 @@
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures the button stays at the bottom */
   text-align: center;
+  height: 350px; /* Set a consistent height for all cards */
 }
 
 .template-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced hover shadow */
 }
 
 .template-icon {
@@ -61,12 +66,13 @@
 .use-template-btn {
   background-color: #007bff;
   color: #fff;
-  padding: 10px 16px;
+  padding: 12px 20px;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  margin-top: auto; /* Pushes the button to the bottom */
 }
 
 .use-template-btn:hover {

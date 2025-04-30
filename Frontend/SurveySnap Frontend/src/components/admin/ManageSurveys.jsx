@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTrash, FaEye, FaSync } from "react-icons/fa";
-import { DataGrid } from "@mui/x-data-grid";
 import {
   Dialog,
   DialogTitle,
@@ -11,10 +10,10 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
-
+import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import { useToast } from "../../contexts/ToastContext";
 import "./ManageSurveys.css";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
 
 const ManageSurveys = () => {
   const [surveys, setSurveys] = useState([]);
@@ -33,7 +32,7 @@ const ManageSurveys = () => {
       const res = await axios.get("/survey/all");
       setSurveys(res.data.data);
       showToast("Surveys fetched successfully!", "success");
-    } catch (err) {
+    } catch {
       showToast("Failed to fetch surveys!", "error");
     }
   };
@@ -52,7 +51,7 @@ const ManageSurveys = () => {
       await axios.delete(`/survey/${deleteSurveyId}`);
       showToast("Survey deleted successfully!", "success");
       fetchSurveys();
-    } catch (err) {
+    } catch {
       showToast("Error deleting survey!", "error");
     }
     setShowDeleteModal(false);
@@ -100,18 +99,19 @@ const ManageSurveys = () => {
       field: "actions",
       headerName: "Actions",
       width: 150,
-      sortable: false,
       renderCell: (params) => (
-        <div className="action-buttons">
+        <div className="survey-action-buttons">
           <button
-            className="view-btn"
+            className="survey-view-btn"
             onClick={() => handleViewSurvey(params.row._id)}
+            title="View"
           >
             <FaEye />
           </button>
           <button
-            className="delete-btn"
+            className="survey-delete-btn"
             onClick={() => confirmDeleteSurvey(params.row._id)}
+            title="Delete"
           >
             <FaTrash />
           </button>
@@ -121,30 +121,30 @@ const ManageSurveys = () => {
   ];
 
   return (
-    <div className="manage-surveys">
+    <div className="managesurvey-container">
       <h2>📊 Manage Surveys by User</h2>
 
-      <div className="top-controls">
+      <div className="managesurvey-top-controls">
         <TextField
           label="Search by title"
           variant="outlined"
           size="small"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input"
+          className="managesurvey-search-input"
         />
-        <button className="add-survey-btn" onClick={fetchSurveys}>
-          <FaSync /> Refresh Surveys
+        <button className="managesurvey-refresh-btn" onClick={fetchSurveys}>
+          <FaSync /> Refresh
         </button>
       </div>
 
       {Object.entries(surveysByUser).map(([userId, { user, surveys }]) => (
-        <div key={userId} className="user-survey-section">
+        <div key={userId} className="managesurvey-user-section">
           <h3>
             Surveys by:{" "}
             {user ? `${user.firstName} ${user.lastName}` : "Unknown User"}
           </h3>
-          <div style={{ height: 400, width: "100%" }}>
+          <div className="managesurvey-table-wrapper">
             <DataGrid
               rows={surveys}
               columns={getColumns()}
@@ -152,12 +152,12 @@ const ManageSurveys = () => {
               pageSize={5}
               rowsPerPageOptions={[5, 10]}
               disableRowSelectionOnClick
+              autoHeight
             />
           </div>
         </div>
       ))}
 
-      {/* Delete Confirmation Dialog */}
       <Dialog
         open={showDeleteModal}
         onClose={handleDeleteCancel}
@@ -166,8 +166,8 @@ const ManageSurveys = () => {
         <DialogTitle id="confirm-delete-title">Delete Survey?</DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            <h6>Are you sure you want to delete this survey?</h6>
-            <h7>This action is irreversible.</h7>
+            Are you sure you want to delete this survey? <br />
+            This action is <strong>irreversible</strong>.
           </Typography>
         </DialogContent>
         <DialogActions>

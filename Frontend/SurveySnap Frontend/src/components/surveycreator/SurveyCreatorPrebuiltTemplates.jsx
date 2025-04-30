@@ -5,527 +5,494 @@ import "./SurveyCreatorPrebuiltTemplates.css"; // Enhanced CSS version
 const prebuiltTemplates = [
   {
     id: 1,
-    title: "Customer Feedback",
+    title: "Customer Feedback Survey",
     icon: "🛒",
-    description: "Gather feedback after a service or purchase.",
+    description: "Collect valuable feedback from customers regarding their experiences with your product or service.",
     questions: [
-      { type: "rating", label: "How satisfied are you with our service?" },
-      { type: "text", label: "What can we improve?" },
+      {
+        type: "text",
+        label: "What product or service did you purchase?"
+      },
+      {
+        type: "rating",
+        label: "How satisfied are you with our service?",
+        description: "Please rate your satisfaction on a scale from 1 (Very Dissatisfied) to 5 (Very Satisfied)."
+      },
+      {
+        type: "text",
+        label: "What improvements can we make to enhance your experience?"
+      },
       {
         type: "multiple-choice",
         label: "How did you hear about us?",
-        options: ["Online", "Friend", "Advertisement", "Other"],
+        options: ["Online", "Friend", "Advertisement", "Social Media", "Other"]
       },
       {
         type: "dropdown",
         label: "Which product did you purchase?",
-        options: ["Product A", "Product B", "Product C"],
+        options: ["Product A", "Product B", "Product C"]
       },
-      { type: "text", label: "Any additional comments?" },
-      { type: "rating", label: "Rate the checkout experience." },
+      {
+        type: "rating",
+        label: "How would you rate the checkout process?",
+        description: "Rate the ease of the checkout process from 1 (Difficult) to 5 (Very Easy)."
+      },
       {
         type: "multiple-choice",
-        label: "Would you recommend us?",
-        options: ["Yes", "No", "Maybe"],
+        label: "Would you recommend our product/service to others?",
+        options: ["Yes", "No", "Maybe"]
       },
-    ],
+      {
+        type: "text",
+        label: "Any additional comments or suggestions?"
+      }
+    ]
   },
   {
     id: 2,
-    title: "Employee Engagement",
+    title: "Employee Engagement Survey",
     icon: "💼",
-    description: "Gauge employee satisfaction and motivation.",
+    description: "Evaluate employee satisfaction, motivation, and challenges to improve workplace dynamics.",
     questions: [
-      { type: "rating", label: "How satisfied are you at work?" },
-      { type: "text", label: "What motivates you daily?" },
+      {
+        type: "rating",
+        label: "How satisfied are you with your current role?",
+        description: "Please rate on a scale from 1 (Very Dissatisfied) to 5 (Very Satisfied)."
+      },
+      {
+        type: "text",
+        label: "What motivates you to perform at your best?"
+      },
       {
         type: "multiple-choice",
-        label: "Do you feel valued?",
-        options: ["Yes", "Somewhat", "No"],
+        label: "Do you feel valued by your team and management?",
+        options: ["Yes", "Somewhat", "No"]
       },
       {
         type: "dropdown",
-        label: "Select your department",
-        options: ["HR", "Engineering", "Marketing", "Sales"],
+        label: "Which department do you belong to?",
+        options: ["HR", "Engineering", "Marketing", "Sales", "Other"]
       },
-      { type: "text", label: "Suggestions for improvement?" },
-      { type: "text", label: "Biggest challenge in your role?" },
-    ],
+      {
+        type: "text",
+        label: "What changes would improve your work environment?"
+      },
+      {
+        type: "text",
+        label: "What challenges do you face in your current role?"
+      }
+    ]
   },
   {
     id: 3,
-    title: "Event Feedback",
+    title: "Event Feedback Survey",
     icon: "🎤",
-    description: "Collect insights post-event from attendees.",
+    description: "Gather feedback from event attendees to refine and enhance future events.",
     questions: [
       {
         type: "dropdown",
         label: "Which sessions did you attend?",
-        options: ["Session A", "Session B", "Session C"],
+        options: ["Session A", "Session B", "Session C", "All of the above"]
       },
-      { type: "rating", label: "Rate the overall event experience." },
+      {
+        type: "rating",
+        label: "How would you rate the overall event experience?",
+        description: "Rate the event based on your overall experience from 1 (Poor) to 5 (Excellent)."
+      },
       {
         type: "multiple-choice",
-        label: "Would you attend again?",
-        options: ["Definitely", "Maybe", "No"],
+        label: "Would you attend another event hosted by us?",
+        options: ["Definitely", "Maybe", "No"]
       },
-      { type: "text", label: "What was the highlight?" },
-      { type: "text", label: "Suggestions for future events?" },
-    ],
+      {
+        type: "text",
+        label: "What was the highlight of the event for you?"
+      },
+      {
+        type: "text",
+        label: "What suggestions do you have for future events?"
+      },
+      {
+        type: "rating",
+        label: "How would you rate the event's organization and logistics?",
+        description: "Rate the organization of the event from 1 (Poor) to 5 (Excellent)."
+      }
+    ]
   },
-  // {
-  //   id: 4,
-  //   title: "Sexual Experience Survey",
-  //   icon: "🔥",
-  //   description: "Explore adult preferences. Private & bold.",
-  //   questions: [
-  //     {
-  //       type: "rating",
-  //       label: "How would you rate your last sexual experience?",
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "Preferred positions?",
-  //       options: ["Missionary", "Doggy", "Cowgirl", "69", "Others"],
-  //     },
-  //     {
-  //       type: "text",
-  //       label: "Average session duration (in minutes)?",
-  //     },
-  //     {
-  //       type: "dropdown",
-  //       label: "Size preference?",
-  //       options: ['<4"', '4-6"', '6-8"', '>8"'],
-  //     },
-  //     {
-  //       type: "text",
-  //       label: "Kinks or fantasies you’d like to share?",
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "Do you prefer spontaneous or planned intimacy?",
-  //       options: ["Spontaneous", "Planned", "Depends"],
-  //     },
-  //   ],
-  // },
   {
-    id: 5,
+    id: 4,
     title: "Tech Usage Survey",
     icon: "💻",
-    description: "Understand user interaction with modern tech.",
+    description: "Understand how users engage with technology and identify preferences and trends.",
     questions: [
       {
         type: "multiple-choice",
-        label: "Devices used daily?",
-        options: ["Laptop", "Tablet", "Phone", "Smartwatch"],
+        label: "Which devices do you use regularly?",
+        options: ["Laptop", "Tablet", "Smartphone", "Smartwatch", "Other"]
       },
-      { type: "rating", label: "How tech-savvy are you?" },
+      {
+        type: "rating",
+        label: "How would you rate your overall tech-savviness?",
+        description: "Rate your level of tech-savviness from 1 (Novice) to 5 (Expert)."
+      },
       {
         type: "dropdown",
-        label: "Favorite OS?",
-        options: ["Windows", "macOS", "Linux", "Android", "iOS"],
+        label: "What operating system do you prefer?",
+        options: ["Windows", "macOS", "Linux", "Android", "iOS"]
       },
-      { type: "text", label: "Most-used app?" },
-      { type: "text", label: "Tech tool you can't live without?" },
-    ],
+      {
+        type: "text",
+        label: "What is your most-used app?"
+      },
+      {
+        type: "text",
+        label: "Which tech tool or gadget can you not live without?"
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: "Education Feedback Survey",
+    icon: "📚",
+    description: "Gather student feedback on their learning experience and educational environment.",
+    questions: [
+      {
+        type: "rating",
+        label: "How would you rate the overall quality of teaching?",
+        description: "Rate the quality of teaching from 1 (Poor) to 5 (Excellent)."
+      },
+      {
+        type: "multiple-choice",
+        label: "What is your preferred mode of learning?",
+        options: ["In-person", "Online", "Hybrid"]
+      },
+      {
+        type: "dropdown",
+        label: "What is your current grade level?",
+        options: ["High School", "Undergraduate", "Postgraduate"]
+      },
+      {
+        type: "text",
+        label: "Which subject do you find most interesting?"
+      },
+      {
+        type: "text",
+        label: "Do you have any suggestions to improve the curriculum?"
+      }
+    ]
   },
   {
     id: 6,
-    title: "Education Feedback",
-    icon: "📚",
-    description: "Student survey on learning experience.",
+    title: "Sports Preferences Survey",
+    icon: "⚽",
+    description: "Understand your sports habits, favorite sports, and fandom interests.",
     questions: [
-      { type: "rating", label: "Rate the teaching quality." },
       {
         type: "multiple-choice",
-        label: "Preferred learning mode?",
-        options: ["In-person", "Online", "Hybrid"],
+        label: "Which sports do you participate in regularly?",
+        options: ["Football", "Basketball", "Tennis", "Cricket", "Others"]
+      },
+      {
+        type: "rating",
+        label: "How often do you play sports each week?",
+        description: "Rate your frequency from 1 (Rarely) to 5 (Everyday)."
+      },
+      {
+        type: "text",
+        label: "Who is your all-time favorite athlete?"
       },
       {
         type: "dropdown",
-        label: "Your grade level:",
-        options: ["High School", "Undergrad", "Postgrad"],
+        label: "What is your favorite sports league?",
+        options: ["NBA", "EPL", "La Liga", "IPL"]
       },
-      { type: "text", label: "Most interesting subject?" },
-      { type: "text", label: "Curriculum improvement ideas?" },
-    ],
+      {
+        type: "text",
+        label: "Why do you enjoy participating in or watching sports?"
+      }
+    ]
   },
   {
     id: 7,
-    title: "Sports Preferences",
-    icon: "⚽",
-    description: "Explore sports habits and favorites.",
-    questions: [
-      {
-        type: "multiple-choice",
-        label: "Favorite sports?",
-        options: ["Football", "Basketball", "Tennis", "Cricket", "Others"],
-      },
-      { type: "rating", label: "How often do you play weekly?" },
-      { type: "text", label: "All-time favorite athlete?" },
-      {
-        type: "dropdown",
-        label: "Favorite league?",
-        options: ["NBA", "EPL", "La Liga", "IPL"],
-      },
-      { type: "text", label: "Why do you love sports?" },
-    ],
-  },
-  {
-    id: 8,
-    title: "Food Preferences",
+    title: "Food Preferences Survey",
     icon: "🍔",
-    description: "Food taste, habits, and restrictions.",
+    description: "Explore food preferences, eating habits, and dietary restrictions.",
     questions: [
       {
         type: "multiple-choice",
-        label: "Preferred cuisine?",
-        options: ["Italian", "Indian", "Chinese", "Mexican"],
+        label: "What is your favorite cuisine?",
+        options: ["Italian", "Indian", "Chinese", "Mexican", "Others"]
       },
-      { type: "rating", label: "Rate your cooking skills." },
+      {
+        type: "rating",
+        label: "How would you rate your cooking skills?",
+        description: "Rate your cooking skills from 1 (Beginner) to 5 (Expert)."
+      },
       {
         type: "dropdown",
         label: "How often do you eat out?",
-        options: ["Daily", "2-3x/week", "Occasionally", "Never"],
+        options: ["Daily", "2-3 times per week", "Occasionally", "Never"]
       },
-      { type: "text", label: "Favorite dish ever?" },
-      { type: "text", label: "Any dietary restrictions?" },
-    ],
+      {
+        type: "text",
+        label: "What is your favorite dish?"
+      },
+      {
+        type: "text",
+        label: "Do you have any dietary restrictions?"
+      }
+    ]
+  },
+  {
+    id: 8,
+    title: "Fashion Preferences Survey",
+    icon: "👗",
+    description: "Analyze fashion preferences, style trends, and shopping habits.",
+    questions: [
+      {
+        type: "multiple-choice",
+        label: "How would you describe your fashion style?",
+        options: ["Casual", "Formal", "Streetwear", "Athleisure", "Other"]
+      },
+      {
+        type: "dropdown",
+        label: "Which fashion brand do you prefer?",
+        options: ["Zara", "H&M", "Nike", "Gucci", "Other"]
+      },
+      {
+        type: "rating",
+        label: "How stylish do you consider yourself?",
+        description: "Rate your style from 1 (Not stylish) to 5 (Very stylish)."
+      },
+      {
+        type: "text",
+        label: "Who is your fashion icon?"
+      },
+      {
+        type: "text",
+        label: "How often do you go shopping?"
+      }
+    ]
   },
   {
     id: 9,
-    title: "Fashion Choices",
-    icon: "👗",
-    description: "Analyze fashion styles and brands.",
+    title: "Customer Satisfaction Survey",
+    icon: "😊",
+    description: "Gauge customer satisfaction with your products or services to drive improvements.",
     questions: [
       {
-        type: "multiple-choice",
-        label: "Your fashion style?",
-        options: ["Casual", "Formal", "Streetwear", "Athleisure"],
+        type: "rating",
+        label: "How satisfied are you with our product?"
       },
       {
-        type: "dropdown",
-        label: "Favorite fashion brand?",
-        options: ["Zara", "H&M", "Nike", "Gucci", "Others"],
+        type: "multiple-choice",
+        label: "How likely are you to recommend our product to others?",
+        options: ["Very likely", "Somewhat likely", "Not likely"]
       },
-      { type: "rating", label: "How stylish are you?" },
-      { type: "text", label: "Your fashion icon?" },
-      { type: "text", label: "Shopping frequency?" },
-    ],
+      {
+        type: "text",
+        label: "What can we improve on?"
+      },
+      {
+        type: "multiple-choice",
+        label: "Which feature of our product do you like the most?",
+        options: ["Design", "Price", "Functionality", "Other"]
+      },
+      {
+        type: "rating",
+        label: "How would you rate the customer service?",
+        description: "Rate the customer service from 1 (Poor) to 5 (Excellent)."
+      }
+    ]
   },
   {
     id: 10,
-    title: "Political Opinion Survey",
-    icon: "🗳️",
-    description: "Understand civic and political leanings.",
+    title: "Market Research Survey",
+    icon: "📊",
+    description: "Gather insights into market trends, competitors, and consumer behavior.",
     questions: [
       {
         type: "multiple-choice",
-        label: "Your political leaning?",
-        options: ["Liberal", "Conservative", "Moderate", "Neutral"],
+        label: "Which of the following brands do you consider as competitors?",
+        options: ["Brand A", "Brand B", "Brand C", "Others"]
       },
-      { type: "rating", label: "Interest in politics?" },
+      {
+        type: "rating",
+        label: "How well do you think we compare to our competitors?"
+      },
+      {
+        type: "text",
+        label: "What do you think is the next big trend in the industry?"
+      },
       {
         type: "dropdown",
-        label: "Did you vote recently?",
-        options: ["Yes", "No", "Not eligible"],
+        label: "Which social media platform do you follow for industry updates?",
+        options: ["Facebook", "Instagram", "Twitter", "LinkedIn"]
       },
-      { type: "text", label: "Biggest issue that matters?" },
-      { type: "text", label: "Ideal leadership traits?" },
-    ],
+      {
+        type: "text",
+        label: "What factors influence your purchase decisions?"
+      }
+    ]
   },
   {
     id: 11,
-    title: "Dating & Love Survey",
-    icon: "💘",
-    description: "Dive into love life & romantic style.",
+    title: "Health & Wellness Survey",
+    icon: "💪",
+    description: "Collect information on health habits, fitness goals, and wellness practices.",
     questions: [
       {
         type: "multiple-choice",
-        label: "Current relationship status?",
-        options: ["Single", "Dating", "Married", "Complicated"],
+        label: "How often do you exercise?",
+        options: ["Every day", "3-4 times a week", "Once a week", "Rarely"]
       },
-      { type: "rating", label: "Satisfaction with love life?" },
       {
-        type: "dropdown",
-        label: "Love language?",
-        options: ["Touch", "Words", "Time", "Gifts", "Acts of Service"],
+        type: "text",
+        label: "What is your primary fitness goal?"
       },
-      { type: "text", label: "Most romantic date idea?" },
-      { type: "text", label: "Deal-breaker in a relationship?" },
-    ],
+      {
+        type: "rating",
+        label: "How would you rate your overall health?",
+        description: "Rate your health from 1 (Poor) to 5 (Excellent)."
+      },
+      {
+        type: "multiple-choice",
+        label: "What kind of exercise do you prefer?",
+        options: ["Running", "Yoga", "Strength Training", "Cycling", "Other"]
+      },
+      {
+        type: "text",
+        label: "Do you follow any specific diet plan?"
+      }
+    ]
   },
   {
     id: 12,
-    title: "Anime & Fandom Survey",
-    icon: "🧝‍♂️",
-    description: "Explore anime tastes & fandom culture.",
+    title: "Travel Preferences Survey",
+    icon: "✈️",
+    description: "Understand traveler preferences, destinations, and travel habits.",
     questions: [
       {
         type: "multiple-choice",
-        label: "Favorite anime genre?",
-        options: ["Shonen", "Romance", "Isekai", "Horror", "Slice of Life"],
+        label: "What type of vacation do you prefer?",
+        options: ["Beach", "Adventure", "Cultural", "Relaxing"]
       },
-      { type: "rating", label: "How hardcore is your fandom?" },
-      { type: "text", label: "Top 3 anime ever?" },
       {
         type: "dropdown",
-        label: "Preferred platform?",
-        options: ["Crunchyroll", "Netflix", "Funimation", "Other"],
+        label: "Which country would you like to visit next?",
+        options: ["Italy", "Japan", "USA", "Australia", "Other"]
       },
-      { type: "text", label: "Waifu or husbando of choice?" },
-    ],
+      {
+        type: "rating",
+        label: "How would you rate your recent travel experience?",
+        description: "Rate your recent trip from 1 (Poor) to 5 (Excellent)."
+      },
+      {
+        type: "text",
+        label: "What is your favorite travel destination?"
+      },
+      {
+        type: "multiple-choice",
+        label: "Do you prefer solo or group travel?",
+        options: ["Solo", "Group", "Both"]
+      }
+    ]
   },
   {
     id: 13,
-    title: "Gaming Survey",
-    icon: "🎮",
-    description: "Dive into gamer habits, genres, and devices.",
+    title: "Music Preferences Survey",
+    icon: "🎶",
+    description: "Explore music tastes, genres, and listening habits.",
     questions: [
       {
         type: "multiple-choice",
-        label: "Main gaming device?",
-        options: ["Console", "PC", "Mobile", "Cloud Gaming"],
+        label: "What genres of music do you listen to?",
+        options: ["Rock", "Pop", "Hip Hop", "Classical", "Jazz", "Other"]
       },
-      { type: "rating", label: "Hours per week you play?" },
       {
-        type: "dropdown",
-        label: "Favorite genre?",
-        options: ["Shooter", "RPG", "Sports", "Simulation", "Puzzle"],
+        type: "rating",
+        label: "How often do you listen to music?",
+        description: "Rate your listening frequency from 1 (Rarely) to 5 (Daily)."
       },
-      { type: "text", label: "Favorite game of all time?" },
-      { type: "text", label: "Gaming goal this year?" },
-    ],
+      {
+        type: "text",
+        label: "Who is your favorite artist or band?"
+      },
+      {
+        type: "multiple-choice",
+        label: "What is your preferred music platform?",
+        options: ["Spotify", "Apple Music", "YouTube", "Other"]
+      },
+      {
+        type: "text",
+        label: "Do you play any musical instruments?"
+      }
+    ]
   },
   {
     id: 14,
-    title: "Music Survey",
-    icon: "🎵",
-    description: "Genres, artists, and listening habits.",
+    title: "Pet Ownership Survey",
+    icon: "🐶",
+    description: "Learn about pet ownership, habits, and preferences.",
     questions: [
       {
         type: "multiple-choice",
-        label: "Favorite music genre?",
-        options: ["Pop", "Rock", "Hip-Hop", "Jazz", "EDM"],
+        label: "What type of pet do you own?",
+        options: ["Dog", "Cat", "Bird", "Other"]
       },
-      { type: "rating", label: "Music importance in your life?" },
+      {
+        type: "rating",
+        label: "How satisfied are you with your pet's behavior?",
+        description: "Rate your satisfaction from 1 (Not satisfied) to 5 (Very satisfied)."
+      },
+      {
+        type: "text",
+        label: "What is your pet's name?"
+      },
       {
         type: "dropdown",
-        label: "Listening platform?",
-        options: ["Spotify", "Apple Music", "YouTube", "Other"],
+        label: "How often do you take your pet to the vet?",
+        options: ["Every 6 months", "Once a year", "As needed"]
       },
-      { type: "text", label: "All-time favorite artist?" },
-      { type: "text", label: "Dream concert to attend?" },
-    ],
+      {
+        type: "text",
+        label: "Do you have any advice for new pet owners?"
+      }
+    ]
   },
   {
     id: 15,
-    title: "Movie & Streaming Survey",
-    icon: "🎬",
-    description: "Watching preferences and platform use.",
+    title: "Technology Adoption Survey",
+    icon: "📱",
+    description: "Understand how people adopt new technology and their attitudes toward innovation.",
     questions: [
       {
         type: "multiple-choice",
-        label: "Preferred genre?",
-        options: ["Action", "Comedy", "Romance", "Thriller", "Sci-Fi"],
+        label: "What type of technology do you use most frequently?",
+        options: ["Smartphones", "Wearables", "Smart Home Devices", "Other"]
       },
-      { type: "rating", label: "How often do you stream?" },
+      {
+        type: "rating",
+        label: "How likely are you to try new technology?",
+        description: "Rate your willingness to try new tech from 1 (Not likely) to 5 (Very likely)."
+      },
+      {
+        type: "text",
+        label: "What recent technological innovation excites you the most?"
+      },
       {
         type: "dropdown",
-        label: "Streaming service of choice?",
-        options: ["Netflix", "Prime", "Disney+", "Hulu", "Other"],
+        label: "What factors influence your decision to adopt new technology?",
+        options: ["Price", "Brand reputation", "Features", "Ease of use"]
       },
-      { type: "text", label: "Movie you rewatch most?" },
-      { type: "text", label: "TV series you recommend?" },
-    ],
-  },
-  {
-    id: 16,
-    title: "Startup/Business Survey",
-    icon: "🚀",
-    description: "Entrepreneurship goals, pain points & growth.",
-    questions: [
       {
-        type: "multiple-choice",
-        label: "Startup stage?",
-        options: ["Idea", "Early", "Growth", "Scaling", "Exit"],
-      },
-      { type: "rating", label: "Confidence in your business?" },
-      {
-        type: "dropdown",
-        label: "Main industry?",
-        options: ["Tech", "Retail", "Health", "Finance", "Other"],
-      },
-      { type: "text", label: "Biggest business challenge?" },
-      { type: "text", label: "What inspires your vision?" },
-    ],
-  },
-  {
-    id: 17,
-    title: "Fitness Lifestyle Survey",
-    icon: "🏋️‍♂️",
-    description: "Health habits and physical goals.",
-    questions: [
-      {
-        type: "multiple-choice",
-        label: "Workout frequency?",
-        options: ["Daily", "3–5x/week", "Rarely", "Never"],
-      },
-      { type: "rating", label: "Current fitness level?" },
-      {
-        type: "dropdown",
-        label: "Workout preference?",
-        options: ["Gym", "Yoga", "Running", "Home", "Other"],
-      },
-      { type: "text", label: "Fitness goal this year?" },
-      { type: "text", label: "Do you follow a diet?" },
-    ],
-  },
-  // {
-  //   id: 18,
-  //   title: "Women's Intimacy & Body Preference Survey",
-  //   icon: "💖",
-  //   description:
-  //     "For adult women to explore body awareness and sexual preferences.",
-  //   questions: [
-  //     {
-  //       type: "dropdown",
-  //       label: "What is your age range?",
-  //       options: ["18–24", "25–34", "35–44", "45–54", "55+"],
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "How would you describe your breast size?",
-  //       options: ["A (Small)", "B", "C", "D", "DD+", "Prefer not to say"],
-  //     },
-  //     {
-  //       type: "rating",
-  //       label: "How confident are you about your breast appearance?",
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "How would you describe your vulva/vaginal appearance comfort?",
-  //       options: [
-  //         "Totally comfortable",
-  //         "Somewhat self-conscious",
-  //         "Curious to learn more",
-  //         "Prefer not to say",
-  //       ],
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "Have you noticed variations in vaginal/labial color?",
-  //       options: [
-  //         "Yes – and comfortable with it",
-  //         "Yes – unsure about it",
-  //         "Not really",
-  //         "Prefer not to say",
-  //       ],
-  //     },
-  //     {
-  //       type: "rating",
-  //       label:
-  //         "How satisfied are you with your vaginal sensitivity during intimacy?",
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "How would you describe your vaginal sensitivity or tightness?",
-  //       options: [
-  //         "Very sensitive / tight",
-  //         "Moderate",
-  //         "Low sensitivity",
-  //         "Depends on mood",
-  //         "Prefer not to say",
-  //       ],
-  //     },
-  //     {
-  //       type: "dropdown",
-  //       label: "Preferred penis size (if applicable)?",
-  //       options: [
-  //         'Small (under 5")',
-  //         'Average (5–6.5")',
-  //         'Large (7+")',
-  //         "Size doesn't matter",
-  //         "Not applicable",
-  //       ],
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "Do you have a preference in penis shape or girth?",
-  //       options: [
-  //         "Yes – prefer thicker",
-  //         "Yes – prefer longer",
-  //         "No preference",
-  //         "Not applicable",
-  //       ],
-  //     },
-  //     {
-  //       type: "rating",
-  //       label: "How important is a partner’s genital appearance to you?",
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "Do you care about a partner’s grooming and hygiene?",
-  //       options: [
-  //         "Yes, very important",
-  //         "Somewhat important",
-  //         "Not really",
-  //         "Not applicable",
-  //       ],
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "Favorite sexual positions?",
-  //       options: [
-  //         "Missionary",
-  //         "Doggy style",
-  //         "Cowgirl / on top",
-  //         "Reverse cowgirl",
-  //         "Oral (receiving)",
-  //         "Oral (giving)",
-  //         "Side-lying / spooning",
-  //         "Standing",
-  //         "Other",
-  //       ],
-  //     },
-  //     {
-  //       type: "dropdown",
-  //       label: "Preferred sexual pace or style?",
-  //       options: [
-  //         "Slow and sensual",
-  //         "Passionate and rough",
-  //         "Playful / teasing",
-  //         "Dominant / submissive dynamics",
-  //         "Depends on mood",
-  //         "Other",
-  //       ],
-  //     },
-  //     {
-  //       type: "rating",
-  //       label: "How adventurous are you in trying new sexual experiences?",
-  //     },
-  //     {
-  //       type: "multiple-choice",
-  //       label: "How open are you to exploring new sexual activities?",
-  //       options: [
-  //         "Very open",
-  //         "Open with the right person",
-  //         "Cautious / selective",
-  //         "Prefer familiar experiences",
-  //       ],
-  //     },
-  //     {
-  //       type: "rating",
-  //       label: "How confident are you in communicating desires and limits?",
-  //     },
-  //     {
-  //       type: "text",
-  //       label:
-  //         "What’s one thing you’d like to experience or explore sexually (optional)?",
-  //     },
-  //   ],
-  // },
+        type: "text",
+        label: "What is your biggest concern regarding new technology?"
+      }
+    ]
+  }
 ];
+
 
 const SurveyCreatorPrebuiltTemplates = () => {
   const navigate = useNavigate();

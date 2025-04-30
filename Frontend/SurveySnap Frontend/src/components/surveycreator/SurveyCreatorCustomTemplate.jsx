@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import axios from "axios"; // 🔥 NEW: axios import for API calls
+import axios from "axios";
 import "./SurveyCreatorCustomTemplate.css";
+import { useToast } from "../../contexts/ToastContext"; // ✅ useToast hook
 
 const SurveyCreatorCustomTemplate = () => {
   const [surveyTitle, setSurveyTitle] = useState("");
@@ -12,6 +11,7 @@ const SurveyCreatorCustomTemplate = () => {
   const [previewMode, setPreviewMode] = useState(false);
   const [ratingValues, setRatingValues] = useState({});
   const navigate = useNavigate();
+  const { showToast } = useToast(); // ✅ Using custom toast
 
   const handleAddQuestion = () => {
     setQuestions([
@@ -67,18 +67,17 @@ const SurveyCreatorCustomTemplate = () => {
 
   const handleSaveSurvey = async () => {
     if (!surveyTitle.trim() || questions.length === 0) {
-      toast.warning("Please add a title and at least one question.");
+      showToast("Please add a title and at least one question.", "warning");
       return;
     }
 
     try {
       const creatorId = localStorage.getItem("id");
       if (!creatorId) {
-        toast.error("User not logged in.");
+        showToast("User not logged in.", "error");
         return;
       }
 
-      // 1. Save survey
       const surveyRes = await axios.post("/survey/add", {
         title: surveyTitle,
         description: surveyDescription,
@@ -88,7 +87,6 @@ const SurveyCreatorCustomTemplate = () => {
 
       const surveyId = surveyRes.data.data._id;
 
-      // 2. Save questions
       await Promise.all(
         questions.map((q) =>
           axios.post("/question/add", {
@@ -104,13 +102,13 @@ const SurveyCreatorCustomTemplate = () => {
         )
       );
 
-      toast.success("Survey and questions saved successfully!");
+      showToast("Survey and questions saved successfully! 🎉", "success");
       setTimeout(() => {
         navigate("/survey-creator-dashboard/my-surveys");
       }, 1500);
     } catch (error) {
       console.error("Save error:", error);
-      toast.error("Error saving survey!");
+      showToast("Error saving survey!", "error");
     }
   };
 
@@ -272,7 +270,6 @@ const SurveyCreatorCustomTemplate = () => {
           ))}
         </div>
       )}
-      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 };

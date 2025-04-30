@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useToast } from "../../contexts/ToastContext";
 import "./SurveyCreationPage.css";
 
 const SurveyCreationPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { showToast } = useToast();
+
   const selectedTemplate = location.state?.template || null;
 
   const [surveyData, setSurveyData] = useState({
@@ -16,7 +19,11 @@ const SurveyCreationPage = () => {
 
   const [responses, setResponses] = useState({});
   const [saving, setSaving] = useState(false);
-  const [hoverStars, setHoverStars] = useState({}); // for hover effect
+  const [hoverStars, setHoverStars] = useState({});
+  const [dragging, setDragging] = useState(null);
+
+  const dragRef = useRef(null); // Define the dragRef
+
   const mapToBackendType = (type) => {
     switch (type) {
       case "text":
@@ -55,11 +62,58 @@ const SurveyCreationPage = () => {
     try {
       const creatorId = localStorage.getItem("id");
       if (!creatorId) {
-        alert("User ID not found in localStorage!");
+        showToast("User ID not found. Please login again.", "error");
         return;
       }
 
-      // Step 1: Create survey
+      const cleanedQuestions = surveyData.questions.map((q) => {
+        const cleanedOptions =
+          q.options?.filter(
+            (opt) =>
+              opt.trim() !== "" &&
+              !/^option\s*\d*$/i.test(opt.trim()) &&
+              !opt.toLowerCase().includes("dropdown")
+          ) || [];
+
+        return {
+          ...q,
+          options: ["Dropdown", "Multiple Choice"].includes(
+            mapToBackendType(q.type)
+          )
+            ? cleanedOptions
+            : [],
+        };
+      });
+
+      const hasValidOptions = cleanedQuestions.every((q) =>
+        ["Dropdown", "Multiple Choice"].includes(mapToBackendType(q.type))
+          ? q.options.length > 0
+          : true
+      );
+
+      if (!hasValidOptions) {
+        showToast(
+          "Some dropdown/multiple choice questions have empty or invalid options.",
+          "error"
+        );
+        setSaving(false);
+        return;
+      }
+
+      const hasRequiredQuestionsAnswered = cleanedQuestions.every(
+        (q, index) => {
+          return (
+            !q.required || responses[index] // Ensure there's a response for required questions
+          );
+        }
+      );
+
+      if (!hasRequiredQuestionsAnswered) {
+        showToast("Please answer all required questions.", "error");
+        setSaving(false);
+        return;
+      }
+
       const payload = {
         title: surveyData.title,
         description: surveyData.description,
@@ -72,28 +126,47 @@ const SurveyCreationPage = () => {
       if (response.status === 201) {
         const newSurveyId = response.data.data._id;
 
-        // Step 2: Save questions to backend
         await Promise.all(
-          surveyData.questions.map((q) =>
+          cleanedQuestions.map((q) =>
             axios.post("/question/add", {
               survey_id: newSurveyId,
               question_text: q.label,
               question_type: mapToBackendType(q.type),
               is_required: q.required || false,
-              options: q.options || [], // handle MCQ or dropdown
+              options: q.options,
             })
           )
         );
 
-        alert("Survey and questions saved successfully!");
+        showToast("Survey and questions saved successfully!", "success");
         navigate("/survey-creator-dashboard/my-surveys");
       }
     } catch (error) {
-      console.error("Error saving survey and questions:", error);
-      alert("Failed to save survey.");
+      console.error("Error saving survey:", error);
+      showToast("Failed to save survey. Try again.", "error");
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleDragStart = (event, questionIndex) => {
+    setDragging(questionIndex);
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (event, targetIndex) => {
+    event.preventDefault();
+    if (dragging !== targetIndex) {
+      const updatedQuestions = [...surveyData.questions];
+      const draggedQuestion = updatedQuestions[dragging];
+      updatedQuestions.splice(dragging, 1);
+      updatedQuestions.splice(targetIndex, 0, draggedQuestion);
+      setSurveyData({ ...surveyData, questions: updatedQuestions });
+    }
+    setDragging(null);
   };
 
   return (
@@ -106,7 +179,14 @@ const SurveyCreationPage = () => {
       <div className="survey-body">
         {surveyData.questions.length > 0 ? (
           surveyData.questions.map((question, index) => (
-            <div key={index} className="question-container">
+            <div
+              key={index}
+              className="question-container"
+              draggable
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={handleDragOver}
+              onDrop={(e) => handleDrop(e, index)}
+            >
               <label className="question-label">{question.label}</label>
 
               {question.type === "text" && (
@@ -145,7 +225,7 @@ const SurveyCreationPage = () => {
 
               {question.type === "multiple-choice" && (
                 <div className="options-group">
-                  {question.options.slice(0, 4).map((option, idx) => (
+                  {question.options.map((option, idx) => (
                     <label key={idx} className="option-label">
                       <input
                         type="radio"

@@ -1,59 +1,120 @@
-.manage-responses-container {
+.manageresponse-container {
   padding: 24px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
 }
 
-.manage-title {
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-.survey-controls {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.survey-select {
-  min-width: 200px;
-}
-
-.filter-export-bar {
+.manageresponse-topbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: flex-start;
   flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.manageresponse-inputs {
+  display: flex;
+  align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.table-container {
-  width: 100%;
+.manageresponse-select {
+  min-width: 220px;
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 
-.loading-spinner {
+.manageresponse-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.manageresponse-buttons button {
+  white-space: nowrap;
+}
+
+.manageresponse-table-container {
+  margin-top: 12px;
+}
+
+.MuiDataGrid-root {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  font-size: 0.9rem;
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: #e3f2fd;
+  color: #1e88e5;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.MuiDataGrid-cell {
+  font-size: 0.875rem;
+}
+
+.manageresponse-spinner {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 250px;
+}
+
+.manageresponse-empty {
   margin-top: 40px;
-}
-
-.no-responses-text {
-  margin-top: 24px;
   text-align: center;
+  font-weight: 500;
   color: #777;
-  font-style: italic;
 }
 
-/* Optional: if you want to style the DataGrid rows a bit */
-.MuiDataGrid-row:hover {
-  background-color: #f9f9f9;
+.manageresponse-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.manageresponse-delete-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #ef9a9a;
+  background-color: #ffebee;
+  color: #d32f2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 
-/* Button spacing inside action column */
-.response-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
+.manageresponse-delete-btn:hover {
+  background-color: #ffcdd2;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .manageresponse-topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .manageresponse-inputs,
+  .manageresponse-buttons {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .manageresponse-table-container {
+    overflow-x: auto;
+  }
 }

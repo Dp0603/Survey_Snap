@@ -6,16 +6,20 @@ import {
   FaSyncAlt,
 } from "react-icons/fa";
 import axios from "axios";
+import { useToast } from "../../contexts/ToastContext"; // Assuming you are using a Toast context for error handling
 import "./SurveyRespondentHome.css";
 
 const SurveyRespondentHome = () => {
   const [available, setAvailable] = useState(0);
   const [completed, setCompleted] = useState(0);
   const [pending, setPending] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const userId = localStorage.getItem("id"); // Assuming you're storing user ID here
+  const { showToast } = useToast(); // For showing toasts
 
   const fetchSurveyStats = async () => {
+    setLoading(true);
     try {
       // Fetch all active surveys
       const surveyResponse = await axios.get(`/survey/all`);
@@ -35,9 +39,21 @@ const SurveyRespondentHome = () => {
       // Set available, completed, and pending stats
       setAvailable(activeSurveys.length);
       setCompleted(completedSurveys.length);
-      setPending(activeSurveys.length - completedSurveys.length); // Pending = Available - Completed
+
+      // Prevent negative pending values and calculate based on available surveys
+      const pendingCount = Math.max(
+        0,
+        activeSurveys.length - completedSurveys.length
+      );
+      setPending(pendingCount); // Pending = Available - Completed, ensure no negative value
     } catch (error) {
       console.error("Error fetching survey stats:", error);
+      showToast(
+        "Failed to fetch survey data. Please try again later.",
+        "error"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,8 +107,12 @@ const SurveyRespondentHome = () => {
 
       {/* Refresh Button */}
       <div className="refresh-button-container">
-        <button className="refresh-button" onClick={fetchSurveyStats}>
-          <FaSyncAlt /> Refresh Data
+        <button
+          className="refresh-button"
+          onClick={fetchSurveyStats}
+          disabled={loading}
+        >
+          <FaSyncAlt /> {loading ? "Refreshing..." : "Refresh Data"}
         </button>
       </div>
     </div>

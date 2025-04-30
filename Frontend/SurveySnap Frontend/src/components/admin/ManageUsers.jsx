@@ -171,23 +171,25 @@ const ManageUsers = () => {
       headerName: "Actions",
       width: 150,
       renderCell: (params) => (
-        <>
-          <IconButton
-            color="primary"
+        <div className="manageuser-action-buttons">
+          <button
+            className="manageuser-edit-btn"
             onClick={() => handleEditOpen(params.row)}
+            title="Edit"
           >
             <FaEdit />
-          </IconButton>
-          <IconButton
-            color="error"
+          </button>
+          <button
+            className="manageuser-delete-btn"
             onClick={() => {
               setDeleteUserId(params.row._id);
               setShowDeleteModal(true);
             }}
+            title="Delete"
           >
             <FaTrash />
-          </IconButton>
-        </>
+          </button>
+        </div>
       ),
     },
   ];
@@ -216,11 +218,7 @@ const ManageUsers = () => {
         />
         <div className="manageuser-buttons">
           <CSVLink data={filteredUsers} filename="users.csv">
-            <Button
-              variant="outlined"
-              startIcon={<FaDownload />}
-              style={{ color: "green" }}
-            >
+            <Button variant="outlined" startIcon={<FaDownload />}>
               Export CSV
             </Button>
           </CSVLink>
@@ -234,18 +232,18 @@ const ManageUsers = () => {
         </div>
       </div>
 
-      <Box className="manageuser-table" sx={{ height: 500, width: "100%" }}>
+      <Box className="manageuser-table-wrapper">
         <DataGrid
           rows={filteredUsers}
           columns={columns}
-          pageSize={25}
-          autoHeight
+          pageSize={7}
           rowsPerPageOptions={[7, 15, 25]}
+          autoHeight
           disableSelectionOnClick
         />
       </Box>
 
-      {/* Add User Modal */}
+      {/* Add Modal */}
       <Dialog
         open={showAddModal}
         onClose={() => setShowAddModal(false)}

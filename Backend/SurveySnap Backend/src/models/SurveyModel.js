@@ -11,8 +11,8 @@ const surveySchema = new Schema(
       enum: ["Active", "Closed", "Draft"],
       default: "Draft",
     },
-    startDate: { type: Date },
-    endDate: { type: Date },
+    startDate: { type: Date }, // Allows for both date and time
+    endDate: { type: Date }, // Allows for both date and time
   },
   { timestamps: true }
 );

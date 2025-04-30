@@ -169,7 +169,7 @@ export const Signup = () => {
                 onChange={(e) => setRole(e.target.value)}
               >
                 <option value="">Choose a role</option>
-                <option value="Admin">👑 Admin</option>
+                {/* <option value="Admin">👑 Admin</option> */}
                 <option value="Survey Creator">📋 Survey Creator</option>
                 <option value="Respondent">📢 Respondent</option>
               </select>

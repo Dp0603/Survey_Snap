@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { QRCodeCanvas } from "qrcode.react";
 import "./SurveyCreatorShareSurvey.css";
+import { useToast } from "../../contexts/ToastContext"; // ✅ Toast hook
 
 const SurveyCreatorShareSurvey = () => {
   const [surveys, setSurveys] = useState([]);
@@ -9,7 +10,7 @@ const SurveyCreatorShareSurvey = () => {
   const [showModal, setShowModal] = useState(false);
   const [recipient, setRecipient] = useState("");
   const [shareMethod, setShareMethod] = useState("");
-  const [showToast, setShowToast] = useState(false);
+  const { showToast } = useToast();
 
   const userId = localStorage.getItem("id");
 
@@ -20,10 +21,11 @@ const SurveyCreatorShareSurvey = () => {
         setSurveys(res.data.data);
       } catch (error) {
         console.error("Error fetching surveys", error);
+        showToast("Failed to load surveys!", "error");
       }
     };
     fetchSurveys();
-  }, []);
+  }, [userId, showToast]);
 
   const handleShare = (survey) => {
     setSelectedSurvey(survey);
@@ -32,30 +34,28 @@ const SurveyCreatorShareSurvey = () => {
 
   const handleSubmitShare = async () => {
     if (!recipient || !shareMethod) {
-      alert("Please enter recipient and select share method.");
-      return;
+      return showToast(
+        "Please enter recipient and select share method.",
+        "error"
+      );
     }
-  
+
     try {
-      const response = await axios.post("/share/share/survey", {
+      await axios.post("/share/share/survey", {
         surveyId: selectedSurvey._id,
         recipient,
         method: shareMethod,
       });
-  
-      console.log("Response:", response.data);
-  
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
+
+      showToast("Survey shared successfully! 🎉", "success");
       setShowModal(false);
       setRecipient("");
       setShareMethod("");
     } catch (error) {
       console.error("Sharing failed", error);
-      alert("Failed to share survey. Please try again.");
+      showToast("Failed to share survey. Please try again.", "error");
     }
   };
-  
 
   return (
     <div className="survey-creator-share">
@@ -141,10 +141,6 @@ const SurveyCreatorShareSurvey = () => {
             </div>
           </div>
         </div>
-      )}
-
-      {showToast && (
-        <div className="share-toast">Survey shared successfully!</div>
       )}
     </div>
   );

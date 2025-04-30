@@ -38,15 +38,8 @@ const Schema = mongoose.Schema;
 
 const questionSchema = new Schema(
   {
-    survey_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Survey",
-      required: true,
-    },
-    question_text: {
-      type: String,
-      required: true,
-    },
+    survey_id: { type: Schema.Types.ObjectId, ref: "Survey", required: true },
+    question_text: { type: String, required: true },
     question_type: {
       type: String,
       enum: [
@@ -58,18 +51,11 @@ const questionSchema = new Schema(
       ],
       required: true,
     },
-    is_required: {
-      type: Boolean,
-      default: false,
-    },
-    questionimageURL: {
-      type: String,
-      required: false,
-    },
+    is_required: { type: Boolean, default: false },
+    questionimageURL: { type: String },
+    options: { type: [String], default: [] },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Question", questionSchema);

@@ -12,32 +12,36 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { Bar } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { CSVLink } from "react-csv";
 import axios from "axios";
 import "./ManageReport.css";
 
 const ManageReport = () => {
-  const [reports, setReports] = useState([]);
-  const [loading, setLoading] = useState(true);
   const reportRef = useRef();
+  const [reportData, setReportData] = useState({
+    users: 0,
+    userRoles: {},
+    surveys: 0,
+    questions: 0,
+    responses: 0,
+    analytics: [],
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchReports();
-    const interval = setInterval(fetchReports, 30000);
-    return () => clearInterval(interval);
+    fetchFullReport();
   }, []);
 
-  const fetchReports = async () => {
+  const fetchFullReport = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:3000/analytics/survey-analytics"
-      );
-      setReports(res.data.data);
+      const res = await axios.get("/adminreport/full-report");
+      setReportData(res.data.data || {});
     } catch (err) {
-      console.error("Failed to fetch analytics", err);
+      console.error("Error fetching full report", err);
     } finally {
       setLoading(false);
     }
@@ -51,114 +55,105 @@ const ManageReport = () => {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("analytics-report.pdf");
+      pdf.save("admin-report.pdf");
     });
   };
 
-  const totalResponses = reports.reduce(
-    (sum, r) => sum + (r.total_responses || 0),
+  const {
+    users,
+    userRoles = {},
+    surveys,
+    questions,
+    responses,
+    analytics = [],
+  } = reportData;
+
+  const totalResponses = analytics.reduce(
+    (sum, a) => sum + (a.total_responses || 0),
     0
   );
-  const latestDate = reports.length
-    ? new Date(
-        Math.max(...reports.map((r) => new Date(r.createdAt)))
-      ).toLocaleDateString()
-    : "N/A";
 
-  const chartData = {
-    labels: reports.map((r) => r.survey_id?.title || "Response"),
+  const userRolePieData = {
+    labels: Object.keys(userRoles),
     datasets: [
       {
-        label: "Responses",
-        data: reports.map((r) => r.total_responses || 0),
-        backgroundColor: "rgba(63, 81, 181, 0.7)",
-        borderRadius: 8,
-        barThickness: 30,
+        data: Object.values(userRoles),
+        backgroundColor: [
+          "#d32f2f", // Admin
+          "#1976d2", // Survey Creator
+          "#388e3c", // Respondent
+        ],
+        borderWidth: 1,
       },
     ],
   };
 
-  const chartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        callbacks: {
-          label: (context) => `Responses: ${context.parsed.y}`,
-        },
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          stepSize: 1,
-        },
-      },
-    },
-  };
-
   return (
-    <Box className="analytics-container" ref={reportRef} sx={{ px: 2, py: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        📈 Survey Analytics Dashboard
+    <Box className="report-container" ref={reportRef}>
+      <Typography variant="h4" className="report-heading">
+        📊 Admin Dashboard Report
       </Typography>
 
       {loading ? (
-        <Box display="flex" justifyContent="center" mt={4}>
+        <Box className="report-loading">
           <CircularProgress />
         </Box>
       ) : (
         <>
-          <Grid container spacing={3} className="summary-grid">
-            <Grid item xs={12} sm={4}>
-              <Paper elevation={3} className="summary-box">
-                <Typography variant="subtitle1" color="textSecondary">
-                  🧮 Total Responses
-                </Typography>
-                <Typography variant="h5" color="primary">
-                  {totalResponses}
-                </Typography>
+          {/* Summary Cards */}
+          <Grid container spacing={2} className="report-summary">
+            <Grid item xs={12} sm={6} md={2.4}>
+              <Paper className="report-card">
+                <Typography variant="subtitle2">👤 Users</Typography>
+                <Typography variant="h5">{users}</Typography>
               </Paper>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <Paper elevation={3} className="summary-box">
-                <Typography variant="subtitle1" color="textSecondary">
-                  📋 Unique Surveys
-                </Typography>
-                <Typography variant="h5" color="primary">
-                  {reports.length}
-                </Typography>
+            <Grid item xs={12} sm={6} md={2.4}>
+              <Paper className="report-card">
+                <Typography variant="subtitle2">📋 Surveys</Typography>
+                <Typography variant="h5">{surveys}</Typography>
               </Paper>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <Paper elevation={3} className="summary-box">
-                <Typography variant="subtitle1" color="textSecondary">
-                  🕒 Latest Report
-                </Typography>
-                <Typography variant="h5" color="primary">
-                  {latestDate}
-                </Typography>
+            <Grid item xs={12} sm={6} md={2.4}>
+              <Paper className="report-card">
+                <Typography variant="subtitle2">❓ Questions</Typography>
+                <Typography variant="h5">{questions}</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={2.4}>
+              <Paper className="report-card">
+                <Typography variant="subtitle2">✅ Responses</Typography>
+                <Typography variant="h5">{responses}</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={2.4}>
+              <Paper className="report-card">
+                <Typography variant="subtitle2">📦 Data Points</Typography>
+                <Typography variant="h5">{totalResponses}</Typography>
               </Paper>
             </Grid>
           </Grid>
 
-          <Box mt={6}>
-            <Typography variant="h6" gutterBottom>
-              📊 Responses per Survey
-            </Typography>
-            <Paper elevation={3} sx={{ p: 2 }}>
-              <Bar data={chartData} options={chartOptions} />
-            </Paper>
+          {/* Only User Role Pie Chart */}
+          <Box className="report-chart-grid">
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <Typography variant="h6" gutterBottom>
+                  👥 User Role Distribution
+                </Typography>
+                <Paper className="chart-card">
+                  <Pie data={userRolePieData} />
+                </Paper>
+              </Grid>
+            </Grid>
           </Box>
 
-          <Box mt={6}>
+          {/* Analytics Table */}
+          <Box className="report-table">
             <Typography variant="h6" gutterBottom>
-              📃 Analytics Reports (Raw Data)
+              📃 Full Report Table
             </Typography>
-            <Paper elevation={2}>
+            <Paper>
               <Table size="small">
                 <TableHead>
                   <TableRow>
@@ -166,10 +161,10 @@ const ManageReport = () => {
                       <strong>Survey</strong>
                     </TableCell>
                     <TableCell>
-                      <strong>Responses</strong>
+                      <strong>Total Responses</strong>
                     </TableCell>
                     <TableCell>
-                      <strong>Response Data</strong>
+                      <strong>Raw Data</strong>
                     </TableCell>
                     <TableCell>
                       <strong>Date</strong>
@@ -177,17 +172,15 @@ const ManageReport = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {reports.map((r) => (
-                    <TableRow key={r._id}>
-                      <TableCell>{r.survey_id?.title || "Response"}</TableCell>
-                      <TableCell>{r.total_responses}</TableCell>
+                  {analytics.map((a) => (
+                    <TableRow key={a._id}>
+                      <TableCell>{a.survey_id?.title || "Untitled"}</TableCell>
+                      <TableCell>{a.total_responses}</TableCell>
                       <TableCell>
-                        {r.response_data.length > 60
-                          ? r.response_data.slice(0, 60) + "..."
-                          : r.response_data}
+                        {JSON.stringify(a.response_data).slice(0, 60)}...
                       </TableCell>
                       <TableCell>
-                        {new Date(r.createdAt).toLocaleDateString()}
+                        {new Date(a.createdAt).toLocaleDateString()}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -196,9 +189,19 @@ const ManageReport = () => {
             </Paper>
           </Box>
 
-          <Box textAlign="right" mt={4}>
-            <Button variant="contained" onClick={exportPDF} color="secondary">
-              📥 Export Full Report
+          {/* Export Buttons */}
+          <Box className="report-export" mt={4} textAlign="right">
+            <CSVLink
+              data={analytics}
+              filename="admin_full_report.csv"
+              className="csv-link"
+            >
+              <Button variant="outlined" color="success" sx={{ mr: 2 }}>
+                📄 Export CSV
+              </Button>
+            </CSVLink>
+            <Button variant="contained" color="secondary" onClick={exportPDF}>
+              📥 Export PDF
             </Button>
           </Box>
         </>

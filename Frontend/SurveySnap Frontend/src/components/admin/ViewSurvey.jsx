@@ -148,29 +148,35 @@ const ViewSurvey = () => {
     {
       field: "actions",
       headerName: "Actions",
-      width: 160,
+      width: 150,
+      sortable: false,
       renderCell: (params) => (
-        <>
+        <div className="viewsurvey-action-buttons">
           {editingId === params.row._id ? (
-            <IconButton
-              color="primary"
+            <button
+              className="viewsurvey-save-btn"
               onClick={() => handleSave(params.row._id)}
+              title="Save"
             >
-              <SaveIcon />
-            </IconButton>
+              <SaveIcon fontSize="small" />
+            </button>
           ) : (
-            <IconButton color="info" onClick={() => handleEdit(params.row)}>
-              <EditIcon />
-            </IconButton>
+            <button
+              className="viewsurvey-edit-btn"
+              onClick={() => handleEdit(params.row)}
+              title="Edit"
+            >
+              <EditIcon fontSize="small" />
+            </button>
           )}
-          {/* DELETE ICON — Always show karenge, no matter what */}
-          <IconButton
-            color="error"
+          <button
+            className="viewsurvey-delete-btn"
             onClick={() => handleDeleteClick(params.row._id)}
+            title="Delete"
           >
-            <DeleteIcon />
-          </IconButton>
-        </>
+            <DeleteIcon fontSize="small" />
+          </button>
+        </div>
       ),
     },
   ];

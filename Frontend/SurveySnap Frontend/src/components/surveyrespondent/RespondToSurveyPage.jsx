@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./RespondToSurveyPage.css";
 import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import "./RespondToSurveyPage.css";
 
 const RespondToSurveyPage = () => {
   const { surveyId } = useParams();
@@ -21,7 +21,7 @@ const RespondToSurveyPage = () => {
         const res = await axios.get(
           `http://localhost:3000/question/survey/${surveyId}`
         );
-        setQuestions(res.data.data);
+        setQuestions(res.data.data); // This will now dynamically fetch real data
       } catch (error) {
         console.error("Error fetching questions:", error);
         toast.error("Failed to load survey questions");
@@ -107,7 +107,7 @@ const RespondToSurveyPage = () => {
 
             {q.question_type === "Multiple Choice" && (
               <div className="option-group">
-                {["Option 1", "Option 2", "Option 3"].map((opt, idx) => (
+                {q.options.map((opt, idx) => (
                   <label key={idx}>
                     <input
                       type="radio"
@@ -130,9 +130,11 @@ const RespondToSurveyPage = () => {
                 required={q.is_required}
               >
                 <option value="">Select an option</option>
-                <option value="Dropdown 1">Dropdown 1</option>
-                <option value="Dropdown 2">Dropdown 2</option>
-                <option value="Dropdown 3">Dropdown 3</option>
+                {q.options.map((opt, idx) => (
+                  <option key={idx} value={opt}>
+                    {opt}
+                  </option>
+                ))}
               </select>
             )}
 

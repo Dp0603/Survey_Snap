@@ -1,148 +1,157 @@
-.manage-surveys {
-  padding: 20px;
+.managesurvey-container {
+  padding: 24px;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.manage-surveys h2 {
-  font-size: 2rem;
+/* Top Controls */
+.managesurvey-top-controls {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 20px 0;
 }
 
-.add-survey-btn {
-  background-color: #1976d2;
+.managesurvey-search-input {
+  width: 300px;
+}
+
+.managesurvey-refresh-btn {
+  background-color: #2563eb;
   color: white;
-  padding: 10px 15px;
-  border: none;
+  padding: 8px 16px;
   border-radius: 8px;
+  font-weight: 500;
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
-  float: right;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
 }
 
-.add-survey-btn:hover {
-  background-color: #1565c0;
+.managesurvey-refresh-btn:hover {
+  background-color: #1e3a8a;
 }
 
-/* Search Bar */
-.search-bar {
-  margin-bottom: 20px;
-}
-
-.search-bar input {
-  width: 300px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-/* User Section */
-.user-survey-section {
-  margin-bottom: 40px;
-  background: #fff;
+/* Card wrapper around each user's surveys */
+.managesurvey-user-section {
+  background-color: #fff;
   padding: 20px;
   border-radius: 12px;
+  margin-bottom: 30px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.user-survey-section h3 {
-  margin-bottom: 10px;
+.managesurvey-user-section h3 {
+  font-size: 1.1rem;
   font-weight: 600;
+  margin-bottom: 12px;
 }
 
-/* Table Styling */
-.MuiDataGrid-root {
-  border-radius: 10px;
+/* ===================== TABLE WRAPPER ===================== */
+.managesurvey-table-wrapper {
+  border-radius: 12px;
   overflow: hidden;
 }
 
-/* Action Buttons */
-.action-buttons {
+/* ===================== ACTION BUTTONS ===================== */
+.survey-action-buttons {
   display: flex;
+  align-items: center;
   gap: 10px;
+  margin-top: 8px;
+}
+
+.survey-view-btn,
+.survey-delete-btn {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 5px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
-/* View Button */
-.view-btn {
+.survey-view-btn {
   background-color: #e3f2fd;
+  color: #1976d2;
   border: 1px solid #90caf9;
-  color: #1565c0;
-  padding: 4px 6px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
 }
 
-.view-btn:hover {
+.survey-view-btn:hover {
   background-color: #bbdefb;
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.05);
 }
 
-/* Delete Button */
-.delete-btn {
+.survey-delete-btn {
   background-color: #ffebee;
-  border: 1px solid #ffcdd2;
-  color: #c62828;
-  padding: 6px 8px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  color: #d32f2f;
+  border: 1px solid #ef9a9a;
 }
 
-.delete-btn:hover {
+.survey-delete-btn:hover {
   background-color: #ffcdd2;
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.05);
 }
 
-/* Status Badge */
-.status-badge {
-  padding: 2px 8px; /* ↓ reduced from 4px 10px */
+/* ===================== STATUS BADGES ===================== */
+.status-badges {
+  display: inline;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
   font-size: 0.85rem;
-  border-radius: 12px;
   font-weight: 600;
+  border-radius: 12px;
+  min-width: 100px;
   text-align: center;
-  display: inline-block;
+  color: white;
   text-transform: capitalize;
+  letter-spacing: 0.3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
 }
 
-
-/* Status: Active */
 .status-badges.active {
-  /* background-color: #e6f4ea; */
-  color: white;
   background-color: #2e7d32;
-  padding: 2px 10px;
-  border-radius: 10px;
-  /* border: 1px solid #a5d6a7; */
 }
 
-/* Status: Inactive */
 .status-badges.inactive {
-  /* background-color: #fff3e0;
-  color: #ef6c00;
-  border: 1px solid #ffb74d; */
-  color: white;
   background-color: #ef6c00;
-  padding: 2px 10px;
-  border-radius: 10px;
 }
 
-/* Delete Confirmation Modal */
-.MuiDialog-paper {
-  border-radius: 12px !important;
+.status-badges.draft {
+  background-color: #f57c00;
 }
 
-.MuiDialogTitle-root {
-  font-weight: bold;
+.status-badges.closed {
+  background-color: #c62828;
 }
 
-.MuiDialogActions-root {
-  padding: 16px;
+.status-badges.published {
+  background-color: #0288d1;
+}
+
+.status-badges.archived {
+  background-color: #6a1b9a;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .managesurvey-top-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .managesurvey-search-input,
+  .managesurvey-refresh-btn {
+    width: 100%;
+  }
 }

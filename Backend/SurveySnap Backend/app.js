@@ -24,7 +24,7 @@ const responseRoutes = require("./src/routes/ResponseRoutes");
 app.use("/responses", responseRoutes);
 
 const surveydistributionRoutes = require("./src/routes/SurveyDistributionRoutes");
-app.use("/distribution", surveydistributionRoutes);
+app.use("/survey-distribution", surveydistributionRoutes);
 
 const notificationRoutes = require("./src/routes/NotificationRoutes");
 app.use("/notification", notificationRoutes);
@@ -38,9 +38,11 @@ app.use("/report", reportRoutes);
 const shareRoutes = require("./src/routes/ShareRoutes");
 app.use("/share", shareRoutes);
 
-const paymentRoutes = require("./src/routes/PaymentRoutes")
-app.use("/payment", paymentRoutes)
+const paymentRoutes = require("./src/routes/PaymentRoutes");
+app.use("/payment", paymentRoutes);
 
+const adminreportRoutes = require("./src/routes/AdminReportRoutes");
+app.use("/adminreport", adminreportRoutes);
 
 mongoose.connect("mongodb://127.0.0.1:27017/Survey_Snap").then(() => {
   console.log("database connected....");

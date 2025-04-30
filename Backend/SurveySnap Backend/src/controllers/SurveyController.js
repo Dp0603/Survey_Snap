@@ -2,10 +2,23 @@ const SurveyModel = require("../models/SurveyModel");
 
 const createSurvey = async (req, res) => {
   try {
+    // Ensure the creator_id is present
     if (!req.body.creator_id) {
       return res.status(401).json({ message: "User ID is required!" });
     }
 
+    // Validate startDate and endDate if provided
+    if (
+      req.body.startDate &&
+      req.body.endDate &&
+      new Date(req.body.startDate) > new Date(req.body.endDate)
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Start date cannot be later than end date" });
+    }
+
+    // Save the survey
     const savedSurvey = await SurveyModel.create(req.body);
     res
       .status(201)
@@ -48,6 +61,16 @@ const getSurveyById = async (req, res) => {
 
 const updateSurvey = async (req, res) => {
   try {
+    const { startDate, endDate } = req.body;
+
+    // Validate startDate and endDate
+    if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+      return res
+        .status(400)
+        .json({ message: "Start date cannot be later than end date" });
+    }
+
+    // Update the survey
     const updatedSurvey = await SurveyModel.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -87,6 +110,26 @@ const getUserSurveys = async (req, res) => {
   }
 };
 
+// Added a function to fetch active surveys based on schedule
+const getActiveSurveys = async (req, res) => {
+  try {
+    const currentDate = new Date();
+
+    // Fetch active surveys that are ongoing based on startDate and endDate
+    const activeSurveys = await SurveyModel.find({
+      startDate: { $lte: currentDate },
+      endDate: { $gte: currentDate },
+      status: "Active",
+    }).populate("creator_id", "firstName lastName email");
+
+    res.status(200).json({
+      message: "Active surveys retrieved successfully",
+      data: activeSurveys,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 module.exports = {
   createSurvey,
@@ -95,4 +138,5 @@ module.exports = {
   updateSurvey,
   deleteSurvey,
   getUserSurveys,
+  getActiveSurveys, // Export the new function
 };

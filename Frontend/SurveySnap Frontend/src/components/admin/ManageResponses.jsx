@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext";
 import "./ManageResponses.css";
 
 const ManageResponses = () => {
@@ -34,7 +34,6 @@ const ManageResponses = () => {
       const res = await axios.get("http://localhost:3000/survey/all");
       setSurveys(res.data.data);
     } catch (err) {
-      console.error("Error fetching surveys:", err);
       showToast("Failed to load surveys", "error");
     }
   };
@@ -49,7 +48,6 @@ const ManageResponses = () => {
       setResponses(res.data.data);
       showToast("Responses loaded successfully!", "success");
     } catch (err) {
-      console.error("Error fetching responses:", err);
       showToast("Failed to fetch responses", "error");
     }
     setLoading(false);
@@ -59,9 +57,8 @@ const ManageResponses = () => {
     try {
       await axios.delete(`http://localhost:3000/responses/${row._id}`);
       showToast("Response deleted successfully!", "success");
-      fetchResponses(); // Refresh the list
+      fetchResponses();
     } catch (err) {
-      console.error("Delete error:", err);
       showToast("Failed to delete response", "error");
     }
   };
@@ -100,29 +97,31 @@ const ManageResponses = () => {
 
   const columns = [
     { field: "surveyTitle", headerName: "Survey Title", flex: 1 },
-    { field: "questionText", headerName: "Question", flex: 1 },
+    { field: "questionText", headerName: "Question", flex: 1.2 },
     { field: "response", headerName: "Response", flex: 1 },
     { field: "respondent_id", headerName: "Respondent ID", flex: 1 },
     {
       field: "actions",
       headerName: "Actions",
-      flex: 0.5,
+      width: 100,
       sortable: false,
       renderCell: (params) => (
-        <IconButton
-          color="error"
-          size="small"
-          onClick={() => handleDelete(params.row)}
-        >
-          <DeleteIcon />
-        </IconButton>
+        <div className="manageresponse-action-buttons">
+          <button
+            className="manageresponse-delete-btn"
+            onClick={() => handleDelete(params.row)}
+            title="Delete"
+          >
+            <DeleteIcon fontSize="small" />
+          </button>
+        </div>
       ),
     },
   ];
 
   const rows = getFilteredResponses().map((r, index) => ({
     id: index,
-    _id: r._id, // needed for delete logic
+    _id: r._id,
     surveyTitle:
       surveys.find((s) => s._id === r.survey_id)?.title || "Survey not found",
     questionText: r.question_id?.question_text || "No question available",
@@ -131,32 +130,33 @@ const ManageResponses = () => {
   }));
 
   return (
-    <Box className="manage-responses-container">
-       <Box
-        className="survey-controls"
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: 2,
-          flexWrap: "wrap",
-        }}
-      >
-        <Select
-          value={selectedSurvey}
-          onChange={(e) => setSelectedSurvey(e.target.value)}
-          displayEmpty
-          size="small"
-          className="survey-select"
-        >
-          <MenuItem value="">-- Choose a Survey --</MenuItem>
-          {surveys.map((s) => (
-            <MenuItem key={s._id} value={s._id}>
-              {s.title}
-            </MenuItem>
-          ))}
-        </Select>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+    <Box className="manageresponse-container">
+      <Box className="manageresponse-topbar">
+        <div className="manageresponse-inputs">
+          <Select
+            value={selectedSurvey}
+            onChange={(e) => setSelectedSurvey(e.target.value)}
+            displayEmpty
+            size="small"
+            className="manageresponse-select"
+          >
+            <MenuItem value="">-- Choose a Survey --</MenuItem>
+            {surveys.map((s) => (
+              <MenuItem key={s._id} value={s._id}>
+                {s.title}
+              </MenuItem>
+            ))}
+          </Select>
+
+          <TextField
+            size="small"
+            label="Filter by Respondent ID"
+            value={respondentFilter}
+            onChange={(e) => setRespondentFilter(e.target.value)}
+          />
+        </div>
+
+        <div className="manageresponse-buttons">
           <Button
             variant="contained"
             onClick={fetchResponses}
@@ -170,33 +170,32 @@ const ManageResponses = () => {
             onClick={exportToCSV}
             disabled={!selectedSurvey}
           >
-            Export to CSV
+            Export CSV
           </Button>
-        </Box>
+        </div>
       </Box>
+
       {loading ? (
-        <Box className="loading-spinner">
+        <Box className="manageresponse-spinner">
           <CircularProgress />
         </Box>
       ) : (
-        <Box className="table-container">
+        <Box className="manageresponse-table-container">
           {rows.length > 0 ? (
-            <Paper>
-              <DataGrid
-                rows={rows}
-                columns={columns}
-                autoHeight
-                pageSizeOptions={[5, 10, 25]}
-                initialState={{
-                  pagination: {
-                    paginationModel: { pageSize: 5, page: 0 },
-                  },
-                }}
-                disableRowSelectionOnClick
-              />
-            </Paper>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              autoHeight
+              pageSizeOptions={[5, 10, 25]}
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 5, page: 0 },
+                },
+              }}
+              disableRowSelectionOnClick
+            />
           ) : (
-            <Typography className="no-responses-text">
+            <Typography className="manageresponse-empty">
               No responses found for this survey.
             </Typography>
           )}

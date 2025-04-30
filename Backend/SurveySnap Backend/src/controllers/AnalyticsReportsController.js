@@ -8,25 +8,28 @@ const generateReport = async (req, res) => {
   try {
     const { survey_id, total_responses, response_data } = req.body;
 
+    console.log("Incoming Analytics Report:", { survey_id, total_responses });
+
     if (!survey_id || !response_data) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const existingReport = await AnalyticsModel.findOne({ survey_id });
-
-    let report;
-    if (existingReport) {
-      existingReport.total_responses =
-        total_responses || existingReport.total_responses;
-      existingReport.response_data = response_data;
-      report = await existingReport.save();
-    } else {
-      report = await AnalyticsModel.create({
-        survey_id,
-        total_responses,
-        response_data,
-      });
+    // Ensure survey_id is a valid ObjectId string (basic length check)
+    if (typeof survey_id !== "string" || survey_id.length !== 24) {
+      return res.status(400).json({ message: "Invalid survey ID format" });
     }
+
+    let report = await AnalyticsModel.findOneAndUpdate(
+      { survey_id },
+      {
+        $set: {
+          survey_id,
+          total_responses,
+          response_data,
+        },
+      },
+      { upsert: true, new: true }
+    );
 
     res.status(201).json({
       message: "Report saved successfully",
