@@ -135,8 +135,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-echo "Backend/SurveySnap Backend/src/controllers/ShareController.js" >> .gitignore
-echo "Backend/SurveySnap Backend/src/utils/SmsUtil.js" >> .gitignore
-
-
+src/controllers/ShareController.js
+src/utils/SmsUtil.js
 th/
