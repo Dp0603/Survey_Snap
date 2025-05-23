@@ -12,7 +12,7 @@ const analyticsSchema = new mongoose.Schema(
       default: 0,
     },
     response_data: {
-      type: mongoose.Schema.Types.Mixed, // Allow JSON/object data
+      type: mongoose.Schema.Types.Mixed,
       required: true,
     },
   },

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./ForgotPassword.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext"; 
 
 export const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -14,15 +14,15 @@ export const ForgotPassword = () => {
     formState: { errors },
   } = useForm();
 
-  const { showToast } = useToast(); // ✅ Hook into the global toast
+  const { showToast } = useToast();
 
   const submitHandler = async (data) => {
-    setLoading(true); // Show loader
+    setLoading(true); 
 
     try {
       const res = await axios.post("/user/forgotpassword", data);
 
-      setLoading(false); // Hide loader before showing toast
+      setLoading(false); 
       if (res.data.message) {
         showToast("Reset Link Sent! Check your email.", "success");
         setTimeout(() => {
@@ -32,7 +32,7 @@ export const ForgotPassword = () => {
         showToast(res.data.message || "Something went wrong.", "error");
       }
     } catch (error) {
-      setLoading(false); // Hide loader before showing toast
+      setLoading(false); 
       console.error("Forgot Password Error:", error);
       showToast("Email not found. Please check your Email!", "error");
     }
@@ -40,7 +40,6 @@ export const ForgotPassword = () => {
 
   return (
     <div className="forgot-container">
-      {/* 🔹 Loader Overlay */}
       {loading && (
         <div className="loader-overlay">
           <div className="survey-loader"></div>

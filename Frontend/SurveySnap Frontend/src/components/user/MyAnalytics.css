@@ -17,7 +17,6 @@
     color: #555;
   }
   
-  /* Animation */
   @keyframes fadeIn {
     from {
       opacity: 0;

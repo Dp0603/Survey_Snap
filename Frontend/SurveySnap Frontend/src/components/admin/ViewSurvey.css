@@ -12,7 +12,6 @@
   min-height: 300px;
 }
 
-/* ===================== DATAGRID TABLE ===================== */
 .MuiDataGrid-root {
   background-color: #fff;
   border-radius: 12px;
@@ -32,7 +31,6 @@
   font-size: 0.875rem;
 }
 
-/* ===================== CHIPS ===================== */
 .MuiChip-root {
   font-weight: 500;
   text-transform: capitalize;
@@ -42,7 +40,6 @@
   border-radius: 12px;
 }
 
-/* ===================== DIALOG ===================== */
 .MuiDialog-paper {
   border-radius: 12px !important;
 }
@@ -59,7 +56,6 @@
   background-color: #115293;
 }
 
-/* ===================== ACTION BUTTONS ===================== */
 .viewsurvey-action-buttons {
   display: flex;
   align-items: center;
@@ -83,7 +79,6 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
-/* Edit */
 .viewsurvey-edit-btn {
   background-color: #e3f2fd;
   color: #1976d2;
@@ -95,7 +90,6 @@
   transform: scale(1.05);
 }
 
-/* Save */
 .viewsurvey-save-btn {
   background-color: #f3e5f5;
   color: #8e24aa;
@@ -107,7 +101,6 @@
   transform: scale(1.05);
 }
 
-/* Delete */
 .viewsurvey-delete-btn {
   background-color: #ffebee;
   color: #d32f2f;
@@ -119,7 +112,6 @@
   transform: scale(1.05);
 }
 
-/* ===================== RESPONSIVE ===================== */
 @media (max-width: 768px) {
   .viewSurvey-container {
     padding: 16px;

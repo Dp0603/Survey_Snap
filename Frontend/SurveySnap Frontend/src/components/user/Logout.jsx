@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
-import "./Logout.css"; // Ensure proper styling
+import "./Logout.css"; 
 
 const Logout = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear authentication tokens or user session data
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
     
-    // Redirect to login or home page
     navigate("/login");
   };
 
@@ -22,7 +20,6 @@ const Logout = () => {
         <FaSignOutAlt /> Logout
       </button>
 
-      {/* Logout Confirmation Modal */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-container">

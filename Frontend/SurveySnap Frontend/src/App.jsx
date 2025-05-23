@@ -73,7 +73,6 @@ function App() {
       }
     >
       <Routes>
-        {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
@@ -82,55 +81,83 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
         <Route path="/resetpassword/:token" element={<ResetPassword />}></Route>
 
-
-        {/* ✅ Admin Dashboard Routes */}
-          <Route path="/admin-dashboard/*" element={<AdminDashboard />}>
-          <Route index element={<AdminHome />} /> 
+        <Route path="/admin-dashboard/*" element={<AdminDashboard />}>
+          <Route index element={<AdminHome />} />
           <Route path="users" element={<ManageUsers />} />
-            <Route path="surveys" element={<ManageSurveys />} />
-            <Route path="surveys/:id" element={<ViewSurvey />} /> 
+          <Route path="surveys" element={<ManageSurveys />} />
+          <Route path="surveys/:id" element={<ViewSurvey />} />
           <Route path="responses" element={<ManageResponses />} />
-          <Route path="reports" element={<ManageReport />} /> 
+          <Route path="reports" element={<ManageReport />} />
           <Route path="settings" element={<Settings />} />
         </Route>
 
-        {/* ✅ User Dashboard Routes */}
-        {/* <Route path="/user-dashboard/*" element={<UserDashboard />}>
-          <Route index element={<UserHome />} />
-          <Route path="mysurveys" element={<MySurvey />} />
-          <Route path="myanalytics" element={<MyAnalytics />} />
-          <Route path="myresponses" element={<MyResponses />} />
-          <Route path="settings" element={<Settings />} />
-        </Route> */}
-
-        {/* ✅ Survey Creator Dashboard Routes */}
-        <Route path="/survey-creator-dashboard/*" element={<SurveyCreatorDashboard />}>
+        <Route
+          path="/survey-creator-dashboard/*"
+          element={<SurveyCreatorDashboard />}
+        >
           <Route index element={<SurveyCreatorHome />} />
           <Route path="my-surveys" element={<SurveyCreatorMySurveys />} />
           <Route path="my-surveys/:id" element={<SurveyCreatorViewSurvey />} />
-          <Route path="my-surveys/create-new-survey" element={<SurveyCreatorTemplateSelection />} />
-          <Route path="my-surveys/create-new-survey/prebuilt-templates" element={<SurveyCreatorPrebuiltTemplates />} />
-          <Route path="my-surveys/create-new-survey/prebuilt-templates/create" element={<SurveyCreationPage />} />
-          <Route path="my-surveys/create-new-survey/custom-templates" element={<SurveyCreatorCustomTemplate />} />
-          <Route path="manage-questions" element={<SurveyCreatorManageSurveyList />} />
-          <Route path="manage-questions/:surveyId" element={<SurveyCreatorManageQuestions />} />
-          <Route path="schedule-surveys" element={<SurveyCreatorScheduleSurveys />} />
-          {/* <Route path="share-survey" element={<SurveyCreatorShareSurvey />} /> */}
-          <Route path="share-survey" element={<SurveyCreatorShareSurvey/>}></Route>
-          {/* <Route path="reports" element={<SurveyCreatorReports />} /> */}
-          {/* <Route path="settings" element={<SurveyCreatorSettings />} /> */}
-        </Route>        
+          <Route
+            path="my-surveys/create-new-survey"
+            element={<SurveyCreatorTemplateSelection />}
+          />
+          <Route
+            path="my-surveys/create-new-survey/prebuilt-templates"
+            element={<SurveyCreatorPrebuiltTemplates />}
+          />
+          <Route
+            path="my-surveys/create-new-survey/prebuilt-templates/create"
+            element={<SurveyCreationPage />}
+          />
+          <Route
+            path="my-surveys/create-new-survey/custom-templates"
+            element={<SurveyCreatorCustomTemplate />}
+          />
+          <Route
+            path="manage-questions"
+            element={<SurveyCreatorManageSurveyList />}
+          />
+          <Route
+            path="manage-questions/:surveyId"
+            element={<SurveyCreatorManageQuestions />}
+          />
+          <Route
+            path="schedule-surveys"
+            element={<SurveyCreatorScheduleSurveys />}
+          />
+          <Route
+            path="share-survey"
+            element={<SurveyCreatorShareSurvey />}
+          ></Route>
+        </Route>
 
-        <Route path="/respondent-dashboard/*" element={<SurveyRespondentDashboard />}>
-        <Route index element={<SurveyRespondentHome />} />
-        <Route path="available-surveys" element={<SurveyRespondentAvailableSurveys />} />
-        <Route path="available-surveys/respond/:surveyId" element={<RespondToSurveyPage />} />
-        <Route path="completed-surveys" element={<SurveyRespondentCompletedSurveys />} />
-        <Route path="response-history" element={<SurveyRespondentResponseHistory />} />
-        <Route path="response-history/view-response/:responseId"  element={<SurveyRespondentViewResponse />}
-/>
-
-        </Route>        
+        <Route
+          path="/respondent-dashboard/*"
+          element={<SurveyRespondentDashboard />}
+        >
+          <Route index element={<SurveyRespondentHome />} />
+          <Route
+            path="available-surveys"
+            element={<SurveyRespondentAvailableSurveys />}
+          />
+          <Route
+            path="available-surveys/respond/:surveyId"
+            element={<RespondToSurveyPage />}
+          />
+          <Route
+            path="completed-surveys"
+            element={<SurveyRespondentCompletedSurveys />}
+          />
+          <Route
+            path="response-history"
+            element={<SurveyRespondentResponseHistory />}
+          />
+          <Route
+            path="response-history/view-response/:responseId"
+            element={<SurveyRespondentViewResponse />}
+          />
+        </Route>
       </Routes>
     </div>
   );

@@ -20,7 +20,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext"; 
 import "./SurveyCreatorManageQuestions.css";
 
 const SurveyCreatorManageQuestions = () => {
@@ -130,7 +130,6 @@ const SurveyCreatorManageQuestions = () => {
         Manage Questions
       </Typography>
 
-      {/* New Question Form */}
       <Box component="form" noValidate autoComplete="off" mb={3}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -218,7 +217,6 @@ const SurveyCreatorManageQuestions = () => {
         </Grid>
       </Box>
 
-      {/* Questions DataGrid */}
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={questions}
@@ -229,7 +227,6 @@ const SurveyCreatorManageQuestions = () => {
         />
       </div>
 
-      {/* Delete Confirmation Dialog */}
       <Dialog open={Boolean(deleteId)} onClose={() => setDeleteId(null)}>
         <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogContent>

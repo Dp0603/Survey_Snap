@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="footer-section">
-      {/* Site Index Section */}
       <div className="footer-site-index">
         <h2 className="footer-site-index-title">
           <Link to="/sitemap">Site Index</Link>
@@ -66,7 +65,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Connect with Us Section */}
       <div className="footer-connect">
         <h3>Connect with Us</h3>
         <div className="footer-social-icons">
@@ -82,7 +80,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Footer Bottom Section */}
       <div className="footer-bottom">
         <p>Copyright © 2025 SurveySnap. All rights reserved worldwide.</p>
         <ul>

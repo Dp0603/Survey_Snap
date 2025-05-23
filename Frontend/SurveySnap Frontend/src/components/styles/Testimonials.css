@@ -1,4 +1,3 @@
-/* ======== Testimonials Section (Unique Class Names) ======== */
 .testimonials-section {
   padding: 80px 20px;
   background-color: #fff;
@@ -47,7 +46,6 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* ======== Responsive Design ======== */
 @media (max-width: 768px) {
   .testimonials-card {
     width: 100%;

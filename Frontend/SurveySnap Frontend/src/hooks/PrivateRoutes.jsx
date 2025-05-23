@@ -22,7 +22,7 @@ const useAuth = () => {
     const auth = useAuth();
   
     if (auth.loading) {
-      return <h1>Loading...</h1>; // Prevents redirection before auth state is set
+      return <h1>Loading...</h1>; 
     }
   
     return auth.isLoggedin ? <Outlet /> : <Navigate to="/login" />;

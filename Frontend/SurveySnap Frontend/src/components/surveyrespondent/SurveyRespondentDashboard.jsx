@@ -4,7 +4,7 @@ import {
   FaHome,
   FaClipboardList,
   FaHistory,
-  FaCheckCircle, // New icon for completed surveys
+  FaCheckCircle,
   FaSignOutAlt,
   FaBars,
 } from "react-icons/fa";
@@ -25,14 +25,13 @@ const SurveyRespondentDashboard = () => {
   const getCurrentPageTitle = () => {
     const path = location.pathname;
     if (path.includes("/available-surveys")) return "Available Surveys";
-    if (path.includes("/completed-surveys")) return "Completed Surveys"; // Updated title
+    if (path.includes("/completed-surveys")) return "Completed Surveys"; 
     if (path.includes("/response-history")) return "Response History";
     return "Dashboard";
   };
 
   return (
     <div className="survey-respondent-dashboard">
-      {/* Sidebar */}
       <div
         className={`survey-respondent-sidebar ${
           isSidebarOpen ? "open" : "closed"
@@ -98,7 +97,6 @@ const SurveyRespondentDashboard = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div
         className={`survey-respondent-content ${
           isSidebarOpen ? "with-sidebar" : "full-width"

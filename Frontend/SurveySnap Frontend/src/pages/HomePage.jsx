@@ -5,7 +5,6 @@ import Features from "../components/layout/Features";
 import HowItWorks from "../components/layout/HowItWorks";
 import Pricing from "../components/layout/Pricing";
 import Industries from "../components/layout/Industries";
-// import Integrations from "../components/layout/Integrations"; // ✅ Imported Properly
 import Resources from "../components/layout/Resources";
 import FAQs from "../components/layout/FAQs";
 import Testimonials from "../components/layout/Testimonials";
@@ -19,7 +18,6 @@ const HomePage = () => {
     { id: "howItWorks", component: <HowItWorks /> },
     { id: "pricing", component: <Pricing /> },
     { id: "industries", component: <Industries /> },
-    // { id: "integrations", component: <Integrations /> },
     { id: "resources", component: <Resources /> },
     { id: "testimonials", component: <Testimonials /> },
     { id: "faqs", component: <FAQs /> },
@@ -37,7 +35,6 @@ const HomePage = () => {
     }
   };
 
-  // Smooth Scroll Animation Effect
   const [visibleSections, setVisibleSections] = useState([]);
 
   useEffect(() => {
@@ -54,7 +51,7 @@ const HomePage = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Run initially
+    handleScroll(); 
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

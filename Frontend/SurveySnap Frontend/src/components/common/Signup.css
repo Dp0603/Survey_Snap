@@ -1,25 +1,13 @@
-/* 🔹 Signup Page - Professional & Modern Styling */
 .signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(to right, #2c3e50, #4ca1af);
-  /* background: linear-gradient(135deg, #007bff, #6c63ff); option1 */
-  /* background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
-    url("/assets/background.jpg");
-  background-size: cover;
-  background-position: center; option2*/
-  /* background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-animation: waveMove 10s infinite alternate;
-@keyframes waveMove {
-   0% { background-position: 0% 50%; }
-   100% { background-position: 100% 50%; }
-} option3*/
+
   padding: 20px;
 }
 
-/* 🔹 Signup Box */
 .signup-box {
   background: rgba(255, 255, 255, 0.9);
   padding: 30px;
@@ -35,7 +23,6 @@ animation: waveMove 10s infinite alternate;
   transform: scale(1.02);
 }
 
-/* 🔹 Title & Subtitle */
 .signup-box h1 {
   font-size: 28px;
   color: #2c3e50;
@@ -48,7 +35,6 @@ animation: waveMove 10s infinite alternate;
   margin-bottom: 20px;
 }
 
-/* 🔹 Form Layout */
 .signup-form-row {
   display: flex;
   gap: 15px;
@@ -87,7 +73,6 @@ animation: waveMove 10s infinite alternate;
   box-shadow: 0 0 5px rgba(76, 161, 175, 0.5);
 }
 
-/* 🔹 Password Field with Toggle Icon */
 .signup-password-group {
   position: relative;
 }
@@ -117,7 +102,6 @@ animation: waveMove 10s infinite alternate;
   color: #4ca1af;
 }
 
-/* 🔹 Signup Button */
 .signup-btn {
   width: 100%;
   padding: 12px;
@@ -136,14 +120,12 @@ animation: waveMove 10s infinite alternate;
   background: #357e85;
 }
 
-/* 🔹 Error Messages */
 .signup-error {
   color: red;
   font-size: 12px;
   margin-top: 4px;
 }
 
-/* 🔹 Footer */
 .signup-footer {
   margin-top: 15px;
   font-size: 14px;
@@ -160,7 +142,6 @@ animation: waveMove 10s infinite alternate;
   text-decoration: underline;
 }
 
-/* 🔹 Responsive */
 @media (max-width: 480px) {
   .signup-form-row {
     flex-direction: column;
@@ -171,14 +152,13 @@ animation: waveMove 10s infinite alternate;
     padding: 20px;
   }
 }
-/* 🔹 Loader Popup Overlay */
 .loader-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Dark transparent */
+  background: rgba(0, 0, 0, 0.6); 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,7 +168,6 @@ animation: waveMove 10s infinite alternate;
   z-index: 1000;
 }
 
-/* 🔹 Survey Themed Loader */
 .survey-loader {
   width: 50px;
   height: 50px;
@@ -199,7 +178,6 @@ animation: waveMove 10s infinite alternate;
   margin-bottom: 10px;
 }
 
-/* 🔹 Loader Animation */
 @keyframes spin {
   0% {
     transform: rotate(0deg);

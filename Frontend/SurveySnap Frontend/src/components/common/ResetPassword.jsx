@@ -2,14 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
-import "./ResetPassword.css"; // ✅ Unique CSS file for styling
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import "./ResetPassword.css"; 
+import { useToast } from "../../contexts/ToastContext"; 
 
 export const ResetPassword = () => {
-  const [loading, setLoading] = useState(false); // ✅ Loader state
+  const [loading, setLoading] = useState(false); 
   const token = useParams().token;
   const navigate = useNavigate();
-  const { showToast } = useToast(); // ✅ Hook into custom toast
+  const { showToast } = useToast(); 
 
   const {
     register,
@@ -18,13 +18,13 @@ export const ResetPassword = () => {
   } = useForm();
 
   const submitHandler = async (data) => {
-    setLoading(true); // ✅ Show loader
+    setLoading(true); 
 
     try {
       const obj = { token, password: data.password };
       const res = await axios.post("/user/resetpassword", obj);
 
-      setLoading(false); // ✅ Hide loader before toast
+      setLoading(false); 
 
       if (res.data.message) {
         showToast("Password Reset Successful! Redirecting to Login...", "success");
@@ -43,7 +43,6 @@ export const ResetPassword = () => {
 
   return (
     <div className="reset-container">
-      {/* 🔹 Loader Overlay */}
       {loading && (
         <div className="loader-overlay">
           <div className="survey-loader"></div>

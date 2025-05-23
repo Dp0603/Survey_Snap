@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./SurveyPreviewPage.css"; // We'll add styles below
+import "./SurveyPreviewPage.css"; 
 
 const SurveyPreviewPage = () => {
   const location = useLocation();
@@ -9,7 +9,7 @@ const SurveyPreviewPage = () => {
 
   if (!survey) return null;
 
-  const handleClose = () => navigate(-1); // or navigate to dashboard
+  const handleClose = () => navigate(-1);
 
   return (
     <div className="modal-overlay">

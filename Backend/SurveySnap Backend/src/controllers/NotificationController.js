@@ -14,7 +14,6 @@ const sendNotification = async (req, res) => {
 
 const getUserNotifications = async (req, res) => {
   try {
-    // const { user_id } = req.params;
     const notifications = await NotificationModel.find().populate("survey_id");
     res.status(200).json({
       message: "Notifications retrieved successfully",

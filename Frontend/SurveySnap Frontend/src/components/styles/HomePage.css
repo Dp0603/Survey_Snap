@@ -1,191 +1,185 @@
-/* ======== Global Color Updates ======== */
 :root {
-    --primary-color: #ffffff; /* Dark navy blue (Header/Navbar) */
-    --secondary-color: #000000; /* Soft blue */
-    --accent-color: #000000; /* Bright orange */
-    --text-light: #ffffff; /* White for navbar/header */
-    --text-dark: #000000; /* Black for all other text */
-    --border-color: #e0e0e0;
-    --background-light: #ffffff;
-    --background-dark: #000000;
+  --primary-color: #ffffff;
+  --secondary-color: #000000;
+  --accent-color: #000000;
+  --text-light: #ffffff;
+  --text-dark: #000000;
+  --border-color: #e0e0e0;
+  --background-light: #ffffff;
+  --background-dark: #000000;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--background-light);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background: var(--primary-color);
+  color: var(--text-light);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.header a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.header a:hover {
+  color: var(--secondary-color);
+}
+
+.homepage-section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 80px 20px;
+  text-align: center;
+  margin: 0 auto;
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  opacity: 0;
+  transform: translateY(40px);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-dark);
+}
+
+.homepage-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homepage-section h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+
+.homepage-section p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  color: var(--text-dark);
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+  font-size: 1.2rem;
+  padding: 14px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease-in-out;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+}
+
+/* ======== Footer Styling (Text Remains White) ======== */
+.homepage-footer {
+  background: var(--primary-color);
+  color: var(--text-light);
+  padding: 50px 20px;
+  text-align: center;
+  font-size: 1rem;
+  border-top: 3px solid var(--secondary-color);
+}
+
+.homepage-footer a {
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+}
+
+.homepage-footer a:hover {
+  color: white;
+}
+
+/* ======== Integrations Section (Logos Scrolling) ======== */
+.integrations-section {
+  width: 100%;
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--background-light);
+  overflow: hidden;
+}
+
+.integrations-slider {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.integrations-slider .slider-track {
+  display: flex;
+  animation: scroll 15s linear infinite;
+  width: calc(150px * 10);
+}
+
+.integrations-slider img {
+  width: 150px;
+  height: auto;
+  margin: 0 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.integrations-slider img:hover {
+  transform: scale(1.1);
+}
+
+/* Scroll Animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
   }
-  
-  body {
-    font-family: "Inter", sans-serif;
-    background: var(--background-light);
-    color: var(--text-dark); /* Default text color is now BLACK */
-    margin: 0;
-    padding: 0;
+  to {
+    transform: translateX(-50%);
   }
-  
-  /* ======== Navbar/Header Styling (Text Remains White) ======== */
-  .header {
-    background: var(--primary-color);
-    color: var(--text-light);
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .header a {
-    color: var(--text-light);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .header a:hover {
-    color: var(--secondary-color);
-  }
-  
-  /* ======== Section Styling (All Text is Black) ======== */
+}
+
+/* ======== Responsive Design (Mobile-Friendly) ======== */
+@media (max-width: 1024px) {
   .homepage-section {
-    width: 100%;
-    max-width: 1200px;
-    padding: 80px 20px;
-    text-align: center;
-    margin: 0 auto;
-    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
-    opacity: 0;
-    transform: translateY(40px);
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-dark); /* Text color is now black */
+    padding: 60px 15px;
   }
-  
-  .homepage-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  /* ======== Headings & Text (Black) ======== */
+
   .homepage-section h2 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--text-dark); /* Headings are black */
-    margin-bottom: 20px;
+    font-size: 2.4rem;
   }
-  
-  .homepage-section p {
-    font-size: 1.2rem;
-    font-weight: 400;
-    max-width: 800px;
-    margin: 0 auto 30px;
-    color: var(--text-dark); /* Paragraphs are black */
+}
+
+@media (max-width: 768px) {
+  .homepage-container {
+    padding-top: 50px;
   }
-  
-  /* ======== CTA Button ======== */
+
+  .homepage-section {
+    padding: 50px 10px;
+  }
+
   .btn-primary {
-    background-color: var(--accent-color);
-    color: white;
-    font-size: 1.2rem;
-    padding: 14px 28px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s ease-in-out;
-    display: inline-block;
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--secondary-color);
-  }
-  
-  /* ======== Footer Styling (Text Remains White) ======== */
-  .homepage-footer {
-    background: var(--primary-color);
-    color: var(--text-light);
-    padding: 50px 20px;
-    text-align: center;
     font-size: 1rem;
-    border-top: 3px solid var(--secondary-color);
+    padding: 12px 24px;
   }
-  
-  .homepage-footer a {
-    color: var(--accent-color);
-    transition: color 0.3s ease;
-  }
-  
-  .homepage-footer a:hover {
-    color: white;
-  }
-  
-  /* ======== Integrations Section (Logos Scrolling) ======== */
-  .integrations-section {
-    width: 100%;
-    text-align: center;
-    padding: 80px 20px;
-    background: var(--background-light);
-    overflow: hidden;
-  }
-  
-  .integrations-slider {
-    display: flex;
-    white-space: nowrap;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    padding: 20px 0;
-  }
-  
-  .integrations-slider .slider-track {
-    display: flex;
-    animation: scroll 15s linear infinite;
-    width: calc(150px * 10);
-  }
-  
+
   .integrations-slider img {
-    width: 150px;
-    height: auto;
-    margin: 0 20px;
-    transition: transform 0.3s ease-in-out;
+    width: 100px;
   }
-  
-  .integrations-slider img:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Scroll Animation */
-  @keyframes scroll {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-  
-  /* ======== Responsive Design (Mobile-Friendly) ======== */
-  @media (max-width: 1024px) {
-    .homepage-section {
-      padding: 60px 15px;
-    }
-  
-    .homepage-section h2 {
-      font-size: 2.4rem;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .homepage-container {
-      padding-top: 50px;
-    }
-  
-    .homepage-section {
-      padding: 50px 10px;
-    }
-  
-    .btn-primary {
-      font-size: 1rem;
-      padding: 12px 24px;
-    }
-  
-    .integrations-slider img {
-      width: 100px;
-    }
-  }
-  
+}

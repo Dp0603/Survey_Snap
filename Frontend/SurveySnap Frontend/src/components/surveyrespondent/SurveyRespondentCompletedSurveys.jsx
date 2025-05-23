@@ -27,7 +27,7 @@ const SurveyRespondentCompletedSurveys = () => {
   const fetchFilledSurveys = async (id) => {
     try {
       const response = await axios.get(`/responses/stats/${id}`);
-      setFilledSurveys(response.data); // Updated to handle an array of detailed stats
+      setFilledSurveys(response.data); 
     } catch (error) {
       toast.error("Failed to fetch filled survey stats! ❌");
     }

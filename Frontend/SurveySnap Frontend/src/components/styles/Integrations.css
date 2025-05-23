@@ -17,7 +17,6 @@
   color: #666;
 }
 
-/* 🔹 Main Slider Container */
 .integrations-slider {
   display: flex;
   flex-direction: column;
@@ -27,7 +26,6 @@
   position: relative;
 }
 
-/* 🔹 Each Row Container */
 .slider-row {
   display: flex;
   overflow: hidden;
@@ -35,7 +33,6 @@
   width: 100%;
 }
 
-/* 🔹 Track that holds the logos */
 .slider-track {
   display: flex;
   align-items: center;
@@ -44,17 +41,14 @@
   will-change: transform;
 }
 
-/* 🔹 First & Third Row - Moves Left to Right */
 .scroll-left {
   animation: scrollLeft 20s linear infinite;
 }
 
-/* 🔹 Second Row - Moves Right to Left */
 .scroll-right {
   animation: scrollRight 20s linear infinite;
 }
 
-/* 🔹 Keyframes for Left to Right Movement */
 @keyframes scrollLeft {
   0% {
     transform: translateX(0);
@@ -64,7 +58,6 @@
   }
 }
 
-/* 🔹 Keyframes for Right to Left Movement */
 @keyframes scrollRight {
   0% {
     transform: translateX(-50%);
@@ -74,7 +67,6 @@
   }
 }
 
-/* 🔹 Logo Styling */
 .integration-logo {
   height: 40px;
   width: auto;
@@ -82,7 +74,6 @@
   transition: transform 0.3s ease-in-out;
 }
 
-/* 🔹 Hover Effect - Pause Animation */
 .integrations-slider:hover .slider-track {
   animation-play-state: paused;
 }

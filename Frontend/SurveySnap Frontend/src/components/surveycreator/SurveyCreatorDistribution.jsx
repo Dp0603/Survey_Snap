@@ -51,7 +51,6 @@ const SurveyCreatorDistribution = ({ surveyId }) => {
     <div className="survey-dist-container">
       <h2 className="survey-dist-title">Distribute Your Survey</h2>
 
-      {/* Email Share */}
       <div className="survey-dist-email">
         <input
           type="email"
@@ -65,7 +64,6 @@ const SurveyCreatorDistribution = ({ surveyId }) => {
         </button>
       </div>
 
-      {/* Copy Link */}
       <div className="survey-dist-link-section">
         <input
           type="text"
@@ -79,7 +77,6 @@ const SurveyCreatorDistribution = ({ surveyId }) => {
         {copySuccess && <span className="survey-dist-copy-msg">{copySuccess}</span>}
       </div>
 
-      {/* QR Code */}
       <div className="survey-dist-qr-section">
         <button onClick={() => setShowQR(!showQR)} className="survey-dist-qr-btn">
           {showQR ? "Hide QR Code" : "Generate QR Code"}
@@ -91,7 +88,6 @@ const SurveyCreatorDistribution = ({ surveyId }) => {
         )}
       </div>
 
-      {/* Social Media */}
       <div className="survey-dist-social">
         <button onClick={handleTwitterShare} className="survey-dist-twitter-btn">
           Share on Twitter

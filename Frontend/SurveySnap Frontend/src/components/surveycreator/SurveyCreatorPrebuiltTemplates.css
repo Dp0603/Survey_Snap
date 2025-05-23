@@ -36,14 +36,14 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensures the button stays at the bottom */
+  justify-content: space-between; 
   text-align: center;
-  height: 350px; /* Set a consistent height for all cards */
+  height: 350px; 
 }
 
 .template-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced hover shadow */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
 }
 
 .template-icon {
@@ -72,7 +72,7 @@
   font-size: 14px;
   transition: background-color 0.3s ease;
   cursor: pointer;
-  margin-top: auto; /* Pushes the button to the bottom */
+  margin-top: auto;
 }
 
 .use-template-btn:hover {

@@ -45,7 +45,7 @@ const getFullReport = async (req, res) => {
       success: true,
       data: {
         users: totalUsers,
-        userRoles: roleSummary, // 👈 This is new
+        userRoles: roleSummary,
         surveys,
         questions,
         responses,

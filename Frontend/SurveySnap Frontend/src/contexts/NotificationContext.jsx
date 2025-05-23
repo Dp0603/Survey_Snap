@@ -8,7 +8,7 @@ export const useNotification = () => useContext(NotificationContext);
 export const NotificationProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
-  const userId = localStorage.getItem("id"); // adjust if different key
+  const userId = localStorage.getItem("id"); 
 
   const fetchNotifications = async () => {
     try {

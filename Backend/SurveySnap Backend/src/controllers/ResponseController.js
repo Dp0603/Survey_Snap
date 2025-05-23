@@ -1,22 +1,19 @@
 const ResponseModel = require("../models/ResponseModel");
 const SurveyModel = require("../models/SurveyModel");
 
-// Submit Response
 const submitResponse = async (req, res) => {
   try {
     const { userId, surveyId, answers } = req.body;
 
-    // Check if all required fields are present
     if (!userId || !surveyId || !answers || !Array.isArray(answers)) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Create new response document
     const newResponse = new ResponseModel({
       userId,
       surveyId,
       status: "completed",
-      answers, // directly assign answers
+      answers,
     });
 
     await newResponse.save();
@@ -31,10 +28,8 @@ const submitResponse = async (req, res) => {
   }
 };
 
-// Get Available Surveys (All active surveys from all creators)
 const getAvailableSurveys = async (req, res) => {
   try {
-    // Fetch all active surveys (no filter for the logged-in user)
     const availableSurveys = await SurveyModel.find({ status: "Active" });
 
     return res.status(200).json({
@@ -49,7 +44,6 @@ const getAvailableSurveys = async (req, res) => {
   }
 };
 
-// Get Completed Surveys (For the logged-in respondent)
 const getCompletedSurveys = async (req, res) => {
   const userId = req.params.userId;
   try {
@@ -57,7 +51,6 @@ const getCompletedSurveys = async (req, res) => {
       return res.status(400).json({ message: "User ID is required!" });
     }
 
-    // Get completed surveys of the specific user
     const responses = await ResponseModel.find({ userId, status: "completed" })
       .populate("surveyId", "title description")
       .lean();
@@ -76,7 +69,6 @@ const getCompletedSurveys = async (req, res) => {
   }
 };
 
-// Get Pending Surveys (For the logged-in respondent)
 const getPendingSurveys = async (req, res) => {
   const userId = req.params.userId;
   try {
@@ -84,13 +76,11 @@ const getPendingSurveys = async (req, res) => {
       return res.status(400).json({ message: "User ID is required!" });
     }
 
-    // Get surveys where the user has not yet submitted a response
     const responses = await ResponseModel.find({ userId }).lean();
     const completedSurveyIds = responses.map((response) =>
       response.surveyId.toString()
     );
 
-    // Get all active surveys that the user has not completed
     const pendingSurveys = await SurveyModel.find({
       status: "Active",
       _id: { $nin: completedSurveyIds },
@@ -106,16 +96,14 @@ const getPendingSurveys = async (req, res) => {
   }
 };
 
-// Get Responses By Survey Id (flattened response structure)
 const getResponsesBySurveyId = async (req, res) => {
   const { surveyId } = req.params;
 
   try {
     const responses = await ResponseModel.find({ surveyId })
-      .populate("answers.questionId") // Populate the question text
+      .populate("answers.questionId")
       .lean();
 
-    // Flatten answers to a simpler structure
     const flatResponses = [];
     responses.forEach((resp) => {
       resp.answers.forEach((ans) => {
@@ -136,7 +124,6 @@ const getResponsesBySurveyId = async (req, res) => {
   }
 };
 
-// Get Respondent Survey Stats (For the specific user)
 const getRespondentSurveyStats = async (req, res) => {
   const { userId } = req.params;
 
@@ -168,7 +155,6 @@ const getRespondentSurveyStats = async (req, res) => {
   }
 };
 
-// Get Response By Id
 const getResponseById = async (req, res) => {
   const { responseId } = req.params;
 
@@ -197,7 +183,7 @@ module.exports = {
   getRespondentSurveyStats,
   getResponsesBySurveyId,
   getResponseById,
-  getAvailableSurveys, // added
-  getCompletedSurveys, // already there
-  getPendingSurveys, // already there
+  getAvailableSurveys,
+  getCompletedSurveys,
+  getPendingSurveys,
 };

@@ -38,7 +38,6 @@ const SurveyCreatorDashboard = () => {
 
   return (
     <div className="creator-dashboard">
-      {/* Sidebar */}
       <div className={`creator-sidebar ${isSidebarOpen ? "open" : "closed"}`}>
         <div className="creator-sidebar-header">
           <button className="creator-toggle-btn" onClick={toggleSidebar}>
@@ -83,24 +82,11 @@ const SurveyCreatorDashboard = () => {
             <FaShareAlt className="creator-icon" />
             <span className="creator-show-text">Share Survey</span>
           </li>
-          {/* <li
-            className={isActive("/survey-creator-dashboard/reports") ? "active" : ""}
-            onClick={() => navigate("/survey-creator-dashboard/reports")}
-          >
-            <FaChartLine className="creator-icon" />
-            <span className="creator-show-text">Reports</span>
-          </li> */}
-          {/* <li
-            className={isActive("/survey-creator-dashboard/settings") ? "active" : ""}
-            onClick={() => navigate("/survey-creator-dashboard/settings")}
-          >
-            <FaCog className="creator-icon" />
-            <span className="creator-show-text">Settings</span>
-          </li> */}
+
         </ul>
       </div>
 
-      {/* Main Content */}
+
       <div className={`creator-content ${isSidebarOpen ? "with-sidebar" : "full-width"}`}>
         <div className="creator-header">
           <h2 className="creator-page-title">{getCurrentPageTitle()}</h2>

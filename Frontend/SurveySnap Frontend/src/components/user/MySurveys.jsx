@@ -14,7 +14,7 @@ const MySurvey = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    creator_id: "65b5d4563e4c2a001f2c3a75", // Replace with dynamic creator ID if needed
+    creator_id: "65b5d4563e4c2a001f2c3a75", 
     status: "Draft",
   });
 
@@ -44,7 +44,7 @@ const MySurvey = () => {
       setFormData({
         title: "",
         description: "",
-        creator_id: "65b5d4563e4c2a001f2c3a75", // Reset to default or dynamic creator ID
+        creator_id: "65b5d4563e4c2a001f2c3a75", 
         status: "Draft",
       });
       fetchSurveys();
@@ -96,12 +96,10 @@ const MySurvey = () => {
       <h1>📋 My Surveys</h1>
       <p>View and manage your surveys.</p>
 
-      {/* Add Survey Button */}
       <button className="add-survey-btn" onClick={() => setShowAddForm(true)}>
         <FaPlus /> Create Survey
       </button>
 
-      {/* Surveys Table */}
       <table>
         <thead>
           <tr>
@@ -138,7 +136,6 @@ const MySurvey = () => {
         </tbody>
       </table>
 
-      {/* Add Survey Modal */}
       {showAddForm && (
         <div className="modal-overlay">
           <div className="modal-container">
@@ -192,7 +189,6 @@ const MySurvey = () => {
         </div>
       )}
 
-      {/* Edit Survey Modal */}
       {showEditSurveyModal && (
         <div className="modal-overlay">
           <div className="modal-container">

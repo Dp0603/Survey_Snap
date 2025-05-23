@@ -15,30 +15,25 @@ import "./UserDashboard.css";
 const UserDashboard = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [showLogoutPopup, setShowLogoutPopup] = useState(false); // Logout confirmation state
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false); 
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // Function to show logout confirmation popup
   const confirmLogout = () => {
     setShowLogoutPopup(true);
   };
 
-  // Logout Function
   const handleLogout = () => {
-    // Clear authentication data
     localStorage.removeItem("authToken");
     localStorage.removeItem("userRole");
 
-    // Redirect to login page
     navigate("/login");
   };
 
   return (
     <div className="user-dashboard">
-      {/* Sidebar */}
       <div className={`user-sidebar ${isSidebarOpen ? "open" : "closed"}`}>
         <div className="user-sidebar-header">
           <h2 className="user-logo">{isSidebarOpen ? "User Panel" : "UP"}</h2>
@@ -75,7 +70,6 @@ const UserDashboard = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div
         className={`user-content ${
           isSidebarOpen ? "with-sidebar" : "full-width"
@@ -86,7 +80,6 @@ const UserDashboard = () => {
         <Outlet />
       </div>
 
-      {/* Logout Confirmation Popup */}
       {showLogoutPopup && (
         <div className="logout-popup">
           <div className="logout-popup-content">

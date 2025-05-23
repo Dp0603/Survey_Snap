@@ -14,13 +14,11 @@ const AdminHome = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Dynamic greeting
     const hour = new Date().getHours();
     if (hour < 12) setGreeting("Good Morning");
     else if (hour < 17) setGreeting("Good Afternoon");
     else setGreeting("Good Evening");
 
-    // Get name from localStorage
     const first = localStorage.getItem("firstName") || "";
     const last = localStorage.getItem("lastName") || "";
     const fullName = `${first} ${last}`.trim();
@@ -55,7 +53,6 @@ const AdminHome = () => {
 
   return (
     <div className="admin-home-container">
-      {/* Welcome Message */}
       <div className="admin-home-welcome">
         <h1 className="admin-home-title">
           {greeting}, <span className="admin-home-name">{adminName} 👋</span>
@@ -65,7 +62,6 @@ const AdminHome = () => {
         </p>
       </div>
 
-      {/* Stats Section */}
       <div className="admin-home-stats">
         <div className="admin-home-stat-card admin-users">
           <FaUsers className="admin-home-stat-icon" />
@@ -92,7 +88,6 @@ const AdminHome = () => {
         </div>
       </div>
 
-      {/* Quick Actions */}
       <div className="admin-home-quick-actions">
         <h2 className="admin-home-section-title">⚡ Quick Actions</h2>
         <div className="admin-home-action-buttons">
@@ -108,12 +103,9 @@ const AdminHome = () => {
         </div>
       </div>
 
-      {/* Dynamic Recent Activity */}
-      {/* Organized Recent Activity in 3 columns */}
       <div className="admin-home-activity">
         <h2 className="admin-home-section-title">🕓 Recent Activity</h2>
         <div className="admin-home-activity-grid">
-          {/* User Activities */}
           <div className="admin-home-activity-box">
             <h4>👤 User Registrations</h4>
             <ul className="admin-home-activity-list">
@@ -134,7 +126,6 @@ const AdminHome = () => {
             </ul>
           </div>
 
-          {/* Survey Activities */}
           <div className="admin-home-activity-box">
             <h4>📋 Surveys Created</h4>
             <ul className="admin-home-activity-list">
@@ -155,7 +146,6 @@ const AdminHome = () => {
             </ul>
           </div>
 
-          {/* Response Activities */}
           <div className="admin-home-activity-box">
             <h4>✅ Responses</h4>
             <ul className="admin-home-activity-list">

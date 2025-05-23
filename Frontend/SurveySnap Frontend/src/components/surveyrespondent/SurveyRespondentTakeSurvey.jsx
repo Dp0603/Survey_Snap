@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./SurveyRespondentTakeSurvey.css"; // We'll style it separately
+import "./SurveyRespondentTakeSurvey.css"; 
 import { useParams, useNavigate } from "react-router-dom";
 
 const SurveyRespondentTakeSurvey = ({ userId }) => {

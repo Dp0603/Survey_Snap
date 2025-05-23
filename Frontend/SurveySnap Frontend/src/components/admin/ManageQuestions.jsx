@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { Edit, Delete, Add } from "@mui/icons-material";
 import axios from "axios";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext"; 
 import "./ManageQuestions.css";
 
 const ManageQuestions = ({ survey, closeModal }) => {

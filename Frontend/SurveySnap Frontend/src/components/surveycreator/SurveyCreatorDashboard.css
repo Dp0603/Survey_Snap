@@ -141,7 +141,6 @@
   overflow-y: auto;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   .creator-sidebar {
     position: absolute;

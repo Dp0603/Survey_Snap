@@ -21,7 +21,7 @@ const RespondToSurveyPage = () => {
         const res = await axios.get(
           `http://localhost:3000/question/survey/${surveyId}`
         );
-        setQuestions(res.data.data); // This will now dynamically fetch real data
+        setQuestions(res.data.data);
       } catch (error) {
         console.error("Error fetching questions:", error);
         toast.error("Failed to load survey questions");
@@ -62,7 +62,6 @@ const RespondToSurveyPage = () => {
       toast.success("Survey submitted successfully!");
       setAnswers({});
 
-      // ✅ Redirect after success
       setTimeout(() => {
         navigate("/respondent-dashboard/available-surveys");
       }, 1000);

@@ -45,7 +45,6 @@
     color: #666;
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .user-home-stat-card {
       width: 100%;

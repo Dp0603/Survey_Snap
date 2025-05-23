@@ -34,7 +34,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard">
-      {/* Sidebar */}
       <div className={`admin-sidebar ${isSidebarOpen ? "open" : "closed"}`}>
         <div className="admin-sidebar-header">
           <button className="admin-toggle-btn" onClick={toggleSidebar}>
@@ -90,7 +89,6 @@ const AdminDashboard = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div
         className={`admin-content ${
           isSidebarOpen ? "with-sidebar" : "full-width"

@@ -1,18 +1,15 @@
-/* Container styling */
 .scmq-container {
   padding: 24px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Page heading */
 .scmq-title {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-/* New question form section */
 .scmq-form-section {
   margin-bottom: 30px;
   display: flex;
@@ -24,12 +21,10 @@
   border-radius: 10px;
 }
 
-/* Responsive fields inside form */
 .scmq-form-section > * {
   flex: 1 1 250px;
 }
 
-/* Question image preview inside table */
 .scmq-image-preview {
   width: 80px;
   height: 60px;
@@ -38,14 +33,12 @@
   border: 1px solid #ccc;
 }
 
-/* Required star icon style */
 .scmq-required {
   color: #d32f2f;
   margin-left: 4px;
   font-weight: bold;
 }
 
-/* DataGrid tweaks */
 .MuiDataGrid-root {
   background-color: #fff;
   border-radius: 10px;
@@ -66,7 +59,6 @@
   border-radius: 4px;
 }
 
-/* Button tweaks */
 .MuiButton-root {
   text-transform: none;
   font-weight: 500;
@@ -80,12 +72,10 @@
   background-color: #115293;
 }
 
-/* Dialog styles */
 .MuiDialog-paper {
   border-radius: 12px;
 }
 
-/* Mobile tweaks */
 @media (max-width: 768px) {
   .scmq-form-section {
     flex-direction: column;

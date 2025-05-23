@@ -35,8 +35,8 @@ const Pricing = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                   ...response,
-                  customer_email: "pateldevam100@gmail.com", // ✅ Replace with real user email later
-                  amount: order.amount, // ✅ Needed for receipt
+                  customer_email: "pateldevam100@gmail.com", 
+                  amount: order.amount, 
                 }),
               }
             );

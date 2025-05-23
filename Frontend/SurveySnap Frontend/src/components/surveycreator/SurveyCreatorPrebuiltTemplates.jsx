@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./SurveyCreatorPrebuiltTemplates.css"; // Enhanced CSS version
+import "./SurveyCreatorPrebuiltTemplates.css"; 
 
 const prebuiltTemplates = [
   {

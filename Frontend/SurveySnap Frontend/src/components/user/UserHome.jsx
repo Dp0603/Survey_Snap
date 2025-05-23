@@ -1,6 +1,6 @@
 import React from "react";
 import { FaUser, FaPoll, FaChartLine } from "react-icons/fa";
-import "./UserHome.css"; // Ensure this CSS is properly linked
+import "./UserHome.css"; 
 
 const UserHome = () => {
   return (
@@ -9,7 +9,6 @@ const UserHome = () => {
       <p className="user-home-subtitle">Participate in surveys, view your progress, and check your reports.</p>
 
       <div className="user-home-stats">
-        {/* Profile Card */}
         <div className="user-home-stat-card user-home-profile">
           <FaUser className="user-home-stat-icon" />
           <div className="user-home-stat-info">
@@ -18,7 +17,6 @@ const UserHome = () => {
           </div>
         </div>
 
-        {/* Surveys Card */}
         <div className="user-home-stat-card user-home-surveys">
           <FaPoll className="user-home-stat-icon" />
           <div className="user-home-stat-info">
@@ -27,7 +25,6 @@ const UserHome = () => {
           </div>
         </div>
 
-        {/* Progress Card */}
         <div className="user-home-stat-card user-home-progress">
           <FaChartLine className="user-home-stat-icon" />
           <div className="user-home-stat-info">

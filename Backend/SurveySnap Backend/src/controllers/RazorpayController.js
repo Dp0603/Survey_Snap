@@ -1,15 +1,13 @@
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
-const { sendingMail } = require("../utils/MailUtil"); // ✅ your mail util
-require("dotenv").config(); // make sure this is at the top
+const { sendingMail } = require("../utils/MailUtil");
+require("dotenv").config();
 
-// Razorpay instance with env variables
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
-// Create Order
 const create_order = async (req, res) => {
   const { amount, currency, receipt } = req.body;
 
@@ -28,8 +26,6 @@ const create_order = async (req, res) => {
   }
 };
 
-// Verify Signature
-
 const verify_order = async (req, res) => {
   const crypto = require("crypto");
   const {
@@ -47,7 +43,6 @@ const verify_order = async (req, res) => {
     .digest("hex");
 
   if (hash === razorpay_signature) {
-    // ✅ Send email here
     const receiptHTML = `
       <h2>🎉 Payment Successful</h2>
       <p>Thank you for your payment.</p>
@@ -60,7 +55,6 @@ const verify_order = async (req, res) => {
       customer_email,
       "Your SurveySnap Payment Receipt 🎟️",
       receiptHTML
-      
     );
 
     return res.json({ status: "success" });

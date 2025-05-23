@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/Integrations.css";
 
-// 🔹 Hardcoded Imports for Brand Logos
 import apple from "../../assets/logos/apple.png";
 import bmw from "../../assets/logos/bmw.png";
 import kia from "../../assets/logos/kia.png";
@@ -33,12 +32,10 @@ import youtube from "../../assets/logos/youtube.png";
 import hdfc from "../../assets/logos/hdfc.png";
 import armani from "../../assets/logos/armani.png";
 
-// 🔹 Split logos into 3 rows (10 per row)
 const topRow = [apple, bmw, kia, microsoft, prime, ronaldo, underarmour, assassinscreed, dell, lamborghini];
 const middleRow = [netflix, pubg, skechers, valorant, audi, emirates, louisphilippe, nike, rcb, spotify];
 const bottomRow = [vi, bjp, iqoo, mcdonalds, s8ul, realmadrid, supercell, youtube, hdfc, armani];
 
-// 🔹 Function to Render Infinite Logo Row
 const LogoRow = ({ logos, animationClass }) => {
   return (
     <div className="slider-row">
@@ -54,13 +51,11 @@ const LogoRow = ({ logos, animationClass }) => {
 const Integrations = () => {
   return (
     <section id="integrations" className="integrations-section">
-      {/* 🔹 Integrations Title */}
       <h2 className="integrations-title">Integrations</h2>
       <p className="integrations-description">
         Seamlessly connect with the tools you use every day.
       </p>
 
-      {/* 🔹 Moving Brand Logos */}
       <div className="integrations-slider">
         <LogoRow logos={topRow} animationClass="scroll-left" />
         <LogoRow logos={middleRow} animationClass="scroll-right" />

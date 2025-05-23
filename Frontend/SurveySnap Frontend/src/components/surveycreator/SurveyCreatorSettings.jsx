@@ -15,8 +15,6 @@ const SurveyCreatorSettings = () => {
 
     console.log("Settings Saved:", settingsPayload);
 
-    // You can later replace this with a real POST request:
-    // await axios.post('/api/survey/settings', settingsPayload);
     alert("Survey settings saved successfully!");
   };
 

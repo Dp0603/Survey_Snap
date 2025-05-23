@@ -25,4 +25,4 @@ const getAllDistributions = async (req, res) => {
   }
 };
 
-module.exports = { distributeSurvey, getAllDistributions }; // Ensure both functions are correctly exported
+module.exports = { distributeSurvey, getAllDistributions }; 

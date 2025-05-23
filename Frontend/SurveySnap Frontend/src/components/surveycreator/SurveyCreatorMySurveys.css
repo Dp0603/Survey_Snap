@@ -8,7 +8,6 @@
   margin-bottom: 20px;
 }
 
-/* Action Buttons */
 .surveycreator-action-btns {
   display: flex;
   align-items: center;
@@ -65,7 +64,6 @@
   transform: scale(1.05);
 }
 
-/* Status Badges */
 .surveycreator-status {
   display: inline;
   align-items: center;
@@ -93,7 +91,6 @@
   background-color: #c62828;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .surveycreator-controls {
     flex-direction: column;

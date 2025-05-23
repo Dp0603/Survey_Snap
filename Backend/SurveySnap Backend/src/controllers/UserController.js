@@ -2,9 +2,8 @@ const userModel = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 const mailUtil = require("../utils/MailUtil");
 const jwt = require("jsonwebtoken");
-const secret = "secret"; // ✅ Added secret key for JWT
+const secret = "secret";
 
-// ✅ Add User (Create)
 const addUser1 = async (req, res) => {
   try {
     const createdUser = await userModel.create(req.body);
@@ -20,7 +19,6 @@ const addUser1 = async (req, res) => {
   }
 };
 
-// ✅ Signup with Password Encryption & Email Notification
 const signup = async (req, res) => {
   try {
     const salt = bcrypt.genSaltSync(10);
@@ -29,9 +27,8 @@ const signup = async (req, res) => {
 
     const createdUser = await userModel.create(req.body);
 
-    // ✅ Construct a professional email
     const emailSubject =
-      "🎉 Welcome to SurveySnap - Your Survey Journey Begins!"; // ✅ Fixed missing quotes
+      "🎉 Welcome to SurveySnap - Your Survey Journey Begins!";
     const emailBody = `
       <html>
       <head>
@@ -102,7 +99,6 @@ const signup = async (req, res) => {
       </body>
       </html>`;
 
-    // ✅ Send Email
     await mailUtil.sendingMail(createdUser.email, emailSubject, emailBody);
 
     res.status(201).json({
@@ -118,7 +114,6 @@ const signup = async (req, res) => {
   }
 };
 
-// ✅ Login User
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -144,7 +139,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-// ✅ Get All Users (Read)
 const getAllUsers = async (req, res) => {
   try {
     const users = await userModel.find().populate("roleId");
@@ -157,7 +151,6 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-// ✅ Get User by ID (Read)
 const getUserById = async (req, res) => {
   try {
     const user = await userModel.findById(req.params.id);
@@ -173,7 +166,6 @@ const getUserById = async (req, res) => {
   }
 };
 
-// ✅ Update User by ID (Update)
 const updateUserById = async (req, res) => {
   try {
     const updatedUser = await userModel.findByIdAndUpdate(
@@ -193,7 +185,6 @@ const updateUserById = async (req, res) => {
   }
 };
 
-// ✅ Delete User by ID (Delete)
 const deleteUserById = async (req, res) => {
   try {
     const deletedUser = await userModel.findByIdAndDelete(req.params.id);
@@ -209,7 +200,6 @@ const deleteUserById = async (req, res) => {
   }
 };
 
-// ✅ Forgot Password
 const forgotPassword = async (req, res) => {
   try {
     const email = req.body.email;
@@ -310,7 +300,6 @@ const forgotPassword = async (req, res) => {
   }
 };
 
-// ✅ Reset Password
 const resetPassword = async (req, res) => {
   const token = req.body.token;
   const newPassword = req.body.password;
@@ -325,7 +314,6 @@ const resetPassword = async (req, res) => {
   res.json({ message: "Password updated successfully." });
 };
 
-// ✅ Export Functions
 module.exports = {
   addUser: addUser1,
   signup,

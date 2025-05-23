@@ -3,7 +3,6 @@ const UserModel = require("../models/UserModel");
 const SurveyModel = require("../models/SurveyModel");
 const ResponseModel = require("../models/ResponseModel");
 
-// 🎯 Generate or update report
 const generateReport = async (req, res) => {
   try {
     const { survey_id, total_responses, response_data } = req.body;
@@ -14,7 +13,6 @@ const generateReport = async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Ensure survey_id is a valid ObjectId string (basic length check)
     if (typeof survey_id !== "string" || survey_id.length !== 24) {
       return res.status(400).json({ message: "Invalid survey ID format" });
     }
@@ -41,7 +39,6 @@ const generateReport = async (req, res) => {
   }
 };
 
-// 📊 Get all analytics reports
 const getSurveyAnalytics = async (req, res) => {
   try {
     const reports = await AnalyticsModel.find().populate(
@@ -58,7 +55,6 @@ const getSurveyAnalytics = async (req, res) => {
   }
 };
 
-// 🔥 NEW: Get Recent Activity (users, surveys, responses)
 const getRecentActivity = async (req, res) => {
   try {
     const recentUsers = await UserModel.find().sort({ createdAt: -1 }).limit(5);
@@ -107,5 +103,5 @@ const getRecentActivity = async (req, res) => {
 module.exports = {
   generateReport,
   getSurveyAnalytics,
-  getRecentActivity, // 🆕 add this to exports
+  getRecentActivity,
 };

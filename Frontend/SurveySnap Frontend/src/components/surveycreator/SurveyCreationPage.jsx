@@ -22,7 +22,7 @@ const SurveyCreationPage = () => {
   const [hoverStars, setHoverStars] = useState({});
   const [dragging, setDragging] = useState(null);
 
-  const dragRef = useRef(null); // Define the dragRef
+  const dragRef = useRef(null); 
 
   const mapToBackendType = (type) => {
     switch (type) {
@@ -103,7 +103,7 @@ const SurveyCreationPage = () => {
       const hasRequiredQuestionsAnswered = cleanedQuestions.every(
         (q, index) => {
           return (
-            !q.required || responses[index] // Ensure there's a response for required questions
+            !q.required || responses[index] 
           );
         }
       );

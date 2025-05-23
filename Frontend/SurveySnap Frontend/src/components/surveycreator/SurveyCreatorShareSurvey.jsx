@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { QRCodeCanvas } from "qrcode.react";
 import "./SurveyCreatorShareSurvey.css";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Toast hook
+import { useToast } from "../../contexts/ToastContext"; 
 
 const SurveyCreatorShareSurvey = () => {
   const [surveys, setSurveys] = useState([]);

@@ -1,4 +1,3 @@
-/* 🔹 Login Page - Professional & Modern Styling */
 .login-container {
   display: flex;
   justify-content: center;
@@ -8,7 +7,6 @@
   padding: 20px;
 }
 
-/* 🔹 Login Box */
 .login-box {
   background: rgba(255, 255, 255, 0.9);
   padding: 30px;
@@ -24,7 +22,6 @@
   transform: scale(1.02);
 }
 
-/* 🔹 Title & Subtitle */
 .login-box h1 {
   font-size: 28px;
   color: #2c3e50;
@@ -37,7 +34,6 @@
   margin-bottom: 20px;
 }
 
-/* 🔹 Form Input Group */
 .login-input-group {
   display: flex;
   flex-direction: column;
@@ -68,7 +64,6 @@
   box-shadow: 0 0 5px rgba(76, 161, 175, 0.5);
 }
 
-/* 🔹 Password Field with Toggle Icon */
 .login-password-group {
   position: relative;
 }
@@ -98,7 +93,6 @@
   color: #4ca1af;
 }
 
-/* 🔹 Forgot Password */
 .login-forgot-password {
   text-align: right;
   margin-bottom: 10px;
@@ -115,7 +109,6 @@
   text-decoration: underline;
 }
 
-/* 🔹 Login Button */
 .login-btn {
   width: 100%;
   padding: 12px;
@@ -134,7 +127,6 @@
   background: #357e85;
 }
 
-/* 🔹 Signup Redirect */
 .login-footer {
   margin-top: 15px;
   font-size: 14px;
@@ -151,20 +143,17 @@
   text-decoration: underline;
 }
 
-/* 🔹 Error Messages */
 .login-error {
   color: red;
   font-size: 12px;
   margin-top: 4px;
 }
 
-/* 🔹 Responsive */
 @media (max-width: 480px) {
   .login-box {
     padding: 20px;
   }
 }
-/* Loader Overlay */
 .loader-overlay {
   position: fixed;
   top: 0;
@@ -178,7 +167,6 @@
   z-index: 9999;
 }
 
-/* Loader Animation */
 .loader {
   width: 60px;
   height: 60px;

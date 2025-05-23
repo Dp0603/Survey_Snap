@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import "./Signup.css";
 import Header from "../layout/Header";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext"; 
 
 export const Signup = () => {
   const {
@@ -26,7 +26,7 @@ export const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { showToast } = useToast(); // ✅ Initialize custom toast
+  const { showToast } = useToast(); 
 
   const getRoleId = (selectedRole) => {
     switch (selectedRole) {
@@ -70,7 +70,6 @@ export const Signup = () => {
     <>
       <Header />
       <div className="signup-container">
-        {/* 🔹 Loader Popup */}
         {isLoading && (
           <div className="loader-overlay">
             <div className="survey-loader"></div>
@@ -78,7 +77,6 @@ export const Signup = () => {
           </div>
         )}
 
-        {/* 🔹 Signup Form */}
         <div className="signup-box">
           <h1>🚀 Join SurveySnap</h1>
           <p className="signup-subtitle">
@@ -169,7 +167,6 @@ export const Signup = () => {
                 onChange={(e) => setRole(e.target.value)}
               >
                 <option value="">Choose a role</option>
-                {/* <option value="Admin">👑 Admin</option> */}
                 <option value="Survey Creator">📋 Survey Creator</option>
                 <option value="Respondent">📢 Respondent</option>
               </select>

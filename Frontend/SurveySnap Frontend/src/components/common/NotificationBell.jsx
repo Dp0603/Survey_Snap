@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { useNotification } from "../../contexts/NotificationContext"; // adjust path
+import { useNotification } from "../../contexts/NotificationContext"; 
 
 const NotificationBell = () => {
   const { notifications, unreadCount, markAllAsRead } = useNotification();

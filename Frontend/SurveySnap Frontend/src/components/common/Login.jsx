@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 import "./Login.css";
 import Header from "../layout/Header";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext"; 
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
-  const { showToast } = useToast(); // ✅ Use custom toast hook
+  const { showToast } = useToast(); 
 
   const submitHandler = async (data) => {
     try {
@@ -36,10 +36,9 @@ export const Login = () => {
           return;
         }
 
-        // ✅ Store data in localStorage
         localStorage.setItem("id", userData._id);
         localStorage.setItem("roles", role);
-        localStorage.setItem("email", userData.email); // <-- This line added
+        localStorage.setItem("email", userData.email); 
         localStorage.setItem("firstName", userData.firstName || "");
         localStorage.setItem("lastName", userData.lastName || "");
 
@@ -133,7 +132,6 @@ export const Login = () => {
         </div>
       </div>
 
-      {/* ✅ Loader Popup */}
       {showLoader && (
         <div className="loader-overlay">
           <div className="loader"></div>

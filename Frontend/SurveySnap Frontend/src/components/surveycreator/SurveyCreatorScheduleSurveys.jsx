@@ -196,8 +196,8 @@ const SurveyCreatorScheduleSurveys = () => {
               const startDateTime = new Date(survey.startDate);
               const endDateTime = new Date(survey.endDate);
 
-              const formattedStartDate = startDateTime.toLocaleString(); // Format date and time
-              const formattedEndDate = endDateTime.toLocaleString(); // Format date and time
+              const formattedStartDate = startDateTime.toLocaleString(); 
+              const formattedEndDate = endDateTime.toLocaleString(); 
 
               return (
                 <TableRow key={survey._id}>
@@ -231,7 +231,6 @@ const SurveyCreatorScheduleSurveys = () => {
         </Table>
       </TableContainer>
 
-      {/* Edit Dialog */}
       <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)}>
         <DialogTitle>Edit Schedule</DialogTitle>
         <DialogContent>
@@ -300,7 +299,6 @@ const SurveyCreatorScheduleSurveys = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Delete Dialog */}
       <Dialog
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}

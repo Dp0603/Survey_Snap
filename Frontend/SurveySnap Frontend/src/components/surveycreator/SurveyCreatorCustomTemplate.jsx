@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SurveyCreatorCustomTemplate.css";
-import { useToast } from "../../contexts/ToastContext"; // ✅ useToast hook
+import { useToast } from "../../contexts/ToastContext"; 
 
 const SurveyCreatorCustomTemplate = () => {
   const [surveyTitle, setSurveyTitle] = useState("");
@@ -11,7 +11,7 @@ const SurveyCreatorCustomTemplate = () => {
   const [previewMode, setPreviewMode] = useState(false);
   const [ratingValues, setRatingValues] = useState({});
   const navigate = useNavigate();
-  const { showToast } = useToast(); // ✅ Using custom toast
+  const { showToast } = useToast(); 
 
   const handleAddQuestion = () => {
     setQuestions([

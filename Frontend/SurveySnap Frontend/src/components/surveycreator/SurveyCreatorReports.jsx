@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useToast } from "../../contexts/ToastContext"; // ✅ your global toast
+import { useToast } from "../../contexts/ToastContext"; 
 import "./SurveyCreatorReports.css";
 
 ChartJS.register(
@@ -26,7 +26,7 @@ const SurveyCreatorReports = () => {
   const [analyticsData, setAnalyticsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { showToast } = useToast();
-  const creatorId = localStorage.getItem("id"); // ✅ get current user
+  const creatorId = localStorage.getItem("id"); 
 
   useEffect(() => {
     fetchAnalytics();
@@ -37,7 +37,6 @@ const SurveyCreatorReports = () => {
       const res = await axios.get("/analytics/survey-analytics");
       const allData = res.data.data || [];
 
-      // ✅ Filter only current user's survey analytics
       const filtered = allData.filter(
         (a) => a.survey_id?.creator_id === creatorId
       );
@@ -110,7 +109,6 @@ const SurveyCreatorReports = () => {
                 />
               </div>
 
-              {/* Render Pie charts if response_data exists */}
               {report.response_data &&
                 (() => {
                   try {

@@ -98,7 +98,6 @@
     color: gold;
   }
   
-  /* Mobile-friendly tweaks */
   @media (max-width: 600px) {
     .modal-content {
       padding: 1.2rem;

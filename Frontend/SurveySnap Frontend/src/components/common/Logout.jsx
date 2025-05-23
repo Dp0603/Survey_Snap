@@ -1,7 +1,6 @@
-// src/components/common/Logout.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "../../contexts/ToastContext"; // ✅ Custom toast system
+import { useToast } from "../../contexts/ToastContext"; 
 import "./Logout.css";
 
 const Logout = ({ trigger }) => {
@@ -13,9 +12,6 @@ const Logout = ({ trigger }) => {
   const handleLogout = () => {
     setIsLoading(true);
         localStorage.clear();
-    // localStorage.removeItem("authToken");
-    // localStorage.removeItem("user");
-    // localStorage.removeItem("userRole");
 
     showToast("You have been logged out", "success");
 

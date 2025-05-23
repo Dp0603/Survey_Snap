@@ -78,11 +78,7 @@ const ManageReport = () => {
     datasets: [
       {
         data: Object.values(userRoles),
-        backgroundColor: [
-          "#d32f2f", // Admin
-          "#1976d2", // Survey Creator
-          "#388e3c", // Respondent
-        ],
+        backgroundColor: ["#d32f2f", "#1976d2", "#388e3c"],
         borderWidth: 1,
       },
     ],
@@ -100,7 +96,6 @@ const ManageReport = () => {
         </Box>
       ) : (
         <>
-          {/* Summary Cards */}
           <Grid container spacing={2} className="report-summary">
             <Grid item xs={12} sm={6} md={2.4}>
               <Paper className="report-card">
@@ -134,7 +129,6 @@ const ManageReport = () => {
             </Grid>
           </Grid>
 
-          {/* Only User Role Pie Chart */}
           <Box className="report-chart-grid">
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
@@ -148,7 +142,6 @@ const ManageReport = () => {
             </Grid>
           </Box>
 
-          {/* Analytics Table */}
           <Box className="report-table">
             <Typography variant="h6" gutterBottom>
               📃 Full Report Table
@@ -189,7 +182,6 @@ const ManageReport = () => {
             </Paper>
           </Box>
 
-          {/* Export Buttons */}
           <Box className="report-export" mt={4} textAlign="right">
             <CSVLink
               data={analytics}

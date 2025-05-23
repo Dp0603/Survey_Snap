@@ -243,7 +243,6 @@ const ManageUsers = () => {
         />
       </Box>
 
-      {/* Add Modal */}
       <Dialog
         open={showAddModal}
         onClose={() => setShowAddModal(false)}
@@ -316,7 +315,6 @@ const ManageUsers = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Edit Modal */}
       <Dialog
         open={showEditModal}
         onClose={() => setShowEditModal(false)}
@@ -366,7 +364,6 @@ const ManageUsers = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Delete Confirmation */}
       <Dialog open={showDeleteModal} onClose={() => setShowDeleteModal(false)}>
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
